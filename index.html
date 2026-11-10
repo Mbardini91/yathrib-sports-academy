@@ -315,6 +315,116 @@ input:focus,textarea:focus{outline:none;border-color:var(--lane)}
 .shelf li.soon{display:flex;gap:10px;align-items:center}
 .tip .lbl .i{width:30px;height:30px;margin-bottom:4px}
 .upcoming h3,.feature h3{display:flex;align-items:center;gap:8px}
+
+/* ---- v3: audiences, login, quiz, calculators ---- */
+.bar{flex-wrap:wrap;row-gap:10px}
+.nav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:100%;order:3;width:100%;justify-content:flex-start}
+.nav::-webkit-scrollbar{display:none}
+.nav a{white-space:nowrap;flex:none}
+@media (min-width:1100px){.nav{width:auto;order:0}}
+.seg{transition:left .4s var(--ease-spring),width .4s var(--ease-spring)}
+.stats{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:76px;padding:4px 10px;border-radius:12px;background:var(--surface);font-size:11px;color:var(--muted);line-height:1.3}
+.stat b{font-size:18px;color:var(--ink);font-variant-numeric:tabular-nums}
+.who{display:inline-flex;align-items:center;gap:6px;padding:6px 6px 6px 12px;border-radius:999px;background:var(--track-soft);color:var(--track);font-weight:600;font-size:14px}
+.who[hidden]{display:none}
+.who button{border:0;background:transparent;color:inherit;cursor:pointer;display:grid;place-items:center;width:28px;height:28px;border-radius:50%}
+.who button:hover{background:color-mix(in srgb,var(--track) 15%,transparent)}
+.login{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+@media (max-width:860px){.login{grid-template-columns:1fr}}
+.login form,.login .side-note{background:var(--surface);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.login .side-note{background:var(--ink);color:var(--bg)}
+.login .side-note p{color:color-mix(in srgb,var(--bg) 78%,transparent)}
+.login .side-note ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.login .side-note li{display:flex;gap:10px;align-items:center}
+.login select{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;width:100%}
+.audhead{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;padding:36px 0 28px}
+.audhead .big{width:88px;height:88px;border-radius:26px;display:grid;place-items:center;background:var(--track);color:#fff}
+.audhead .big .i{width:44px;height:44px;stroke-width:1.6}
+.audhead.t .big{background:var(--lane)}
+.audhead.n .big{background:var(--ink);color:var(--bg)}
+.audhead h1{font-size:clamp(34px,5vw,56px)}
+.aud{display:grid;grid-template-columns:1fr 1.15fr;gap:20px;align-items:start}
+@media (max-width:900px){.aud{grid-template-columns:1fr}}
+.walk{background:var(--surface);border-radius:24px;padding:24px}
+.walk h3,.tips h3{display:flex;align-items:center;gap:10px;font-size:22px;margin-bottom:14px}
+.walk table{width:100%;border-collapse:separate;border-spacing:0 6px}
+.walk td{padding:10px 14px;background:var(--bg)}
+.walk td:first-child{border-radius:0 12px 12px 0;font-weight:600;width:90px}
+.walk td:last-child{border-radius:12px 0 0 12px;font-weight:600;color:var(--lane)}
+.walk tr.rest td:last-child{color:var(--muted);font-weight:400}
+.walk tr.today td{background:var(--track-soft)}
+.walk tr.today td:first-child::after{content:" · اليوم";font-weight:400;font-size:12px;color:var(--track)}
+.tips{background:linear-gradient(160deg,var(--ink),color-mix(in srgb,var(--ink) 75%,var(--lane)));color:var(--bg);border-radius:24px;padding:24px}
+.tips ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.tips li{background:rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:12px}
+.tips li .i{width:22px;height:22px;color:var(--track);margin-top:3px}
+.tips li b{display:block;font-size:16px}
+.tips li span{font-size:14px;color:color-mix(in srgb,var(--bg) 78%,transparent)}
+.exs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.ex{background:var(--surface);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:12px;border-top:4px solid var(--lane)}
+.ex.done{border-top-color:var(--track)}
+.ex header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ex h3{font-size:20px;display:flex;align-items:center;gap:8px}
+.ex .min{font-weight:700;color:var(--lane);white-space:nowrap}
+.ex .goal-l{font-size:14px;color:var(--muted)}
+.ex ol{margin:0;padding:0;list-style:none;display:grid;gap:6px;counter-reset:s}
+.ex ol li{display:flex;justify-content:space-between;gap:10px;font-size:15px;padding:8px 12px;border-radius:10px;background:var(--bg);counter-increment:s}
+.ex ol li::before{content:counter(s,arabic-indic);font-weight:700;color:var(--muted);margin-inline-end:8px}
+.ex ol li span:first-child{flex:1}
+.ex ol li .d{color:var(--muted);font-size:13px;white-space:nowrap}
+.ex ol li.cur{background:var(--track-soft);color:var(--track)}
+.ex .note{font-size:13px;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--lane) 12%,transparent);color:var(--lane)}
+.ex .ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ex .timer{font-weight:700;font-variant-numeric:tabular-nums;font-size:18px;margin-inline-start:auto}
+.btn.sm{padding:8px 16px;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.btn.ok{background:var(--lane);border-color:var(--lane);color:#fff}
+.calcs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.calcs{grid-template-columns:1fr}}
+.calc{background:var(--surface);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.calc h3{display:flex;align-items:center;gap:8px;font-size:20px}
+.calc .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.calc select{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:11px 14px}
+.calc .out{min-height:48px;padding:12px 14px;border-radius:12px;background:var(--bg);font-weight:600}
+.calc .out small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.adultnote{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--muted);margin-bottom:14px}
+.facil{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media (max-width:1000px){.facil{grid-template-columns:repeat(2,1fr)}}
+.fac{border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px;background:linear-gradient(160deg,color-mix(in srgb,var(--lane) 22%,var(--surface)),var(--surface))}
+.fac .i{width:34px;height:34px;color:var(--lane)}
+.fac h3{font-size:18px}
+.fac p{font-size:14px;color:var(--muted)}
+.fac.safe{background:linear-gradient(160deg,var(--track-soft),var(--surface))}
+.fac.safe .i{color:var(--track)}
+.libcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.libc{background:var(--surface);border-radius:20px;padding:20px}
+.libc h3{display:flex;gap:8px;align-items:center;font-size:18px;margin-bottom:10px}
+.libc h3 .i{color:var(--track)}
+.libc ul{margin:0;padding-inline-start:18px;display:grid;gap:4px;font-size:15px;color:var(--muted)}
+.quizbox{max-width:680px;margin:0 auto;display:grid;gap:16px}
+.qcard{background:var(--surface);border-radius:26px;padding:30px;display:flex;flex-direction:column;gap:16px}
+.qcard .top{display:flex;align-items:center;gap:14px}
+.qcard .top .hi{margin:0}
+.qcard .q{font-size:22px;font-weight:600;line-height:1.5}
+.qopts{display:grid;gap:10px}
+.qopts button{text-align:start;font:inherit;font-size:17px;padding:14px 18px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:transform var(--press),border-color .2s ease,background-color .2s ease}
+.qopts button:active{transform:scale(.98)}
+.qopts button[aria-pressed="true"]{border-color:var(--ink)}
+.qopts button.right{border-color:var(--lane);background:color-mix(in srgb,var(--lane) 14%,transparent)}
+.qopts button.wrong{border-color:var(--track);background:var(--track-soft)}
+.qfb{padding:14px 16px;border-radius:14px;font-size:15px}
+.qfb.ok{background:color-mix(in srgb,var(--lane) 14%,transparent);color:var(--lane)}
+.qfb.no{background:var(--track-soft);color:var(--track)}
+.winner{border-radius:24px;padding:24px;text-align:center;background:linear-gradient(120deg,var(--gold),var(--track));color:#fff;display:grid;gap:4px;justify-items:center}
+.winner .i{width:34px;height:34px}
+.winner b{font-size:24px}
+.contact{background:var(--ink);color:var(--bg);margin-top:40px}
+.contact .wrap{display:grid;grid-template-columns:auto 1fr 1fr;gap:20px;align-items:center;padding:40px 24px}
+@media (max-width:760px){.contact .wrap{grid-template-columns:1fr}}
+.contact h2{font-size:28px;display:flex;align-items:center;gap:10px}
+.contact .ci{background:rgba(255,255,255,.07);border-radius:18px;padding:18px 20px;display:flex;gap:14px;align-items:center}
+.contact .ci .i{width:28px;height:28px;color:var(--track)}
+.contact .ci small{display:block;color:color-mix(in srgb,var(--bg) 70%,transparent)}
 /* ---- swipeable calendar ---- */
 .gridclip{overflow:hidden;margin-inline:-4px;padding-inline:4px}
 #grid{touch-action:pan-y;will-change:transform;user-select:none;-webkit-user-select:none}
@@ -391,12 +501,26 @@ footer a{color:var(--lane)}
 <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
 <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/></symbol>
 <symbol id="i-run" viewBox="0 0 24 24"><circle cx="15" cy="4" r="2"/><path d="M9 21l3-6-3-3 3-4 3 3h4M6 12l3-4M12 15l4 2v4"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+<symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
+<symbol id="i-bike" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3.5"/><circle cx="18" cy="17" r="3.5"/><path d="M6 17l4-8h5l3 8M9 9h3M14 6h2"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+<symbol id="i-crown" viewBox="0 0 24 24"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></symbol>
+<symbol id="i-question" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01"/></symbol>
+<symbol id="i-logout" viewBox="0 0 24 24"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></symbol>
+<symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="M11 21l2-6-3-3 1-5 3 3h3M8 11l2-4M13 15l3 6"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 10 11 5 20 4c0 9-5 15-14 15zM5 19l7-7"/></symbol>
 </defs></svg>
 <div class="chrome" id="chrome"><div class="wrap">
   <header class="bar">
-    <a class="brand" href="#home"><span class="mark" aria-hidden="true"></span><span><b>أكاديمية يثرب الرياضية</b><small>مدرسة يثرب الإعدادية للبنات</small></span></a>
+    <a class="brand" href="#home"><span class="mark" aria-hidden="true"></span><span><b>أكاديمية يثرب الرياضية</b><small>مدرسة يثرب الإعدادية للبنات · العام الدراسي ٢٠٢٦–٢٠٢٧</small></span></a>
+    <div class="stats" aria-live="polite"><span class="stat"><b id="st-visits">٠</b>زياراتك اليوم</span><span class="stat"><b id="st-done">٠</b>تمارينك اليوم</span><span class="who" id="who" hidden><svg class="i" aria-hidden="true"><use href="#i-user"/></svg><span id="who-name"></span><button type="button" id="logout" aria-label="تسجيل الخروج"><svg class="i" aria-hidden="true"><use href="#i-logout"/></svg></button></span></div>
     <nav class="nav" aria-label="أقسام المنصة">
-      <a href="#home" data-v="home">الرئيسية</a><a href="#about" data-v="about">تعرفي علينا</a><a href="#play" data-v="play">إلعبي معنا</a><a href="#library" data-v="library">مكتبتنا</a><span class="seg" id="seg" aria-hidden="true"></span>
+      <a href="#home" data-v="home">الرئيسية</a><a href="#about" data-v="about">تعرفي علينا</a><a href="#students" data-v="students">الطالبات</a><a href="#staff" data-v="staff">الهيئة الإدارية</a><a href="#parents" data-v="parents">أولياء الأمور</a><a href="#play" data-v="play">إلعبي معنا</a><a href="#library" data-v="library">مكتبتنا</a><a href="#quiz" data-v="quiz">المسابقة اليومية</a><span class="seg" id="seg" aria-hidden="true"></span>
     </nav>
   </header>
 </div></div>
@@ -422,7 +546,17 @@ footer a{color:var(--lane)}
     </div>
   </div>
 
-  <section class="block">
+  <section class="block" id="login-block"><div class="wrap">
+  <div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></span>تسجيل الدخول</h2><p>سجّلي اسمك وفئتك، ونوديك مباشرة لقسمك. الاسم يُحفظ على جهازك فقط.</p></div>
+  <div class="login">
+    <form id="loginForm" novalidate><b style="font-size:20px">مرحباً بك في أكاديمية يثرب الرياضية</b>
+      <div class="field"><label for="lg-name">الاسم الثلاثي</label><input id="lg-name" placeholder="مثال: فاطمة أحمد محمد" autocomplete="off"></div>
+      <div class="field"><label for="lg-role">التصنيف</label><select id="lg-role"><option value="">اختر التصنيف</option><option value="students">طالبة</option><option value="staff">الهيئة الإدارية</option><option value="parents">ولي أمر</option></select></div>
+      <button class="btn" type="submit">تسجيل الدخول</button><p class="err" id="lg-err" role="alert"></p></form>
+    <div class="side-note"><b style="font-size:22px">مرحباً بك في رحلتك نحو الصحة واللياقة</b><p>نحن سعداء بوجودك معنا! سجل دخولك الآن للوصول إلى برامج التمارين المخصصة، جداول المشي، المكتبة الصحية، والمسابقات اليومية المثيرة.</p>
+      <ul><li><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>برامج متخصصة</li><li><svg class="i" aria-hidden="true"><use href="#i-dumbbell"/></svg>تمارين متنوعة</li><li><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg>مسابقات يومية</li></ul></div>
+  </div></div></section>
+<section class="block">
     <div class="wrap">
       <div class="head"><h2><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-megaphone"/></svg></span>الإعلانات وآخر الأخبار</h2><p><span class="pill">محتوى مقترح مؤقت</span> يُستبدل بأخبار الأكاديمية الفعلية.</p></div>
       <div class="board">
@@ -515,6 +649,8 @@ footer a{color:var(--lane)}
       <div class="goals"><article class="goal"><span class="n">١</span><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></span><p>تعزيز دور الرياضة لمنتسبي المدرسة وجعلها إسلوب حياة.</p></article><article class="goal"><span class="n">٢</span><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-pulse"/></svg></span><p>رفع نسبة ممارسة النشاط البدني لدى جميع منتسبي المدرسة.</p></article><article class="goal"><span class="n">٣</span><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-dumbbell"/></svg></span><p>رفع معدل اللياقة البدنية بشكل عام لدى جميع منتسبي المدرسة.</p></article><article class="goal"><span class="n">٤</span><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-megaphone"/></svg></span><p>نشر ثقافة أهمية ممارسة النشاط البدني واللياقة البدنية.</p></article><article class="goal"><span class="n">٥</span><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-sun"/></svg></span><p>تعزيز الحياة الصحية وعلاج السمنة لدى جميع منتسبي المدرسة.</p></article></div>
     </div>
   </section>
+  <section class="block"><div class="wrap"><div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-dumbbell"/></svg></span>إمكانات المركز</h2><p>تجهيزات مركز اللياقة البدنية في المدرسة.</p></div>
+<div class="facil"><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg><h3>جهاز المشي</h3><p>أجهزة حديثة لتمارين الكارديو</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-bike"/></svg><h3>الدراجة البيضاوية</h3><p>تمارين شاملة للجسم</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-bike"/></svg><h3>الدراجة الثابتة</h3><p>تقوية عضلات الساقين</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg><h3>أدوات رياضية متنوعة</h3><p>كرات، أوزان، وأدوات تمارين</p></div><div class="fac safe"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg><h3>بيئة آمنة</h3><p>مساحة مهيأة لممارسة الرياضة بأمان</p></div></div></div></section>
   <section class="block">
     <div class="wrap">
       <div class="head"><h2><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-pulse"/></svg></span>لماذا الآن؟</h2><p>الحركة اليومية طاقة وتركيز ومزاج أفضل داخل الفصل وخارجه.</p></div>
@@ -605,6 +741,14 @@ footer a{color:var(--lane)}
   <div class="wrap">
     <div class="pagehead"><div><span class="school">البوابة ٣</span><h1>مكتبتنا</h1><p class="lede">موارد مختارة من جهات موثوقة، مرتّبة حسب من يحتاجها.</p></div><div class="hero"><img src="img/gate-library.webp" alt="طالبة تقرأ كتابًا بجانب رف فيه أدوات رياضية" width="880" height="660"></div></div>
   </div>
+  <section class="block"><div class="wrap"><div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></span>المكتبة الصحية</h2><p>نصائح مختصرة للجميع. الحاسبات الصحية في قسمي الهيئة الإدارية وأولياء الأمور.</p></div>
+<div class="libcards">
+<div class="libc"><h3><svg class="i" aria-hidden="true"><use href="#i-walk"/></svg>نمط حياة نشط</h3><ul><li>ممارسة الرياضة 30 دقيقة يومياً</li><li>تناول وجبات صغيرة متعددة</li><li>تجنب السكريات المضافة</li><li>النوم 7-8 ساعات يومياً</li></ul></div>
+<div class="libc"><h3><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg>الصحة العامة</h3><ul><li>تناول الخضروات والفواكه</li><li>تجنب التدخين</li><li>ممارسة التأمل والاسترخاء</li><li>الفحص الطبي الدوري</li></ul></div>
+<div class="libc"><h3><svg class="i" aria-hidden="true"><use href="#i-leaf"/></svg>التغذية الصحية</h3><ul><li>تناول البروتين في كل وجبة</li><li>اختر الحبوب الكاملة</li><li>قلل من الدهون المشبعة</li><li>تناول المكسرات باعتدال</li></ul></div>
+<div class="libc"><h3><svg class="i" aria-hidden="true"><use href="#i-dumbbell"/></svg>بناء العضلات</h3><ul><li>تمارين المقاومة 3 مرات أسبوعياً</li><li>تناول البروتين بعد التمرين</li><li>الراحة بين التمارين</li><li>زيادة الأوزان تدريجياً</li></ul></div>
+<div class="libc"><h3><svg class="i" aria-hidden="true"><use href="#i-sun"/></svg>الصحة النفسية</h3><ul><li>ممارسة الرياضة تحسن المزاج</li><li>قضاء وقت في الطبيعة</li><li>التواصل مع الأصدقاء</li><li>ممارسة الهوايات المفضلة</li></ul></div>
+</div></div></section>
   <section class="block">
     <div class="wrap">
       <div class="shelves">
@@ -628,6 +772,40 @@ footer a{color:var(--lane)}
   </section>
 </main>
 
+<main id="v-students" class="view">
+  <div class="wrap"><div class="audhead "><span class="big"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg></span><div><h1>قسم الطالبات</h1><p class="lede">جدول مشي، ونصائح تساعدك في الدراسة، وتمارين منزلية تقدرين تسوينها بأي وقت.</p></div></div></div>
+  <section class="block"><div class="wrap"><div class="aud"><div class="walk"><h3><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-walk"/></svg></span>جدول المشي الأسبوعي</h3><table><tr class="" data-day="6"><td>السبت</td><td>20 دقيقة - مشي خفيف</td></tr><tr class="" data-day="0"><td>الأحد</td><td>25 دقيقة - مشي متوسط</td></tr><tr class="" data-day="1"><td>الاثنين</td><td>15 دقيقة - مشي سريع</td></tr><tr class="rest" data-day="2"><td>الثلاثاء</td><td>راحة</td></tr><tr class="" data-day="3"><td>الأربعاء</td><td>30 دقيقة - مشي متوسط</td></tr><tr class="" data-day="4"><td>الخميس</td><td>20 دقيقة - مشي خفيف</td></tr><tr class="rest" data-day="5"><td>الجمعة</td><td>راحة</td></tr></table></div><div class="tips"><h3><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>نصائح رياضية لتحسين الدراسة</h3><ul><li><svg class="i" aria-hidden="true"><use href="#i-wind"/></svg><div><b>تمارين لتحسين التركيز</b><span>مارسي تمارين التنفس العميق لمدة 5 دقائق قبل المذاكرة لتحسين التركيز والانتباه</span></div></li><li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><div><b>فترات الراحة النشطة</b><span>كل 45 دقيقة مذاكرة، خذي استراحة 10 دقائق بتمارين الإطالة أو المشي في المكان</span></div></li><li><svg class="i" aria-hidden="true"><use href="#i-sun"/></svg><div><b>الرياضة الصباحية</b><span>ممارسة 15 دقيقة رياضة صباحية تزيد من نشاط الدماغ وتحسن الذاكرة طوال اليوم</span></div></li><li><svg class="i" aria-hidden="true"><use href="#i-pulse"/></svg><div><b>الترطيب والحركة</b><span>اشربي الماء بانتظام وحركي جسمك كل ساعة لتحافظي على تدفق الدم للدماغ</span></div></li></ul></div></div></div></section>
+  <section class="block"><div class="wrap"><div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-home"/></svg></span>تمارين منزلية للطالبات</h2><p>اضغطي «ابدأ التمرين» ليمشي معك المؤقت خطوة بخطوة، و«أكملت» لما تخلصين.</p></div><div class="exs"><article class="ex" id="ex-st-stretch" data-id="st-stretch"><header><h3><svg class="i" aria-hidden="true"><use href="#i-wind"/></svg>تمارين الإطالة</h3><span class="min">10 دقائق</span></header><p class="goal-l"><b>الهدف:</b> تحسين مرونة الجسم والوضعية</p><ol><li data-sec="120"><span>إطالة الذراعين والكتفين</span><span class="d">2 دقيقة</span></li><li data-sec="180"><span>إطالة الساقين والفخذين</span><span class="d">3 دقائق</span></li><li data-sec="120"><span>إطالة العمود الفقري</span><span class="d">2 دقيقة</span></li><li data-sec="60"><span>إطالة عضلات الرقبة</span><span class="d">1 دقيقة</span></li><li data-sec="120"><span>تمارين الاسترخاء</span><span class="d">2 دقيقة</span></li></ol><p class="note"><b>نصيحة:</b> احتفظي بكل وضعية لمدة 15-30 ثانية</p><div class="ctl"><button class="btn sm" type="button" data-act="start" id="ex-st-stretch-start"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>ابدأ التمرين</button><button class="btn sm ok" type="button" data-act="done" id="ex-st-stretch-done"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>أكملت</button><span class="timer" aria-live="polite"></span></div></article><article class="ex" id="ex-st-strength" data-id="st-strength"><header><h3><svg class="i" aria-hidden="true"><use href="#i-dumbbell"/></svg>تمارين القوة البسيطة</h3><span class="min">15 دقيقة</span></header><p class="goal-l"><b>الهدف:</b> بناء القوة باستخدام وزن الجسم</p><ol><li data-sec="180"><span>تمارين الضغط المعدلة</span><span class="d">3 دقائق</span></li><li data-sec="240"><span>تمرين القرفصاء</span><span class="d">4 دقائق</span></li><li data-sec="180"><span>تمرين البلانك</span><span class="d">3 دقائق</span></li><li data-sec="180"><span>تمارين البطن</span><span class="d">3 دقائق</span></li><li data-sec="120"><span>تمارين التبريد</span><span class="d">2 دقيقة</span></li></ol><p class="note"><b>للمبتدئات:</b> ابدئي بـ 10 تكرارات لكل تمرين</p><div class="ctl"><button class="btn sm" type="button" data-act="start" id="ex-st-strength-start"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>ابدأ التمرين</button><button class="btn sm ok" type="button" data-act="done" id="ex-st-strength-done"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>أكملت</button><span class="timer" aria-live="polite"></span></div></article><article class="ex" id="ex-st-cardio" data-id="st-cardio"><header><h3><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg>تمارين الكارديو</h3><span class="min">20 دقيقة</span></header><p class="goal-l"><b>الهدف:</b> تحسين اللياقة القلبية والتنفسية</p><ol><li data-sec="180"><span>الإحماء والمشي في المكان</span><span class="d">3 دقائق</span></li><li data-sec="300"><span>الجري في المكان</span><span class="d">5 دقائق</span></li><li data-sec="240"><span>تمارين الجامبينج جاك</span><span class="d">4 دقائق</span></li></ol><div class="ctl"><button class="btn sm" type="button" data-act="start" id="ex-st-cardio-start"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>ابدأ التمرين</button><button class="btn sm ok" type="button" data-act="done" id="ex-st-cardio-done"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>أكملت</button><span class="timer" aria-live="polite"></span></div></article></div></div></section>
+  
+</main>
+<main id="v-staff" class="view">
+  <div class="wrap"><div class="audhead t"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg></span><div><h1>قسم الهيئة الإدارية</h1><p class="lede">حركة بسيطة خلال يوم العمل المكتبي تفرق في الطاقة والتركيز.</p></div></div></div>
+  <section class="block"><div class="wrap"><div class="aud"><div class="walk"><h3><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-walk"/></svg></span>جدول المشي الأسبوعي</h3><table><tr class="" data-day="6"><td>السبت</td><td>30 دقيقة - مشي سريع</td></tr><tr class="" data-day="0"><td>الأحد</td><td>45 دقيقة - مشي متوسط</td></tr><tr class="rest" data-day="1"><td>الاثنين</td><td>راحة</td></tr><tr class="" data-day="2"><td>الثلاثاء</td><td>35 دقيقة - مشي سريع</td></tr><tr class="" data-day="3"><td>الأربعاء</td><td>40 دقيقة - مشي متوسط</td></tr><tr class="rest" data-day="4"><td>الخميس</td><td>راحة</td></tr><tr class="" data-day="5"><td>الجمعة</td><td>50 دقيقة - مشي طويل</td></tr></table></div><div class="tips"><h3><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg>نصائح صحية للعمل المكتبي</h3><ul><li><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><div><b>الجلوس الصحيح</b><span>حافظ على استقامة الظهر وضع القدمين مسطحتين على الأرض، واجعل الشاشة في مستوى العين</span></div></li><li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><div><b>فترات الراحة</b><span>قف وتحرك كل 30-45 دقيقة، وقم بتمارين الإطالة البسيطة لتجنب تيبس العضلات</span></div></li><li><svg class="i" aria-hidden="true"><use href="#i-eye"/></svg><div><b>راحة العينين</b><span>اتبع قاعدة 20-20-20: كل 20 دقيقة انظر لشيء على بعد 20 قدم لمدة 20 ثانية</span></div></li><li><svg class="i" aria-hidden="true"><use href="#i-leaf"/></svg><div><b>الترطيب المستمر</b><span>اشرب الماء بانتظام واحتفظ بزجاجة ماء على مكتبك لتذكيرك بالشرب</span></div></li></ul></div></div></div></section>
+  <section class="block"><div class="wrap"><div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-home"/></svg></span>تمارين منزلية للإداريين</h2><p>اضغط «ابدأ التمرين» ليمشي معك المؤقت خطوة بخطوة، و«أكملت» لما تخلص.</p></div><div class="exs"><article class="ex" id="ex-sf-neck" data-id="sf-neck"><header><h3><svg class="i" aria-hidden="true"><use href="#i-user"/></svg>تمارين الرقبة والكتفين</h3><span class="min">10 دقائق</span></header><p class="goal-l"><b>الهدف:</b> تخفيف التوتر من العمل المكتبي</p><ol><li data-sec="30"><span>دوران الرقبة يميناً ويساراً</span><span class="d">30 ثانية</span></li><li data-sec="60"><span>رفع الكتفين للأعلى والأسفل</span><span class="d">1 دقيقة</span></li><li data-sec="120"><span>تمديد الرقبة للجانبين</span><span class="d">2 دقيقة</span></li><li data-sec="120"><span>دوران الكتفين للخلف والأمام</span><span class="d">2 دقيقة</span></li><li data-sec="270"><span>تمارين الاسترخاء</span><span class="d">4.5 دقيقة</span></li></ol><div class="ctl"><button class="btn sm" type="button" data-act="start" id="ex-sf-neck-start"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>ابدأ التمرين</button><button class="btn sm ok" type="button" data-act="done" id="ex-sf-neck-done"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>أكملت</button><span class="timer" aria-live="polite"></span></div></article><article class="ex" id="ex-sf-breath" data-id="sf-breath"><header><h3><svg class="i" aria-hidden="true"><use href="#i-wind"/></svg>تمارين التنفس</h3><span class="min">5 دقائق</span></header><p class="goal-l"><b>الهدف:</b> الاسترخاء وتقليل الضغط النفسي</p><ol><li data-sec="120"><span>التنفس العميق من البطن</span><span class="d">2 دقيقة</span></li><li data-sec="120"><span>تقنية 4-7-8 للتنفس</span><span class="d">2 دقيقة</span></li><li data-sec="60"><span>التنفس المتدرج</span><span class="d">1 دقيقة</span></li></ol><p class="note"><b>تقنية 4-7-8:</b> شهيق 4 ثوانٍ، حبس النفس 7 ثوانٍ، زفير 8 ثوانٍ</p><div class="ctl"><button class="btn sm" type="button" data-act="start" id="ex-sf-breath-start"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>ابدأ التمرين</button><button class="btn sm ok" type="button" data-act="done" id="ex-sf-breath-done"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>أكملت</button><span class="timer" aria-live="polite"></span></div></article><article class="ex" id="ex-sf-back" data-id="sf-back"><header><h3><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg>تقوية عضلات الظهر</h3></header><p class="goal-l"><b>الهدف:</b> تقوية عضلات الظهر</p><ol><li data-sec="120"><span>تمديد الظهر للخلف</span><span class="d">2 دقيقة</span></li><li data-sec="180"><span>تمرين الجسر</span><span class="d">3 دقائق</span></li><li data-sec="240"><span>تمديد العمود الفقري</span><span class="d">4 دقائق</span></li><li data-sec="180"><span>تمارين الاسترخاء</span><span class="d">3 دقائق</span></li></ol><p class="note"><b>نصيحة:</b> توقف فوراً إذا شعرت بألم حاد</p><div class="ctl"><button class="btn sm" type="button" data-act="start" id="ex-sf-back-start"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>ابدأ التمرين</button><button class="btn sm ok" type="button" data-act="done" id="ex-sf-back-done"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>أكملت</button><span class="timer" aria-live="polite"></span></div></article></div></div></section>
+  <section class="block"><div class="wrap"><div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-calc"/></svg></span>حاسبات صحية</h2><p>للبالغين من عمر ١٨ سنة فأكثر.</p></div><div class="calcs">
+<form class="calc" id="sf-bmi" novalidate><h3><svg class="i" aria-hidden="true"><use href="#i-calc"/></svg>حاسبة كتلة الجسم (BMI)</h3><div class="row"><input id="sf-bmi-w" type="number" inputmode="decimal" placeholder="الوزن (كجم)" aria-label="الوزن بالكيلوغرام"><input id="sf-bmi-h" type="number" inputmode="decimal" placeholder="الطول (سم)" aria-label="الطول بالسنتيمتر"></div><button class="btn sm" type="submit">احسب</button><p class="out" aria-live="polite">أدخل الوزن والطول.</p><p class="src">التصنيف حسب <a href="https://www.who.int/europe/news-room/fact-sheets/item/a-healthy-lifestyle---who-recommendations">منظمة الصحة العالمية</a> للبالغين.</p></form>
+<form class="calc" id="sf-cal" novalidate><h3><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg>حاسبة السعرات اليومية</h3><div class="row"><input id="sf-cal-w" type="number" inputmode="decimal" placeholder="الوزن (كجم)" aria-label="الوزن بالكيلوغرام"><input id="sf-cal-h" type="number" inputmode="decimal" placeholder="الطول (سم)" aria-label="الطول بالسنتيمتر"><input id="sf-cal-a" type="number" inputmode="numeric" placeholder="العمر" aria-label="العمر بالسنوات"><select id="sf-cal-s" aria-label="الجنس"><option value="">الجنس</option><option value="f">أنثى</option><option value="m">ذكر</option></select></div><button class="btn sm" type="submit">احسب</button><p class="out" aria-live="polite">أدخل البيانات الأربعة.</p><p class="src">معادلة Mifflin-St Jeor لمعدل الأيض الأساسي.</p></form>
+</div></div></section>
+</main>
+<main id="v-parents" class="view">
+  <div class="wrap"><div class="audhead n"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-home"/></svg></span><div><h1>قسم أولياء الأمور</h1><p class="lede">البيت هو الملعب الثاني: جدول مشي عائلي، ونصائح صحية، وتمارين خفيفة.</p></div></div></div>
+  <section class="block"><div class="wrap"><div class="aud"><div class="walk"><h3><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-walk"/></svg></span>جدول المشي الأسبوعي</h3><table><tr class="" data-day="6"><td>السبت</td><td>25 دقيقة - مشي هادئ</td></tr><tr class="" data-day="0"><td>الأحد</td><td>30 دقيقة - مشي متوسط</td></tr><tr class="" data-day="1"><td>الاثنين</td><td>20 دقيقة - مشي سريع</td></tr><tr class="rest" data-day="2"><td>الثلاثاء</td><td>راحة</td></tr><tr class="" data-day="3"><td>الأربعاء</td><td>35 دقيقة - مشي متوسط</td></tr><tr class="" data-day="4"><td>الخميس</td><td>مشي عائلي - الطابور الصباحي</td></tr><tr class="" data-day="5"><td>الجمعة</td><td>40 دقيقة - مشي عائلي</td></tr></table></div><div class="tips"><h3><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg>نصائح صحية عامة</h3><ul><li><svg class="i" aria-hidden="true"><use href="#i-leaf"/></svg><div><b>شرب الماء</b><span>اشرب 8-10 أكواب من الماء يومياً للحفاظ على ترطيب الجسم وتحسين الأداء البدني</span></div></li><li><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg><div><b>التغذية المتوازنة</b><span>تناول وجبات متوازنة تحتوي على البروتين والخضروات والفواكه والحبوب الكاملة</span></div></li><li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><div><b>النوم الكافي</b><span>احرص على النوم 7-8 ساعات يومياً لتجديد طاقة الجسم وتحسين الأداء الذهني</span></div></li><li><svg class="i" aria-hidden="true"><use href="#i-walk"/></svg><div><b>النشاط اليومي</b><span>مارس النشاط البدني لمدة 30 دقيقة يومياً على الأقل للحفاظ على صحة القلب والعضلات</span></div></li></ul></div></div></div></section>
+  <section class="block"><div class="wrap"><div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-home"/></svg></span>تمارين منزلية لأولياء الأمور</h2><p>اضغط «ابدأ التمرين» ليمشي معك المؤقت خطوة بخطوة، و«أكملت» لما تخلص.</p></div><div class="exs"><article class="ex" id="ex-pr-joints" data-id="pr-joints"><header><h3><svg class="i" aria-hidden="true"><use href="#i-pulse"/></svg>تمارين المفاصل</h3><span class="min">10 دقائق</span></header><p class="goal-l"><b>الهدف:</b> تحسين مرونة المفاصل ومنع التيبس</p><ol><li data-sec="120"><span>دوران الرقبة يميناً ويساراً</span><span class="d">2 دقيقة</span></li><li data-sec="120"><span>دوران الكتفين للخلف والأمام</span><span class="d">2 دقيقة</span></li><li data-sec="180"><span>ثني الركبتين ورفعهما</span><span class="d">3 دقائق</span></li><li data-sec="120"><span>دوران الكاحلين والمعصمين</span><span class="d">2 دقيقة</span></li><li data-sec="60"><span>تمارين الاسترخاء</span><span class="d">1 دقيقة</span></li></ol><p class="note"><b>مهم:</b> تحرك ببطء ولا تجبر المفصل على الحركة</p><div class="ctl"><button class="btn sm" type="button" data-act="start" id="ex-pr-joints-start"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>ابدأ التمرين</button><button class="btn sm ok" type="button" data-act="done" id="ex-pr-joints-done"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>أكملت</button><span class="timer" aria-live="polite"></span></div></article><article class="ex" id="ex-pr-balance" data-id="pr-balance"><header><h3><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>تمارين التوازن</h3><span class="min">8 دقائق</span></header><p class="goal-l"><b>الهدف:</b> تحسين الثبات والتوازن ومنع السقوط</p><ol><li data-sec="120"><span>الوقوف على قدم واحدة</span><span class="d">2 دقيقة</span></li><li data-sec="120"><span>المشي في خط مستقيم</span><span class="d">2 دقيقة</span></li><li data-sec="120"><span>الوقوف على أطراف الأصابع</span><span class="d">2 دقيقة</span></li><li data-sec="120"><span>تمارين التوازن الجانبي</span><span class="d">2 دقيقة</span></li></ol><p class="note"><b>للأمان:</b> تمسك بكرسي أو حائط عند الحاجة</p><div class="ctl"><button class="btn sm" type="button" data-act="start" id="ex-pr-balance-start"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>ابدأ التمرين</button><button class="btn sm ok" type="button" data-act="done" id="ex-pr-balance-done"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>أكملت</button><span class="timer" aria-live="polite"></span></div></article></div></div></section>
+  <section class="block"><div class="wrap"><div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-calc"/></svg></span>حاسبات صحية</h2><p>للبالغين من عمر ١٨ سنة فأكثر.</p></div><div class="calcs">
+<form class="calc" id="pr-bmi" novalidate><h3><svg class="i" aria-hidden="true"><use href="#i-calc"/></svg>حاسبة كتلة الجسم (BMI)</h3><div class="row"><input id="pr-bmi-w" type="number" inputmode="decimal" placeholder="الوزن (كجم)" aria-label="الوزن بالكيلوغرام"><input id="pr-bmi-h" type="number" inputmode="decimal" placeholder="الطول (سم)" aria-label="الطول بالسنتيمتر"></div><button class="btn sm" type="submit">احسب</button><p class="out" aria-live="polite">أدخل الوزن والطول.</p><p class="src">التصنيف حسب <a href="https://www.who.int/europe/news-room/fact-sheets/item/a-healthy-lifestyle---who-recommendations">منظمة الصحة العالمية</a> للبالغين.</p></form>
+<form class="calc" id="pr-cal" novalidate><h3><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg>حاسبة السعرات اليومية</h3><div class="row"><input id="pr-cal-w" type="number" inputmode="decimal" placeholder="الوزن (كجم)" aria-label="الوزن بالكيلوغرام"><input id="pr-cal-h" type="number" inputmode="decimal" placeholder="الطول (سم)" aria-label="الطول بالسنتيمتر"><input id="pr-cal-a" type="number" inputmode="numeric" placeholder="العمر" aria-label="العمر بالسنوات"><select id="pr-cal-s" aria-label="الجنس"><option value="">الجنس</option><option value="f">أنثى</option><option value="m">ذكر</option></select></div><button class="btn sm" type="submit">احسب</button><p class="out" aria-live="polite">أدخل البيانات الأربعة.</p><p class="src">معادلة Mifflin-St Jeor لمعدل الأيض الأساسي.</p></form>
+</div></div></section>
+</main>
+<main id="v-quiz" class="view">
+  <div class="wrap"><div class="audhead"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg></span><div><h1>المسابقة الرياضية اليومية</h1><p class="lede">سؤال جديد كل يوم. جاوبي واعرفي النتيجة فورًا.</p></div></div></div>
+  <section class="block"><div class="wrap"><div class="quizbox">
+    <div class="qcard"><div class="top"><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-question"/></svg></span><div><b>سؤال اليوم</b><p class="src" id="q-date"></p></div></div>
+      <p class="q" id="q-text"></p><div class="qopts" id="q-opts" role="group" aria-label="الخيارات"></div>
+      <button class="btn" type="button" id="q-send" disabled>إرسال الإجابة</button><p class="qfb" id="q-fb" hidden></p></div>
+    <div class="winner"><svg class="i" aria-hidden="true"><use href="#i-crown"/></svg><span>فائزة الأمس</span><b id="q-winner">مريم خالد</b><span>تهانينا للفائزة</span></div>
+  </div></div></section>
+</main>
+<section class="contact"><div class="wrap"><h2><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>للاستفسار</h2><div class="ci"><svg class="i" aria-hidden="true"><use href="#i-school"/></svg><div><b>مدرسة يثرب الإعدادية للبنات</b><small>يرجى التواصل مع قسم التربية الرياضية</small></div></div><div class="ci"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><div><b>ساعات العمل</b><small>من 7:00 صباحاً إلى 1:30 ظهراً</small></div></div></div></section>
 <div class="wrap">
   <footer>
     <span>أكاديمية يثرب الرياضية · مدرسة يثرب الإعدادية للبنات · مملكة البحرين</span>
@@ -644,7 +822,7 @@ const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){retu
 
 /* ---------- motion helpers ---------- */
 const RM=matchMedia("(prefers-reduced-motion: reduce)");
-const ORDER={home:0,about:1,play:2,library:3};
+const ORDER={home:0,about:1,students:2,staff:3,parents:4,play:5,library:6,quiz:7};
 function enter(el,dir){ // dir: +1 = arriving from the inline-end side (RTL: from the left)
   if(!el.animate)return;
   const x=RM.matches?0:dir*24;
@@ -653,16 +831,16 @@ function enter(el,dir){ // dir: +1 = arriving from the inline-end side (RTL: fro
 function moveSeg(){
   const a=document.querySelector('.nav a[aria-current="page"]'),seg=document.getElementById("seg");
   if(!a||!seg)return;
-  const nav=a.parentElement.getBoundingClientRect(),r=a.getBoundingClientRect();
-  seg.style.width=r.width+"px";
-  seg.style.insetInlineStart=(nav.right-r.right)+"px"; // RTL: measure from the right edge
+  seg.style.width=a.offsetWidth+"px";
+  seg.style.left=a.offsetLeft+"px";
+  a.scrollIntoView&&a.scrollIntoView({block:"nearest",inline:"nearest",behavior:RM.matches?"auto":"smooth"});
 }
 addEventListener("resize",moveSeg);
 document.fonts&&document.fonts.ready.then(moveSeg);
 const chrome=document.getElementById("chrome");
 addEventListener("scroll",()=>chrome.classList.toggle("scrolled",scrollY>4),{passive:true});
 /* ---------- routing ---------- */
-const VIEWS=["home","about","play","library"];
+const VIEWS=["home","about","students","staff","parents","play","library","quiz"];
 let lastView=null;
 function route(){
   const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):"home";
@@ -835,6 +1013,85 @@ const rubber=(o,dim,c=.55)=>(o*dim*c)/(dim+c*Math.abs(o));
 
 const up=EV.filter(x=>x.S&&x.E>=today).sort((a,b)=>a.S-b.S).slice(0,5);
 document.getElementById("upcoming").innerHTML=up.map(x=>`<li><div class="d">${ar(x.S.getDate())}<span>${MONTHS[x.S.getMonth()]}</span></div><div>${x.t}${x.p?' <span class="pill ghost">مقترح</span>':''}<span class="src" style="display:block">${ic(CICON[x.c])} ${CATS[x.c]}${x.a?" · تقريبي":""}</span></div></li>`).join("");
+
+/* ---------- v3: counters, login, exercises, calculators, quiz ---------- */
+const todayKey=(()=>{const d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()})();
+let day=store.get("yathrib-day")||{};
+if(day.k!==todayKey)day={k:todayKey,visits:0,done:[]};
+day.visits++;store.set("yathrib-day",day);
+function drawStats(){document.getElementById("st-visits").textContent=ar(day.visits);document.getElementById("st-done").textContent=ar(day.done.length)}
+drawStats();
+// highlight today's row in walking tables
+const wd=new Date().getDay();
+document.querySelectorAll(".walk tr").forEach(tr=>{if(+tr.dataset.day===wd)tr.classList.add("today")});
+
+// login (device only)
+let me=store.get("yathrib-user");
+function drawWho(){const w=document.getElementById("who");if(me&&me.name){w.hidden=false;document.getElementById("who-name").textContent=me.name.split(" ")[0]}else w.hidden=true}
+drawWho();
+document.getElementById("loginForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=document.getElementById("lg-name").value.trim(),role=document.getElementById("lg-role").value,err=document.getElementById("lg-err");
+  if(!name||!role){err.textContent="اكتبي الاسم واختاري التصنيف.";return}
+  err.textContent="";me={name,role};store.set("yathrib-user",me);drawWho();location.hash=role;
+});
+document.getElementById("logout").onclick=()=>{me=null;try{localStorage.removeItem("yathrib-user")}catch(e){}drawWho();document.getElementById("lg-name").value="";document.getElementById("lg-role").value=""};
+
+// exercise cards: guided timer + done
+const fmt=s=>ar(Math.floor(s/60))+":"+ar(String(s%60).padStart(2,"0"));
+document.querySelectorAll(".ex").forEach(card=>{
+  const id=card.dataset.id,steps=[...card.querySelectorAll("ol li")],tm=card.querySelector(".timer"),startB=card.querySelector('[data-act="start"]'),doneB=card.querySelector('[data-act="done"]');
+  let t=null,i=0,left=0;
+  const label=()=>startB.innerHTML=t?'<svg class="i" aria-hidden="true"><use href="#i-pause"/></svg>إيقاف مؤقت':'<svg class="i" aria-hidden="true"><use href="#i-play"/></svg>'+(left?"استمرار":"ابدأ التمرين");
+  const mark=()=>steps.forEach((s,k)=>s.classList.toggle("cur",k===i&&(t||left)));
+  function tick(){left--;if(left<=0){i++;if(i>=steps.length){stop();finish();return}left=+steps[i].dataset.sec}tm.textContent=fmt(left);mark()}
+  function stop(){clearInterval(t);t=null;label();mark()}
+  function finish(){i=0;left=0;tm.textContent="أحسنتِ!";mark();markDone()}
+  function markDone(){if(!day.done.includes(id)){day.done.push(id);store.set("yathrib-day",day);drawStats()}card.classList.add("done");doneB.disabled=true;doneB.innerHTML='<svg class="i" aria-hidden="true"><use href="#i-check"/></svg>تم اليوم'}
+  startB.onclick=()=>{if(t){stop();return}if(!left){i=0;left=+steps[0].dataset.sec}tm.textContent=fmt(left);t=setInterval(tick,1000);label();mark()};
+  doneB.onclick=()=>{stop();markDone()};
+  if(day.done.includes(id))markDone();
+});
+
+// calculators (adults)
+const num=id=>parseFloat(document.getElementById(id).value);
+["sf","pr"].forEach(p=>{
+  const b=document.getElementById(p+"-bmi"),c=document.getElementById(p+"-cal");
+  b.addEventListener("submit",e=>{e.preventDefault();const w=num(p+"-bmi-w"),h=num(p+"-bmi-h")/100,o=b.querySelector(".out");
+    if(!(w>20&&w<350&&h>1&&h<2.5)){o.textContent="تأكد من الوزن بالكيلوغرام والطول بالسنتيمتر.";return}
+    const v=w/(h*h),c2=v<18.5?"أقل من الطبيعي":v<25?"وزن طبيعي":v<30?"زيادة في الوزن":"سمنة";
+    o.innerHTML=`مؤشر كتلة الجسم: ${ar(v.toFixed(1))}<small>${c2} · المؤشر تقدير عام ولا يغني عن استشارة الطبيب</small>`});
+  c.addEventListener("submit",e=>{e.preventDefault();const w=num(p+"-cal-w"),h=num(p+"-cal-h"),a=num(p+"-cal-a"),sx=document.getElementById(p+"-cal-s").value,o=c.querySelector(".out");
+    if(!(w>20&&h>100&&a>=18&&a<110&&sx)){o.textContent=a&&a<18?"هذه الحاسبة للبالغين من ١٨ سنة فأكثر.":"أكمل الوزن والطول والعمر والجنس.";return}
+    const bmr=Math.round(10*w+6.25*h-5*a+(sx==="m"?5:-161));
+    o.innerHTML=`معدل الأيض الأساسي: ${ar(bmr)} سعرة/يوم<small>مع نشاط خفيف تقريبًا ${ar(Math.round(bmr*1.375))} سعرة/يوم</small>`});
+});
+
+// daily quiz
+const QS=[
+ ["كم عدد السعرات الحرارية التي يحرقها المشي لمدة 30 دقيقة تقريباً؟",["50-80 سعرة حرارية","120-180 سعرة حرارية","250-300 سعرة حرارية"],1,"المشي المعتدل لنصف ساعة يحرق تقريبًا ١٢٠–١٨٠ سعرة حسب الوزن والسرعة."],
+ ["كم دقيقة نشاط بدني توصي بها منظمة الصحة العالمية يوميًا لمن هم بين ٥ و١٧ سنة؟",["٢٠ دقيقة","٣٠ دقيقة","٦٠ دقيقة في المتوسط"],2,"التوصية: متوسط ٦٠ دقيقة يوميًا من النشاط المتوسط إلى القوي على مدار الأسبوع."],
+ ["كم مرة في الأسبوع يُنصح بتمارين تقوية العضلات والعظام للأطفال والمراهقين؟",["مرة واحدة","٣ مرات على الأقل","كل يوم بدون راحة"],1,"منظمة الصحة العالمية توصي بها ٣ مرات أسبوعيًا على الأقل."],
+ ["ما هي قاعدة 20-20-20 لراحة العينين؟",["كل 20 دقيقة انظر لشيء على بعد 20 قدمًا لمدة 20 ثانية","20 دقيقة نوم بعد كل 20 دقيقة عمل","20 تمرين ضغط كل 20 دقيقة"],0,"قاعدة بسيطة تخفف إجهاد العين أمام الشاشات."],
+ ["في تقنية التنفس 4-7-8، كم ثانية تحبسين النفس؟",["٤ ثوانٍ","٧ ثوانٍ","٨ ثوانٍ"],1,"شهيق ٤ ثوانٍ، حبس ٧ ثوانٍ، زفير ٨ ثوانٍ."],
+ ["كم ثانية يُنصح بالاحتفاظ بوضعية الإطالة؟",["٣ ثوانٍ","١٥–٣٠ ثانية","٥ دقائق"],1,"الاحتفاظ بالوضعية ١٥–٣٠ ثانية يساعد العضلة على الاسترخاء والتمدد."],
+ ["ما الفائدة الأساسية من الإحماء قبل التمرين؟",["تجهيز العضلات وتقليل خطر الإصابة","حرق أكبر كمية من السعرات","لا فائدة له"],0,"الإحماء يرفع حرارة العضلات ويجهز الجسم للحركة."],
+ ["أي عبارة صحيحة حسب منظمة الصحة العالمية؟",["النشاط القليل لا فائدة منه","القليل من النشاط أفضل من لا شيء","الرياضة للرياضيين فقط"],1,"أي حركة لها فائدة، والزيادة تكون تدريجية."],
+ ["تمرين البلانك يقوّي بشكل أساسي:",["عضلات الجذع والبطن","عضلات الأصابع","عضلات الفك"],0,"البلانك تمرين ثبات يقوّي عضلات الجذع."],
+ ["كم ساعة نوم يحتاجها المراهق (١٣–١٨ سنة) يوميًا؟",["٥–٦ ساعات","٨–١٠ ساعات","١٢–١٤ ساعة"],1,"توصي الأكاديمية الأمريكية لطب النوم بـ ٨–١٠ ساعات للمراهقين."]
+];
+const now=new Date(),doy=Math.floor((now-new Date(now.getFullYear(),0,0))/864e5),Q=QS[doy%QS.length];
+document.getElementById("q-date").textContent=now.toLocaleDateString("ar-BH",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+document.getElementById("q-text").textContent=Q[0];
+const qo=document.getElementById("q-opts"),qs=document.getElementById("q-send"),qf=document.getElementById("q-fb");
+let pick=null;const saved=store.get("yathrib-quiz");
+Q[1].forEach((t,k)=>{const b=document.createElement("button");b.type="button";b.id="q-opt-"+k;b.textContent=t;b.setAttribute("aria-pressed","false");
+  b.onclick=()=>{if(qs.dataset.locked)return;pick=k;qo.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));qs.disabled=false};qo.appendChild(b)});
+function reveal(k){qs.dataset.locked=1;qs.disabled=true;qs.textContent="تم الإرسال";
+  qo.querySelectorAll("button").forEach((x,j)=>{if(j===Q[2])x.classList.add("right");else if(j===k)x.classList.add("wrong")});
+  qf.hidden=false;qf.className="qfb "+(k===Q[2]?"ok":"no");qf.textContent=(k===Q[2]?"إجابة صحيحة! ":"إجابة غير صحيحة. ")+Q[3]}
+qs.onclick=()=>{if(pick===null)return;store.set("yathrib-quiz",{k:todayKey,a:pick});reveal(pick)};
+if(saved&&saved.k===todayKey)reveal(saved.a);
 
 /* ---------- tip of the day ---------- */
 const WHO="https://www.who.int/europe/news-room/fact-sheets/item/physical-activity", BH="https://who.int/initiatives/behealthy/physical-activity", CDC="https://www.cdc.gov/physical-activity-education/guidelines/";
