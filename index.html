@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>أكاديمية يثرب الرياضية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: the platform is a running track — the 60-minute ring is the mark, each audience runs its own lane, every view opens from three gates on the home page. */
+:root{
+  --bg:#EEF1F5; --surface:#FFFFFF; --ink:#121B33; --muted:#5A647D;
+  --track:#D9482B; --lane:#1F7A8C; --line:#D5DAE4; --track-soft:#F7DDD6;
+  --gold:#B7861C; --violet:#6A4FB3;
+  --display:"IBM Plex Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif;
+  --body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1324; --surface:#151D33; --ink:#EEF1F7; --muted:#9AA4BD;
+    --track:#F0694C; --lane:#4FB3C6; --line:#26314D; --track-soft:#3A2220;
+    --gold:#E0B04A; --violet:#A38BEB; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1324; --surface:#151D33; --ink:#EEF1F7; --muted:#9AA4BD;
+  --track:#F0694C; --lane:#4FB3C6; --line:#26314D; --track-soft:#3A2220;
+  --gold:#E0B04A; --violet:#A38BEB; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);line-height:1.25;margin:0;text-wrap:balance;font-weight:600}
+h1{font-weight:700;line-height:1.12}
+h2{line-height:1.18}
+p{margin:0}
+a{color:inherit}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--lane);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+@media (max-width:420px){.wrap{padding:0 16px}}
+
+/* top bar */
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.mark{width:44px;height:44px;border-radius:50%;border:3px solid var(--track);position:relative;flex:none}
+.mark::after{content:"";position:absolute;inset:6px;border-radius:50%;border:2px solid var(--lane)}
+.brand b{display:block;font-family:var(--display);font-weight:700;font-size:19px;line-height:1.2}
+.brand small{display:block;font-weight:500;font-size:13px;color:var(--muted)}
+.nav{display:flex;gap:4px;flex-wrap:wrap;background:var(--surface);padding:4px;border-radius:999px}
+.nav a{text-decoration:none;font-size:14px;font-weight:600;padding:7px 14px;border-radius:999px;color:var(--muted)}
+.nav a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.nav a:hover:not([aria-current]){color:var(--ink)}
+
+.view{display:none}
+.view.on{display:block}
+
+/* welcome */
+.welcome{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;padding:36px 0 48px}
+@media (max-width:860px){.welcome{grid-template-columns:1fr;gap:20px;padding-top:12px}}
+.school{font-family:var(--display);font-size:clamp(20px,2.4vw,26px);color:var(--lane);font-weight:300}
+.welcome h1{font-size:clamp(40px,6.2vw,76px);margin:8px 0 16px}
+.welcome h1 em{font-style:normal;color:var(--track)}
+.lede{font-size:18px;font-weight:300;color:var(--muted);max-width:36em}
+.ringbox{position:relative;aspect-ratio:1;max-width:320px;width:100%;justify-self:center}
+.ringbox svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ringbox .base{fill:none;stroke:var(--track-soft);stroke-width:46}
+.ringbox .lanes{fill:none;stroke:var(--surface);stroke-width:1.5}
+.ringbox .arc{fill:none;stroke:var(--track);stroke-width:46;animation:draw 1.8s cubic-bezier(.6,.05,.25,1) both}
+@keyframes draw{from{stroke-dasharray:0 1000}to{stroke-dasharray:1000 0}}
+.ringlabel{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ringlabel b{font-family:var(--display);font-weight:200;font-size:clamp(64px,9vw,104px);line-height:1}
+.ringlabel span{font-weight:600;color:var(--muted);font-size:15px}
+
+/* section shell */
+.block{padding:56px 0;border-top:1px solid var(--line)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.head h2{font-size:clamp(28px,3.6vw,42px)}
+.head p{color:var(--muted);max-width:32em}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--track-soft);color:var(--track);line-height:1.6}
+.pill.teal{background:color-mix(in srgb,var(--lane) 16%,transparent);color:var(--lane)}
+.pill.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.src{font-size:13px;color:var(--muted)}
+.src a{color:var(--lane)}
+.btn{display:inline-block;font:600 15px var(--body);padding:11px 20px;border-radius:999px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);text-decoration:none;cursor:pointer;transition:transform .15s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+
+/* announcements + news */
+.board{display:grid;grid-template-columns:1fr 1.25fr;gap:20px}
+@media (max-width:900px){.board{grid-template-columns:1fr}}
+.notice{background:var(--track);color:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.notice .pill{background:rgba(255,255,255,.2);color:#fff;align-self:start}
+.notice h3{font-size:28px;font-weight:700}
+.notice ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.notice li{background:rgba(255,255,255,.12);border-radius:14px;padding:12px 16px;font-size:15px}
+.notice li b{display:block;font-size:16px}
+.newslist{display:grid;gap:12px}
+.news{background:var(--surface);border-radius:20px;padding:18px 20px;display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:start}
+.date{display:flex;flex-direction:column;align-items:center;border:2px solid var(--track);border-radius:14px;padding:6px 0;font-variant-numeric:tabular-nums}
+.date b{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.1;color:var(--track)}
+.date span{font-size:12px;font-weight:600}
+.news h3{font-size:19px;margin:4px 0}
+.news p{color:var(--muted);font-size:15px}
+
+/* calendar */
+.calwrap{display:grid;grid-template-columns:1fr 320px;gap:20px}
+@media (max-width:960px){.calwrap{grid-template-columns:1fr}}
+.cal{background:var(--surface);border-radius:24px;padding:22px}
+.calbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.calbar h3{font-size:24px}
+.calbar button{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:20px;cursor:pointer}
+.calbar button:disabled{opacity:.35;cursor:default}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.filters button{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.filters button[aria-pressed="false"]{opacity:.45}
+.dot{width:10px;height:10px;border-radius:50%;flex:none;display:inline-block}
+.c-off{background:var(--track)} .c-sc{background:var(--ink)} .c-bh{background:var(--lane)} .c-ar{background:var(--gold)} .c-gl{background:var(--violet)}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.dow{font-size:12px;font-weight:600;color:var(--muted);text-align:center;padding-bottom:4px}
+.cell{min-height:64px;border-radius:10px;background:var(--bg);padding:6px;display:flex;flex-direction:column;gap:4px;border:1.5px solid transparent;cursor:pointer;text-align:start;color:var(--ink);font:inherit}
+.cell.empty{background:transparent;cursor:default}
+.cell .n{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.cell .dots{display:flex;flex-wrap:wrap;gap:3px}
+.cell.today{border-color:var(--track)}
+.cell.sel{background:var(--ink);color:var(--bg)}
+.cell.weekend .n{color:var(--muted)}
+.cell.sel .n{color:var(--bg)}
+@media (max-width:520px){.cell{min-height:46px;padding:4px}}
+.monthlist{margin-top:16px;display:grid;gap:8px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;font-size:15px}
+.ev .dot{margin-top:9px}
+.ev small{display:block;color:var(--muted);font-size:13px}
+.side{display:flex;flex-direction:column;gap:16px}
+.upcoming,.feature{background:var(--surface);border-radius:24px;padding:22px}
+.upcoming h3,.feature h3{font-size:20px;margin-bottom:12px}
+.upcoming ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.upcoming li{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start}
+.upcoming .d{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.1;text-align:center;color:var(--track)}
+.upcoming .d span{display:block;font:600 11px var(--body);color:var(--muted)}
+.feature{background:var(--ink);color:var(--bg)}
+.feature p{color:color-mix(in srgb,var(--bg) 75%,transparent);font-size:15px}
+.calnote{font-size:13px;color:var(--muted);margin-top:14px}
+
+/* gates */
+.gates{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:860px){
+  .gates{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;margin-inline:-24px;padding:4px 24px 8px;scroll-padding-inline:24px}
+  .gates::-webkit-scrollbar{display:none}
+  .gate{scroll-snap-align:start}
+}
+.gatedots{display:none;justify-content:center;gap:8px;margin-top:14px}
+@media (max-width:860px){.gatedots{display:flex}}
+.gatedots i{width:8px;height:8px;border-radius:999px;background:var(--line);transition:width .35s var(--ease-spring,ease),background-color .2s ease}
+.gatedots i.on{width:24px;background:var(--track)}
+.gate{position:relative;display:flex;flex-direction:column;gap:10px;padding:28px;border-radius:24px;background:var(--surface);text-decoration:none;min-height:230px;overflow:hidden;transition:transform .2s ease}
+.gate:hover{transform:translateY(-4px)}
+.gate .no{font-family:var(--display);font-weight:300;font-size:15px;color:var(--muted)}
+.gate h3{font-size:30px;font-weight:700}
+.gate p{color:var(--muted);flex:1}
+.gate .go{font-weight:600;color:var(--track)}
+.gate::after{content:"";position:absolute;inset-inline-start:-60px;bottom:-60px;width:150px;height:150px;border-radius:50%;border:14px solid var(--track-soft)}
+.gate.g2{background:var(--ink);color:var(--bg)}
+.gate.g2 p,.gate.g2 .no{color:color-mix(in srgb,var(--bg) 70%,transparent)}
+.gate.g2::after{border-color:color-mix(in srgb,var(--track) 45%,transparent)}
+
+/* tip */
+.tip{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;background:var(--track-soft);border-radius:24px;padding:26px 30px}
+@media (max-width:700px){.tip{grid-template-columns:1fr}}
+.tip .lbl{font-family:var(--display);font-size:15px;color:var(--track);display:flex;flex-direction:column;align-items:center;gap:2px}
+.tip .lbl b{font-size:44px;line-height:1;font-weight:200}
+.tip p{font-size:20px;font-weight:300}
+.tip .src{margin-top:6px}
+
+/* inner pages */
+.pagehead{padding:36px 0 40px}
+.pagehead h1{font-size:clamp(38px,5.5vw,64px);margin:8px 0 12px;font-weight:700}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:860px){.why{grid-template-columns:1fr}}
+.fact{background:var(--surface);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:10px}
+.fact .num{font-family:var(--display);font-weight:700;font-size:46px;line-height:1;color:var(--track)}
+.fact.study{border:2px dashed var(--line);background:transparent}
+.fact.study .num{color:var(--lane)}
+.fact p{color:var(--muted)}
+.lanes-list{display:grid;border-top:3px solid var(--ink)}
+.lane{display:grid;grid-template-columns:90px 1fr 1.6fr;gap:28px;padding:28px 0;border-bottom:1.5px solid var(--line);align-items:start}
+@media (max-width:760px){.lane{grid-template-columns:56px 1fr;gap:16px}.lane ul{grid-column:1/-1}}
+.lane-no{font-family:var(--display);font-weight:200;font-size:52px;line-height:1;color:var(--track);display:flex;flex-direction:column}
+.lane-no small{font:600 12px var(--body);color:var(--muted);margin-bottom:6px}
+.lane h3{font-size:24px;margin-bottom:4px}
+.lane > div > p{color:var(--muted)}
+.lane ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.lane li{background:var(--surface);border-radius:14px;padding:12px 18px;border-inline-start:4px solid var(--lane)}
+.lane li b{font-weight:600}
+
+.programs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media (max-width:960px){.programs{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.programs{grid-template-columns:1fr}}
+.prog{background:var(--surface);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.prog .ico{width:42px;height:42px}
+.prog h3{font-size:22px}
+.prog p{color:var(--muted);font-size:15px;flex:1}
+.prog .when{font-size:13px;font-weight:600;color:var(--lane)}
+
+.tracker{background:var(--surface);border-radius:28px;padding:30px;display:grid;grid-template-columns:1fr 280px;gap:36px}
+@media (max-width:860px){.tracker{grid-template-columns:1fr;padding:20px}}
+.days{display:grid;gap:10px}
+.day{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center}
+.day span.l{font-weight:600;font-size:15px}
+.meter{height:14px;border-radius:999px;background:var(--bg);overflow:hidden;position:relative}
+.meter i{position:absolute;inset-block:0;inset-inline-start:0;background:var(--track);border-radius:999px;transition:width .3s ease}
+.meter::after{content:"";position:absolute;inset-block:-2px;inset-inline-start:50%;width:2px;background:var(--ink);opacity:.35}
+.stepper{display:flex;align-items:center;gap:6px}
+.stepper button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:600 18px var(--body);cursor:pointer;line-height:1}
+.stepper output{min-width:58px;text-align:center;font-variant-numeric:tabular-nums;font-weight:600;font-size:15px}
+.legend{font-size:13px;color:var(--muted);margin-top:14px}
+.summary{display:flex;flex-direction:column;gap:14px;border-inline-start:1.5px solid var(--line);padding-inline-start:30px}
+@media (max-width:860px){.summary{border:0;padding:0;border-top:1.5px solid var(--line);padding-top:20px}}
+.avg{font-family:var(--display);font-weight:200;font-size:68px;line-height:1}
+.avg small{font:600 16px var(--body);color:var(--muted)}
+.status{align-self:start;font-weight:600;font-size:14px;padding:6px 14px;border-radius:999px}
+.status.ok{background:color-mix(in srgb,var(--lane) 18%,transparent);color:var(--lane)}
+.status.go{background:var(--track-soft);color:var(--track)}
+.summary p{color:var(--muted);font-size:15px}
+
+.reg{background:var(--surface);border-radius:28px;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:700px){.reg{grid-template-columns:1fr;padding:20px}}
+.field{display:flex;flex-direction:column;gap:8px;border:0;margin:0;padding:0;min-width:0}
+.full{grid-column:1/-1}
+.field label,.field legend{font-weight:600;font-size:15px;padding:0}
+.field legend{margin-bottom:8px}
+input:not([type=radio]),textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;width:100%}
+input:focus,textarea:focus{outline:none;border-color:var(--lane)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;padding:8px 18px;border-radius:999px;border:1.5px solid var(--line);font-weight:500}
+.chips input:checked+span{background:var(--track);border-color:var(--track);color:#fff}
+.chips input:focus-visible+span{outline:3px solid var(--lane);outline-offset:2px}
+.actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.err{color:var(--track);font-weight:600;font-size:14px}
+.receipt{background:var(--bg);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;border-inline-start:4px solid var(--lane);white-space:pre-line}
+.receipt .btn{align-self:start}
+
+.moves{display:grid;grid-template-columns:repeat(5,1fr);background:var(--ink);color:var(--bg);border-radius:24px;overflow:hidden}
+@media (max-width:860px){.moves{grid-template-columns:1fr 1fr}}
+.move{padding:22px;border-inline-start:1px solid color-mix(in srgb,var(--bg) 18%,transparent)}
+.move:first-child{border:0}
+.move b{font-family:var(--display);font-weight:700;font-size:32px;display:block;color:var(--track)}
+.move span{font-size:15px}
+
+.shelves{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:860px){.shelves{grid-template-columns:1fr}}
+.shelf{background:var(--surface);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.shelf h3{font-size:22px}
+.shelf ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.shelf li a{display:block;text-decoration:none;padding:12px 14px;border-radius:12px;background:var(--bg);border-inline-start:4px solid var(--lane)}
+.shelf li a:hover{border-color:var(--track)}
+.shelf li a small{display:block;color:var(--muted);font-size:13px}
+.shelf li.soon{padding:12px 14px;border-radius:12px;border:1.5px dashed var(--line);color:var(--muted);font-size:15px}
+
+
+
+/* ---- icons + imagery ---- */
+.i{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.2em}
+.hi{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--track-soft);color:var(--track);margin-inline-end:12px;vertical-align:middle}
+.hi .i{width:24px;height:24px}
+.hi.t{background:color-mix(in srgb,var(--lane) 15%,transparent);color:var(--lane)}
+.head h2{display:flex;align-items:center}
+.notice li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.notice li .i{width:22px;height:22px;margin-top:3px}
+.pill .i{width:13px;height:13px;margin-inline-end:4px;vertical-align:-2px}
+.filters button .i{width:15px;height:15px}
+.gate{padding:0;min-height:0}
+.gate .art{aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
+.gate .art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease-spring,ease)}
+.gate:hover .art img{transform:scale(1.04)}
+.gate .txt{padding:22px 24px 24px;display:flex;flex-direction:column;gap:8px;flex:1}
+.gate::after{display:none}
+.prog{padding:0;overflow:hidden}
+.prog .art{aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
+.prog .art img{width:100%;height:100%;object-fit:cover;display:block}
+.prog .txt{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.prog .when{display:flex;align-items:center;gap:6px}
+.pagehead{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+@media (max-width:860px){.pagehead{grid-template-columns:1fr;gap:20px}}
+.pagehead .hero{border-radius:28px;overflow:hidden;aspect-ratio:4/3;background:var(--surface)}
+.pagehead .hero img{width:100%;height:100%;object-fit:cover;display:block}
+.vm{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:760px){.vm{grid-template-columns:1fr}}
+.vm article{border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:12px}
+.vm .v{background:var(--ink);color:var(--bg)}
+.vm .m{background:var(--track);color:#fff}
+.vm .ico{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:rgba(255,255,255,.14)}
+.vm .ico .i{width:28px;height:28px}
+.vm span.k{font-weight:300;font-size:15px;opacity:.8}
+.vm p{font-size:clamp(22px,2.6vw,30px);font-weight:600;line-height:1.45}
+.goals{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media (max-width:1000px){.goals{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.goals{grid-template-columns:1fr}}
+.goal{background:var(--surface);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px;position:relative}
+.goal .n{position:absolute;inset-inline-end:18px;top:14px;font-size:40px;font-weight:200;color:var(--line);line-height:1}
+.goal .hi{margin:0}
+.goal p{font-size:16px;font-weight:500;line-height:1.6}
+.fact .hi{margin:0;align-self:start}
+.lane h3{display:flex;align-items:center;gap:10px}
+.lane h3 .i{color:var(--lane);width:26px;height:26px}
+.move .i{width:30px;height:30px;color:var(--bg);opacity:.85;display:block;margin-bottom:10px}
+.shelf h3{display:flex;align-items:center;gap:10px}
+.shelf li a{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.shelf li a .i{width:20px;height:20px;color:var(--lane)}
+.shelf li a .i.o{width:16px;height:16px;color:var(--muted)}
+.shelf li.soon{display:flex;gap:10px;align-items:center}
+.tip .lbl .i{width:30px;height:30px;margin-bottom:4px}
+.upcoming h3,.feature h3{display:flex;align-items:center;gap:8px}
+/* ---- swipeable calendar ---- */
+.gridclip{overflow:hidden;margin-inline:-4px;padding-inline:4px}
+#grid{touch-action:pan-y;will-change:transform;user-select:none;-webkit-user-select:none}
+#grid.dragging .cell{cursor:grabbing}
+.swipehint{display:none;font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
+@media (pointer:coarse){.swipehint{display:block}}
+/* ---- Apple-style layer: material chrome, press response, motion ---- */
+:root{--ease-spring:cubic-bezier(.22,1,.36,1);--press:100ms ease-out}
+.chrome{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 72%,transparent);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%)}
+.chrome::after{content:"";position:absolute;inset-inline:0;top:100%;height:18px;pointer-events:none;background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 70%,transparent),transparent);opacity:0;transition:opacity .25s ease}
+.chrome.scrolled::after{opacity:1}
+.bar{padding:12px 0}
+.nav{position:relative;isolation:isolate;background:color-mix(in srgb,var(--surface) 80%,transparent)}
+.nav a{position:relative;z-index:1;transition:color .2s ease}
+.nav a[aria-current="page"]{background:transparent;color:var(--bg)}
+.seg{position:absolute;z-index:0;top:4px;bottom:4px;border-radius:999px;background:var(--ink);transition:inset-inline-start .4s var(--ease-spring),width .4s var(--ease-spring)}
+/* respond on press, not on release */
+.btn,.gate,.cell,.filters button,.stepper button,.calbar button,.chips span,.nav a,.shelf li a,.brand{transition:transform var(--press),background-color .2s ease,color .2s ease,border-color .2s ease,opacity .2s ease}
+.btn:hover{transform:none}
+.btn:active,.filters button:active,.chips label:active span,.nav a:active{transform:scale(.96)}
+.cell:not(.empty):active,.stepper button:active,.calbar button:active{transform:scale(.92)}
+.gate:hover{transform:translateY(-3px)}
+.gate:active,.shelf li a:active{transform:scale(.98)}
+.cell:not(.empty):hover{border-color:var(--line)}
+.cell.sel:hover{border-color:transparent}
+.meter i{transition:width .4s var(--ease-spring)}
+@media (prefers-reduced-transparency: reduce){
+  .chrome{background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .nav{background:var(--surface)}
+}
+@media (prefers-contrast: more){
+  .chrome{background:var(--bg);backdrop-filter:none;border-bottom:1.5px solid var(--ink)}
+  .cell,.fact,.prog,.shelf,.news,.cal,.upcoming{border:1.5px solid var(--ink)}
+  .muted,.lede,.src{color:var(--ink)}
+}
+@media (prefers-reduced-motion: reduce){.seg{transition:none}}
+footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:grid;gap:8px}
+footer a{color:var(--lane)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 9a4 4 0 0 1 0 6M18 6a8 8 0 0 1 0 12"/></symbol>
+<symbol id="i-news" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8M10 17h4"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4h11l-2 4 2 4H5"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2 2 2 0 0 0 2 2h13"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></symbol>
+<symbol id="i-shirt" viewBox="0 0 24 24"><path d="M8 3 4 6l2 4 2-1v12h8V9l2 1 2-4-4-3a4 4 0 0 1-8 0z"/></symbol>
+<symbol id="i-whistle" viewBox="0 0 24 24"><circle cx="8" cy="15" r="5"/><path d="M11 11l9-4v4l-6 2"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7M5 10v10h14V10"/><path d="M12 17s-3-1.8-3-3.6A1.6 1.6 0 0 1 12 12a1.6 1.6 0 0 1 3 1.4c0 1.8-3 3.6-3 3.6z"/></symbol>
+<symbol id="i-school" viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-5 7 5v11M10 21v-5h4v5"/><circle cx="12" cy="11" r="1.5"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
+<symbol id="i-dumbbell" viewBox="0 0 24 24"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/></symbol>
+<symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+<symbol id="i-video" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 13h6M9 17h4"/></symbol>
+<symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+<symbol id="i-stairs" viewBox="0 0 24 24"><path d="M3 20h5v-5h5v-5h5V5h3"/></symbol>
+<symbol id="i-wind" viewBox="0 0 24 24"><path d="M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7"/></symbol>
+<symbol id="i-squat" viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="M13 7v5l-4 2 1 6M13 12l4 2-2 6M9 9h8"/></symbol>
+<symbol id="i-plank" viewBox="0 0 24 24"><circle cx="5" cy="10" r="2"/><path d="M7 12l12 3M8 13v5M19 15v3M3 18h18"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15 14a5 5 0 0 1 6 5"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-4.7-8-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 8 2.8C20 15.3 12 20 12 20z"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+<symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/></symbol>
+<symbol id="i-run" viewBox="0 0 24 24"><circle cx="15" cy="4" r="2"/><path d="M9 21l3-6-3-3 3-4 3 3h4M6 12l3-4M12 15l4 2v4"/></symbol>
+</defs></svg>
+<div class="chrome" id="chrome"><div class="wrap">
+  <header class="bar">
+    <a class="brand" href="#home"><span class="mark" aria-hidden="true"></span><span><b>أكاديمية يثرب الرياضية</b><small>مدرسة يثرب الإعدادية للبنات</small></span></a>
+    <nav class="nav" aria-label="أقسام المنصة">
+      <a href="#home" data-v="home">الرئيسية</a><a href="#about" data-v="about">تعرفي علينا</a><a href="#play" data-v="play">إلعبي معنا</a><a href="#library" data-v="library">مكتبتنا</a><span class="seg" id="seg" aria-hidden="true"></span>
+    </nav>
+  </header>
+</div></div>
+
+<!-- ================= HOME ================= -->
+<main id="v-home" class="view">
+  <div class="wrap">
+    <div class="welcome">
+      <div>
+        <span class="school">مدرسة يثرب الإعدادية للبنات</span>
+        <h1>أهلًا بنجمات <em>يثرب</em></h1>
+        <p class="lede">مرحبًا بكِ في منصة أكاديميتنا الرياضية. هنا تجدين إعلانات الأكاديمية، وتقويم المناسبات الرياضية، وبرامجنا، ونصيحة جديدة كل يوم. نلتقي في الملعب على هدف واحد: ستون دقيقة حركة يوميًا.</p>
+        <p class="src" style="margin-top:10px"><span class="pill ghost">نص ترحيبي مؤقت</span></p>
+      </div>
+      <div class="ringbox" aria-label="هدف ستين دقيقة نشاط يوميًا">
+        <svg viewBox="0 0 400 400" aria-hidden="true">
+          <circle class="base" cx="200" cy="200" r="160"/>
+          <circle class="arc" cx="200" cy="200" r="160" pathLength="1000"/>
+          <circle class="lanes" cx="200" cy="200" r="145"/><circle class="lanes" cx="200" cy="200" r="160"/><circle class="lanes" cx="200" cy="200" r="175"/>
+        </svg>
+        <div class="ringlabel"><b>٦٠</b><span>دقيقة نشاط يوميًا</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="head"><h2><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-megaphone"/></svg></span>الإعلانات وآخر الأخبار</h2><p><span class="pill">محتوى مقترح مؤقت</span> يُستبدل بأخبار الأكاديمية الفعلية.</p></div>
+      <div class="board">
+        <article class="notice">
+          <span class="pill"><svg class="i" aria-hidden="true"><use href="#i-megaphone"/></svg>إعلانات الأكاديمية</span>
+          <h3>التسجيل في برامج الفصل الثاني مفتوح</h3>
+          <ul>
+            <li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><div><b>آخر موعد للتسجيل</b>نهاية الأسبوع الأول من الفصل الثاني، عبر صفحة «إلعبي معنا».</div></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-shirt"/></svg><div><b>الزي الرياضي</b>إلزامي في حصص الأكاديمية، مع قارورة ماء شخصية.</div></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg><div><b>الفسحة النشطة</b>ألعاب منظمة في الساحة كل خميس.</div></li>
+          </ul>
+          <a class="btn ghost" href="#play" style="border-color:#fff;color:#fff;align-self:start">سجّلي الآن</a>
+        </article>
+        <div class="newslist">
+          <article class="news"><div class="date"><b>١٨</b><span>نوفمبر</span></div><div><span class="pill"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg>بطولة</span><h3>دوري الفصول لكرة السلة</h3><p>مباريات بين فصول الأول والثاني الإعدادي، والنهائي بحضور أولياء الأمور.</p></div></article>
+          <article class="news"><div class="date"><b>٢</b><span>ديسمبر</span></div><div><span class="pill teal"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg>فعالية</span><h3>يوم الجري المدرسي</h3><p>جري ومشي جماعي احتفاءً بالعيد الوطني، وكل طالبة تختار مسافتها.</p></div></article>
+          <article class="news"><div class="date"><b>٢٨</b><span>أكتوبر</span></div><div><span class="pill ghost"><svg class="i" aria-hidden="true"><use href="#i-news"/></svg>خبر</span><h3>انطلاق أكاديمية يثرب الرياضية</h3><p>إطلاق المنصة لربط الطالبات وأولياء الأمور والإدارة بأنشطة الأكاديمية.</p></div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="calendar-block">
+    <div class="wrap">
+      <div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg></span>تقويم العام الدراسي ٢٠٢٦–٢٠٢٧</h2><p>الإجازات الرسمية في البحرين، ومواعيد المدرسة، وأبرز المناسبات الرياضية البحرينية والعربية والعالمية.</p></div>
+      <div class="calwrap">
+        <div class="cal">
+          <div class="calbar">
+            <button type="button" id="prev" aria-label="الشهر السابق">›</button>
+            <h3 id="mtitle" aria-live="polite"></h3>
+            <button type="button" id="next" aria-label="الشهر التالي">‹</button>
+          </div>
+          <div class="filters" id="filters"></div>
+          <div class="gridclip"><div class="grid" id="grid"></div></div>
+          <p class="swipehint">اسحبي يمينًا أو يسارًا للتنقل بين الأشهر</p>
+          <div class="monthlist" id="mlist"></div>
+          <p class="calnote">المواعيد المرتبطة بالأشهر الهجرية تقريبية حتى إعلانها رسميًا بعد رؤية الهلال. مواعيد «المدرسة» المقترحة تُستبدل بخطة الأكاديمية.</p>
+        </div>
+        <aside class="side">
+          <div class="upcoming"><h3><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>القادم</h3><ol id="upcoming"></ol></div>
+          <div class="feature">
+            <span class="pill" style="background:rgba(255,255,255,.15);color:inherit"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg>حدث العام</span>
+            <h3 style="margin-top:10px">البحرين تستضيف دورة الألعاب العربية ٢٠٢٧</h3>
+            <p>أول استضافة بحرينية لأكبر حدث رياضي متعدد الألعاب في العالم العربي. الموعد يُضاف فور إعلانه.</p>
+            <p class="src" style="margin-top:8px"><a href="https://www.newsofbahrain.com/sports/121603.html" style="color:inherit">المصدر: News of Bahrain</a></p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="gates" id="gates">
+        <a class="gate" href="#about"><div class="art"><img src="img/gate-about.webp" alt="ثلاث طالبات بالزي الرياضي يرحّبن على مضمار الجري" width="880" height="660" loading="lazy"></div><div class="txt"><span class="no">البوابة ١</span><h3>تعرفي علينا</h3><p>رؤيتنا ورسالتنا وأهدافنا، ولماذا الحركة الآن، ومسار كل من الطالبة والأسرة والمدرسة.</p><span class="go">ادخلي ←</span></div></a>
+        <a class="gate g2" href="#play"><div class="art"><img src="img/gate-play.webp" alt="طالبتان تلعبان الكرة الطائرة وتجريان في صالة رياضية" width="880" height="660" loading="lazy"></div><div class="txt"><span class="no">البوابة ٢</span><h3>إلعبي معنا</h3><p>البرامج والجدول، وتحدي الأسبوع، والتسجيل في الأنشطة.</p><span class="go">ابدئي اللعب ←</span></div></a>
+        <a class="gate" href="#library"><div class="art"><img src="img/gate-library.webp" alt="طالبة تقرأ كتابًا بجانب رف فيه أدوات رياضية" width="880" height="660" loading="lazy"></div><div class="txt"><span class="no">البوابة ٣</span><h3>مكتبتنا</h3><p>مكتبة موارد موثوقة: إرشادات، تمارين، وأدلة للطالبات وأولياء الأمور.</p><span class="go">تصفّحي المكتبة ←</span></div></a>
+      </div>
+      <div class="gatedots" id="gatedots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="tip" aria-live="polite">
+        <div class="lbl"><svg class="i" aria-hidden="true"><use href="#i-bulb"/></svg><b id="tipno">١</b>نصيحة اليوم</div>
+        <div><p id="tiptext"></p><p class="src" id="tipsrc"></p></div>
+        <button class="btn ghost" type="button" id="tipnext">نصيحة أخرى</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= ABOUT ================= -->
+<main id="v-about" class="view">
+  <div class="wrap">
+    <div class="pagehead"><div><span class="school">البوابة ١</span><h1>تعرفي علينا</h1><p class="lede">مركز اللياقة البدنية في مدرسة يثرب الإعدادية للبنات: رؤية واضحة، ورسالة نعيشها، وأهداف نقيسها مع الطالبات وأولياء الأمور والإدارة.</p></div><div class="hero"><img src="img/gate-about.webp" alt="ثلاث طالبات بالزي الرياضي يرحّبن على مضمار الجري" width="880" height="660"></div></div>
+  </div>
+  <section class="block">
+    <div class="wrap">
+      <div class="vm">
+        <article class="v"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-eye"/></svg></span><span class="k">الرؤية</span><p>توجيه المجتمع المدرسي نحو اسلوب حياة صحي.</p></article>
+        <article class="m"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-target"/></svg></span><span class="k">الرسالة</span><p>يسعى مركز اللياقة البدنية إلى جعل الرياضة إسلوب حياة.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="block">
+    <div class="wrap">
+      <div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span>أهدافنا</h2><p>خمسة أهداف تقود برامج المركز وأنشطته.</p></div>
+      <div class="goals"><article class="goal"><span class="n">١</span><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></span><p>تعزيز دور الرياضة لمنتسبي المدرسة وجعلها إسلوب حياة.</p></article><article class="goal"><span class="n">٢</span><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-pulse"/></svg></span><p>رفع نسبة ممارسة النشاط البدني لدى جميع منتسبي المدرسة.</p></article><article class="goal"><span class="n">٣</span><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-dumbbell"/></svg></span><p>رفع معدل اللياقة البدنية بشكل عام لدى جميع منتسبي المدرسة.</p></article><article class="goal"><span class="n">٤</span><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-megaphone"/></svg></span><p>نشر ثقافة أهمية ممارسة النشاط البدني واللياقة البدنية.</p></article><article class="goal"><span class="n">٥</span><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-sun"/></svg></span><p>تعزيز الحياة الصحية وعلاج السمنة لدى جميع منتسبي المدرسة.</p></article></div>
+    </div>
+  </section>
+  <section class="block">
+    <div class="wrap">
+      <div class="head"><h2><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-pulse"/></svg></span>لماذا الآن؟</h2><p>الحركة اليومية طاقة وتركيز ومزاج أفضل داخل الفصل وخارجه.</p></div>
+      <div class="why">
+        <article class="fact"><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg></span><span class="num">٦٠ د</span><h3>الحد الموصى به يوميًا</h3><p>توصي منظمة الصحة العالمية من عمر ٥ إلى ١٧ عامًا بمتوسط ٦٠ دقيقة يوميًا من النشاط المتوسط إلى القوي على مدار الأسبوع.</p><span class="src">المصدر: <a href="https://www.who.int/europe/news-room/fact-sheets/item/physical-activity">منظمة الصحة العالمية</a></span></article>
+        <article class="fact"><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-dumbbell"/></svg></span><span class="num">٣×</span><h3>تقوية العضلات والعظام</h3><p>ثلاث مرات أسبوعيًا على الأقل. والقليل من النشاط أفضل من لا شيء، والزيادة تكون تدريجية.</p><span class="src">المصدر: <a href="https://who.int/initiatives/behealthy/physical-activity">WHO — Be Healthy</a></span></article>
+        <article class="fact study"><span class="pill teal" style="align-self:start"><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg>دراسة المدرسة</span><span class="num">٢٠٢٥ ← ٢٠٢٦</span><h3>أثر التعلّم عن بُعد على نجماتنا</h3><p>دراسة حالة داخلية تقارن نفس الدفعات بين العامين. تُعرض النتائج بشكل إجمالي فقط، دون أي بيانات فردية.</p><span class="src">النتائج تُنشر قريبًا</span></article>
+      </div>
+    </div>
+  </section>
+  <section class="block">
+    <div class="wrap">
+      <div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg></span>لكلٍّ مسارُه في الملعب</h2><p>ثلاثة مسارات تركض جنبًا إلى جنب. حين يتحرك كل مسار، تصل الطالبة.</p></div>
+      <div class="lanes-list">
+        <div class="lane"><span class="lane-no"><small>المسار</small>١</span><div><h3><svg class="i" aria-hidden="true"><use href="#i-star"/></svg>الطالبات</h3><p>نجمات يثرب في قلب الملعب.</p></div><ul><li><b>تحدي الأسبوع:</b> سجّلي دقائق حركتك وراقبي متوسطك يقترب من الستين.</li><li><b>اختاري رياضتك:</b> انضمي لبرنامج واحد على الأقل هذا الفصل.</li><li><b>استراحة الشاشة:</b> كل ساعة جلوس يقابلها خمس دقائق حركة.</li></ul></div>
+        <div class="lane"><span class="lane-no"><small>المسار</small>٢</span><div><h3><svg class="i" aria-hidden="true"><use href="#i-home"/></svg>أولياء الأمور</h3><p>البيت هو الملعب الثاني.</p></div><ul><li><b>مشي عائلي:</b> ٢٠ دقيقة بعد العشاء، ثلاث مرات أسبوعيًا.</li><li><b>تحفيز بلا مقارنة:</b> امدحوا الالتزام والجهد، لا الشكل أو الوزن.</li><li><b>تابعوا التحدي:</b> شاركوا ابنتكم تسجيل دقائقها نهاية كل أسبوع.</li></ul></div>
+        <div class="lane"><span class="lane-no"><small>المسار</small>٣</span><div><h3><svg class="i" aria-hidden="true"><use href="#i-school"/></svg>إدارة المدرسة</h3><p>بيئة تجعل الحركة خيارًا سهلًا.</p></div><ul><li><b>فسحة نشطة:</b> ألعاب منظمة في الساحة خلال الاستراحة.</li><li><b>تكريم شهري:</b> للفصل الأعلى التزامًا بتحدي الأسبوع.</li><li><b>متابعة الدراسة:</b> عرض نتائج دراسة الحالة لاتخاذ قرارات البرامج القادمة.</li></ul></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= PLAY ================= -->
+<main id="v-play" class="view">
+  <div class="wrap">
+    <div class="pagehead"><div><span class="school">البوابة ٢</span><h1>إلعبي معنا</h1><p class="lede">اختاري برنامجك، سجّلي دقائقك، وكوني جزءًا من فريق الأكاديمية.</p></div><div class="hero"><img src="img/gate-play.webp" alt="طالبتان تلعبان الكرة الطائرة وتجريان في صالة رياضية" width="880" height="660"></div></div>
+  </div>
+  <section class="block">
+    <div class="wrap">
+      <div class="head"><h2><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-whistle"/></svg></span>البرامج والجدول</h2><p><span class="pill">جدول مقترح</span> يُعدَّل حسب خطة قسم التربية الرياضية.</p></div>
+      <div class="programs">
+        <article class="prog"><div class="art"><img src="img/prog-basketball.webp" alt="طالبة تصوّب كرة السلة نحو السلة" width="720" height="540" loading="lazy"></div><div class="txt"><h3>كرة السلة</h3><p>مهارات التمرير والتصويب ولعب جماعي.</p><span class="when"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>الأحد والثلاثاء · بعد الدوام</span></div></article>
+        <article class="prog"><div class="art"><img src="img/prog-volleyball.webp" alt="طالبتان تلعبان الكرة الطائرة" width="720" height="540" loading="lazy"></div><div class="txt"><h3>الكرة الطائرة</h3><p>إرسال واستقبال وتنسيق الفريق.</p><span class="when"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>الاثنين · بعد الدوام</span></div></article>
+        <article class="prog"><div class="art"><img src="img/prog-running.webp" alt="طالبة تجري على المضمار" width="720" height="540" loading="lazy"></div><div class="txt"><h3>نادي الجري</h3><p>تحمّل تدريجي من ١٠ إلى ٢٠ دقيقة.</p><span class="when"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>الأربعاء · الحصة السابعة</span></div></article>
+        <article class="prog"><div class="art"><img src="img/prog-fitness.webp" alt="طالبة تؤدي تمرين السكوات على بساط" width="720" height="540" loading="lazy"></div><div class="txt"><h3>لياقة وقوة</h3><p>تمارين وزن الجسم والحبل لتقوية العضلات والعظام.</p><span class="when"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>الخميس · الفسحة النشطة</span></div></article>
+      </div>
+    </div>
+  </section>
+  <section class="block">
+    <div class="wrap">
+      <div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg></span>تحدي الأسبوع</h2><p>سجّلي دقائق نشاطك كل يوم. الخط في منتصف الشريط هو هدف الستين دقيقة.</p></div>
+      <div class="tracker">
+        <div><div class="days" id="days"></div><p class="legend">كل ضغطة تضيف أو تنقص ١٥ دقيقة. البيانات تُحفظ على جهازك فقط.</p></div>
+        <div class="summary" aria-live="polite">
+          <span class="pill ghost" id="mode" style="align-self:start">أسبوع تجريبي</span>
+          <div class="avg"><span id="avg">٠</span> <small>دقيقة / يوم</small></div>
+          <span class="status go" id="status">—</span>
+          <p id="total">—</p>
+          <button class="btn ghost" id="reset" type="button" style="align-self:start">ابدئي أسبوعك من الصفر</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="block">
+    <div class="wrap">
+      <div class="head"><h2><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-pen"/></svg></span>التسجيل في البرامج</h2><p>اختاري برنامجك، ثم انسخي الطلب وسلّميه لمعلمة التربية الرياضية. لا يُرسل أي شيء من هذه الصفحة.</p></div>
+      <form class="reg" id="regForm" novalidate>
+        <div class="field"><label for="r-name">اسم الطالبة</label><input id="r-name" required autocomplete="off"></div>
+        <div class="field"><label for="r-class">الصف والشعبة</label><input id="r-class" placeholder="مثال: ٢/٣" required autocomplete="off"></div>
+        <fieldset class="field full"><legend>البرنامج</legend><div class="chips">
+          <label><input type="radio" name="prog" id="p1" value="كرة السلة"><span>كرة السلة</span></label>
+          <label><input type="radio" name="prog" id="p2" value="الكرة الطائرة"><span>الكرة الطائرة</span></label>
+          <label><input type="radio" name="prog" id="p3" value="نادي الجري"><span>نادي الجري</span></label>
+          <label><input type="radio" name="prog" id="p4" value="لياقة وقوة"><span>لياقة وقوة</span></label>
+        </div></fieldset>
+        <div class="field full"><label for="r-note">ملاحظة لولي الأمر أو المعلمة (اختياري)</label><textarea id="r-note" rows="2"></textarea></div>
+        <div class="full actions"><button class="btn" type="submit" id="r-submit">جهّزي طلب التسجيل</button><p class="err" id="r-err" role="alert"></p></div>
+        <div class="full receipt" id="receipt" hidden><p id="r-text"></p><button class="btn ghost" type="button" id="r-copy">انسخي الطلب</button><span class="src" id="r-copied"></span></div>
+      </form>
+    </div>
+  </section>
+  <section class="block">
+    <div class="wrap">
+      <div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-home"/></svg></span>عشر دقائق في البيت</h2><p>حين لا يتسع اليوم لأكثر، هذه الدقائق تُحسب.</p></div>
+      <div class="moves">
+        <div class="move"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg><b>٢ د</b><span>قفز بالحبل أو قفز في المكان</span></div>
+        <div class="move"><svg class="i" aria-hidden="true"><use href="#i-squat"/></svg><b>٢ د</b><span>سكوات بطيء مع ثبات الظهر</span></div>
+        <div class="move"><svg class="i" aria-hidden="true"><use href="#i-stairs"/></svg><b>٢ د</b><span>صعود ونزول الدرج</span></div>
+        <div class="move"><svg class="i" aria-hidden="true"><use href="#i-plank"/></svg><b>٢ د</b><span>بلانك على فترات ٢٠ ثانية</span></div>
+        <div class="move"><svg class="i" aria-hidden="true"><use href="#i-wind"/></svg><b>٢ د</b><span>إطالة وتنفّس عميق</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= LIBRARY ================= -->
+<main id="v-library" class="view">
+  <div class="wrap">
+    <div class="pagehead"><div><span class="school">البوابة ٣</span><h1>مكتبتنا</h1><p class="lede">موارد مختارة من جهات موثوقة، مرتّبة حسب من يحتاجها.</p></div><div class="hero"><img src="img/gate-library.webp" alt="طالبة تقرأ كتابًا بجانب رف فيه أدوات رياضية" width="880" height="660"></div></div>
+  </div>
+  <section class="block">
+    <div class="wrap">
+      <div class="shelves">
+        <div class="shelf"><span class="pill teal" style="align-self:start">إرشادات موثوقة</span><h3><svg class="i" aria-hidden="true"><use href="#i-pulse"/></svg>كم نتحرك؟</h3><ul>
+          <li><a href="https://www.who.int/europe/news-room/fact-sheets/item/physical-activity"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><span>النشاط البدني — صحيفة وقائع<small>منظمة الصحة العالمية</small></span><svg class="i o" aria-hidden="true"><use href="#i-out"/></svg></a></li>
+          <li><a href="https://who.int/initiatives/behealthy/physical-activity"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><span>مستويات النشاط الموصى بها حسب العمر<small>منظمة الصحة العالمية — Be Healthy</small></span><svg class="i o" aria-hidden="true"><use href="#i-out"/></svg></a></li>
+          <li><a href="https://www.cdc.gov/physical-activity-education/guidelines/"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><span>إرشادات النشاط للأطفال في سن المدرسة<small>CDC</small></span><svg class="i o" aria-hidden="true"><use href="#i-out"/></svg></a></li>
+        </ul></div>
+        <div class="shelf"><span class="pill" style="align-self:start">للطالبات</span><h3><svg class="i" aria-hidden="true"><use href="#i-run"/></svg>تمارين وأفكار</h3><ul>
+          <li class="soon"><svg class="i" aria-hidden="true"><use href="#i-video"/></svg>فيديوهات تمارين قصيرة من معلمات الأكاديمية — قريبًا</li>
+          <li class="soon"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>بطاقات «عشر دقائق في البيت» للطباعة — قريبًا</li>
+          <li><a href="https://www.un.org/en/observances/sport-day"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><span>اليوم الدولي للرياضة من أجل التنمية والسلام<small>الأمم المتحدة</small></span><svg class="i o" aria-hidden="true"><use href="#i-out"/></svg></a></li>
+        </ul></div>
+        <div class="shelf"><span class="pill ghost" style="align-self:start">لأولياء الأمور والإدارة</span><h3><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>أدلة ومتابعة</h3><ul>
+          <li class="soon"><svg class="i" aria-hidden="true"><use href="#i-home"/></svg>دليل «البيت ملعب ثانٍ» لأولياء الأمور — قريبًا</li>
+          <li class="soon"><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg>ملخص نتائج دراسة الحالة ٢٠٢٥–٢٠٢٦ — قريبًا</li>
+          <li class="soon"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>نماذج متابعة البرامج للإدارة — قريبًا</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>أكاديمية يثرب الرياضية · مدرسة يثرب الإعدادية للبنات · مملكة البحرين</span>
+    <span>مصادر التقويم: <a href="https://gdnonline.com/Details/1397274/Parents-can-now-plan-for-new-academic-year">GDN — العام الدراسي</a> · <a href="https://www.officeholidays.com/countries/bahrain/national_day.php">Office Holidays</a> · <a href="https://holidaydb.com/guides/public-holidays/bahrain/2027">HolidayDB</a> · <a href="https://www.gdnonline.com/Details/1406642">GDN — الفورمولا ١</a> · <a href="https://www.un.org/en/observances/sport-day">الأمم المتحدة</a></span>
+  </footer>
+</div>
+
+<script>
+(function(){
+const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+const MONTHS=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+
+/* ---------- motion helpers ---------- */
+const RM=matchMedia("(prefers-reduced-motion: reduce)");
+const ORDER={home:0,about:1,play:2,library:3};
+function enter(el,dir){ // dir: +1 = arriving from the inline-end side (RTL: from the left)
+  if(!el.animate)return;
+  const x=RM.matches?0:dir*24;
+  el.animate([{opacity:0,transform:`translateX(${x}px)`},{opacity:1,transform:"none"}],{duration:RM.matches?180:420,easing:"cubic-bezier(.22,1,.36,1)"});
+}
+function moveSeg(){
+  const a=document.querySelector('.nav a[aria-current="page"]'),seg=document.getElementById("seg");
+  if(!a||!seg)return;
+  const nav=a.parentElement.getBoundingClientRect(),r=a.getBoundingClientRect();
+  seg.style.width=r.width+"px";
+  seg.style.insetInlineStart=(nav.right-r.right)+"px"; // RTL: measure from the right edge
+}
+addEventListener("resize",moveSeg);
+document.fonts&&document.fonts.ready.then(moveSeg);
+const chrome=document.getElementById("chrome");
+addEventListener("scroll",()=>chrome.classList.toggle("scrolled",scrollY>4),{passive:true});
+/* ---------- routing ---------- */
+const VIEWS=["home","about","play","library"];
+let lastView=null;
+function route(){
+  const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):"home";
+  const dir=lastView===null?0:(ORDER[v]>ORDER[lastView]?-1:1);
+  VIEWS.forEach(x=>document.getElementById("v-"+x).classList.toggle("on",x===v));
+  document.querySelectorAll(".nav a").forEach(a=>{if(a.dataset.v===v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  moveSeg();
+  if(lastView!==null&&lastView!==v){window.scrollTo(0,0);enter(document.getElementById("v-"+v),dir)}
+  lastView=v;
+}
+window.addEventListener("hashchange",route);route();
+
+/* ---------- calendar ---------- */
+const CATS={off:"إجازة رسمية",sc:"المدرسة",bh:"رياضة بحرينية",ar:"عربية وخليجية",gl:"عالمية"};
+const CICON={off:"sun",sc:"school",bh:"flag",ar:"trophy",gl:"globe"};
+const ic=n=>`<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const EV=[
+ {s:"2026-09-03",t:"بداية العام الدراسي للطالبات",c:"sc"},
+ {s:"2026-09-19",e:"2026-10-04",t:"دورة الألعاب الآسيوية — آيتشي-ناغويا، اليابان (بمشاركة البحرين)",c:"gl"},
+ {s:"2026-10-28",t:"إطلاق منصة الأكاديمية",c:"sc",p:1},
+ {s:"2026-11-18",t:"دوري الفصول لكرة السلة",c:"sc",p:1},
+ {s:"2026-12-02",t:"يوم الجري المدرسي",c:"sc",p:1},
+ {s:"2026-12-16",e:"2026-12-17",t:"العيد الوطني لمملكة البحرين",c:"off"},
+ {s:"2027-01-01",t:"رأس السنة الميلادية",c:"off"},
+ {s:"2027-01-14",e:"2027-01-15",t:"بطولة البحرين للسهام (Bahrain Darts Masters)",c:"bh"},
+ {s:"2027-01-28",e:"2027-01-31",t:"بطولة البحرين للجولف — جولة DP World Tour، نادي الرفاع",c:"bh"},
+ {m:"2027-02",t:"يوم البحرين الرياضي — يُعلن الموعد (أُقيم في ١٢ فبراير ٢٠٢٦)",c:"bh"},
+ {s:"2027-02-09",t:"اليوم الرياضي للدولة في قطر",c:"ar"},
+ {s:"2027-02-24",e:"2027-02-27",t:"تجارب ما قبل موسم الفورمولا ١ — حلبة البحرين الدولية",c:"bh"},
+ {s:"2027-03-09",e:"2027-03-11",t:"عيد الفطر",c:"off",a:1},
+ {s:"2027-03-12",e:"2027-03-14",t:"جائزة البحرين الكبرى للفورمولا ١ — افتتاح الموسم",c:"bh"},
+ {s:"2027-03-28",e:"2027-04-08",t:"دورة الألعاب الآسيوية للصالات والفنون القتالية — الرياض",c:"ar"},
+ {s:"2027-04-05",e:"2027-04-10",t:"بطولة العالم للبلياردو (٩ كرات) — معرض البحرين الدولي",c:"bh"},
+ {s:"2027-04-06",t:"اليوم الدولي للرياضة من أجل التنمية والسلام",c:"gl"},
+ {s:"2027-04-07",t:"يوم الصحة العالمي",c:"gl"},
+ {s:"2027-05-01",t:"عيد العمال",c:"off"},
+ {s:"2027-05-16",e:"2027-05-19",t:"يوم عرفة وعيد الأضحى",c:"off",a:1},
+ {s:"2027-06-06",t:"رأس السنة الهجرية",c:"off",a:1},
+ {s:"2027-06-15",e:"2027-06-16",t:"عاشوراء",c:"off",a:1},
+ {s:"2027-06-30",t:"نهاية العام الدراسي",c:"sc"}
+];
+const D=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
+EV.forEach(x=>{if(x.s){x.S=D(x.s);x.E=x.e?D(x.e):x.S}});
+const START=new Date(2026,8,1), END=new Date(2027,5,1);
+const today=new Date();today.setHours(0,0,0,0);
+let cur=new Date(today.getFullYear(),today.getMonth(),1);
+if(cur<START||cur>END)cur=new Date(START);
+let on=Object.assign({off:1,sc:1,bh:1,ar:1,gl:1},store.get("yathrib-cal-filter")||{});
+let sel=null;
+
+const fbox=document.getElementById("filters");
+Object.keys(CATS).forEach(k=>{
+  const b=document.createElement("button");b.type="button";b.id="f-"+k;
+  b.innerHTML=`<span class="dot c-${k}"></span>${ic(CICON[k])}${CATS[k]}`;
+  b.onclick=()=>{on[k]=on[k]?0:1;store.set("yathrib-cal-filter",on);drawCal()};
+  fbox.appendChild(b);
+});
+document.getElementById("prev").onclick=()=>{cur=new Date(cur.getFullYear(),cur.getMonth()-1,1);sel=null;drawCal();enter(document.getElementById("grid"),-1)};
+document.getElementById("next").onclick=()=>{cur=new Date(cur.getFullYear(),cur.getMonth()+1,1);sel=null;drawCal();enter(document.getElementById("grid"),1)};
+
+const fmtDay=d=>`${ar(d.getDate())} ${MONTHS[d.getMonth()]}`;
+const rangeTxt=x=>x.m?"خلال الشهر":(x.S.getTime()===x.E.getTime()?fmtDay(x.S):`${fmtDay(x.S)} – ${fmtDay(x.E)}`);
+const evLine=x=>`<div class="ev"><span class="dot c-${x.c}"></span><div>${x.t}${x.p?' <span class="pill ghost">مقترح</span>':''}<small>${rangeTxt(x)}${x.a?" · تقريبي":""}</small></div></div>`;
+
+function drawCal(){
+  Object.keys(CATS).forEach(k=>document.getElementById("f-"+k).setAttribute("aria-pressed",on[k]?"true":"false"));
+  const y=cur.getFullYear(),m=cur.getMonth();
+  document.getElementById("mtitle").textContent=`${MONTHS[m]} ${ar(y)}`;
+  document.getElementById("prev").disabled=cur<=START;
+  document.getElementById("next").disabled=cur>=END;
+  const g=document.getElementById("grid");g.innerHTML="";
+  ["أحد","إثنين","ثلاثاء","أربعاء","خميس","جمعة","سبت"].forEach(d=>{const h=document.createElement("div");h.className="dow";h.textContent=d;g.appendChild(h)});
+  const first=new Date(y,m,1).getDay(), n=new Date(y,m+1,0).getDate();
+  for(let i=0;i<first;i++){const e=document.createElement("div");e.className="cell empty";g.appendChild(e)}
+  const vis=EV.filter(x=>on[x.c]);
+  for(let d=1;d<=n;d++){
+    const day=new Date(y,m,d), evs=vis.filter(x=>x.S&&day>=x.S&&day<=x.E);
+    const c=document.createElement("button");c.type="button";c.className="cell";c.id=`day-${y}-${m+1}-${d}`;
+    if(day.getDay()===5||day.getDay()===6)c.classList.add("weekend");
+    if(day.getTime()===today.getTime())c.classList.add("today");
+    if(sel&&day.getTime()===sel.getTime())c.classList.add("sel");
+    c.innerHTML=`<span class="n">${ar(d)}</span><span class="dots">${evs.map(x=>`<span class="dot c-${x.c}"></span>`).join("")}</span>`;
+    c.setAttribute("aria-label",`${fmtDay(day)}${evs.length?": "+evs.map(x=>x.t).join("، "):""}`);
+    c.onclick=()=>{sel=(sel&&sel.getTime()===day.getTime())?null:day;drawCal()};
+    g.appendChild(c);
+  }
+  const ml=document.getElementById("mlist");
+  const mEnd=new Date(y,m+1,0), key=`${y}-${String(m+1).padStart(2,"0")}`;
+  let list=vis.filter(x=>x.m?x.m===key:(x.S<=mEnd&&x.E>=new Date(y,m,1)));
+  if(sel)list=list.filter(x=>x.S&&sel>=x.S&&sel<=x.E);
+  ml.innerHTML=list.length?list.map(evLine).join(""):`<p class="src">${sel?"لا مناسبات في هذا اليوم.":"لا مناسبات ضمن التصنيفات المختارة هذا الشهر."}</p>`;
+}
+drawCal();
+
+
+/* ---------- spring + swipe (calendar) ---------- */
+// Apple-style spring: damping ratio + response (s). Interruptible; carries velocity in and out.
+function spring(from,to,v0,{damping=1,response=.35}={},onUpdate,onDone){
+  const k=Math.pow(2*Math.PI/response,2),c=4*Math.PI*damping/response;
+  let x=from,v=v0,last=performance.now(),id,stopped=false;
+  function tick(now){
+    if(stopped)return;
+    let dt=Math.min(.032,(now-last)/1000);last=now;
+    const steps=4,h=dt/steps;
+    for(let i=0;i<steps;i++){const a=-k*(x-to)-c*v;v+=a*h;x+=v*h}
+    onUpdate(x);
+    if(Math.abs(x-to)<.4&&Math.abs(v)<8){onUpdate(to);onDone&&onDone();return}
+    id=requestAnimationFrame(tick);
+  }
+  id=requestAnimationFrame(tick);
+  return{stop(){stopped=true;cancelAnimationFrame(id);return{x,v}}};
+}
+const project=(v,d=.998)=>(v/1000)*d/(1-d);
+const rubber=(o,dim,c=.55)=>(o*dim*c)/(dim+c*Math.abs(o));
+(function(){
+  const g=document.getElementById("grid");
+  let x=0,anim=null,drag=null,swallowClick=false;
+  const set=v=>{x=v;g.style.transform=v?`translate3d(${v}px,0,0)`:""};
+  const canGo=dir=>dir>0?cur<END:cur>START; // dir>0: next month (RTL: next lives on the left, finger drags right)
+  g.addEventListener("pointerdown",e=>{
+    if(e.button!==0)return;
+    if(anim){const st=anim.stop();anim=null;set(st.x)} // grab it mid-flight, from the on-screen value
+    drag={id:e.pointerId,x0:e.clientX-x,y0:e.clientY,on:false,hist:[{x:e.clientX,t:e.timeStamp}]};
+  });
+  g.addEventListener("pointermove",e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    const dx=e.clientX-drag.x0,dy=e.clientY-drag.y0;
+    if(!drag.on){
+      if(Math.abs(dx-x)<10&&Math.abs(dy)<10)return;
+      if(Math.abs(dy)>Math.abs(dx-x)){drag=null;return} // vertical intent: let the page scroll
+      drag.on=true;g.classList.add("dragging");g.setPointerCapture(e.pointerId);
+    }
+    drag.hist.push({x:e.clientX,t:e.timeStamp});if(drag.hist.length>6)drag.hist.shift();
+    const dir=dx>0?1:-1,w=g.offsetWidth;
+    set(canGo(dir)?dx:rubber(dx,w)); // soft edge at the ends of the school year
+  });
+  function release(e){
+    if(!drag||e.pointerId!==drag.id)return;
+    const d=drag;drag=null;g.classList.remove("dragging");
+    if(!d.on){if(x)anim=spring(x,0,0,{},set,()=>anim=null);return}
+    swallowClick=true;
+    const h=d.hist,a=h[0],b=h[h.length-1],dt=Math.max(1,b.t-a.t);
+    const v=(b.x-a.x)/dt*1000; // px/s
+    const w=g.offsetWidth,end=x+project(v),dir=end>0?1:-1;
+    if(Math.abs(end)>w*.35&&canGo(dir)&&Math.sign(v||end)===dir){
+      if(RM.matches){set(0);step(dir);return}
+      anim=spring(x,dir*w,v,{damping:1,response:.28},set,()=>{
+        step(dir);set(-dir*w*.35);
+        anim=spring(x,0,v*.4,{damping:.85,response:.35},set,()=>anim=null); // momentum earned the small settle
+      });
+    }else{
+      anim=spring(x,0,v,{damping:1,response:.32},set,()=>anim=null);
+    }
+  }
+  g.addEventListener("pointerup",release);
+  g.addEventListener("pointercancel",release);
+  g.addEventListener("click",e=>{if(swallowClick){e.stopPropagation();e.preventDefault();swallowClick=false}},true);
+  function step(dir){cur=new Date(cur.getFullYear(),cur.getMonth()+dir,1);sel=null;drawCal()}
+})();
+
+/* ---------- gates carousel dots (mobile) ---------- */
+(function(){
+  const gs=document.getElementById("gates"),dots=[...document.querySelectorAll("#gatedots i")];
+  gs.addEventListener("scroll",()=>{
+    const cards=[...gs.children],mid=gs.getBoundingClientRect().left+gs.clientWidth/2;
+    let best=0,bd=1e9;cards.forEach((c,i)=>{const r=c.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-mid);if(d<bd){bd=d;best=i}});
+    dots.forEach((d,i)=>d.classList.toggle("on",i===best));
+  },{passive:true});
+})();
+
+const up=EV.filter(x=>x.S&&x.E>=today).sort((a,b)=>a.S-b.S).slice(0,5);
+document.getElementById("upcoming").innerHTML=up.map(x=>`<li><div class="d">${ar(x.S.getDate())}<span>${MONTHS[x.S.getMonth()]}</span></div><div>${x.t}${x.p?' <span class="pill ghost">مقترح</span>':''}<span class="src" style="display:block">${ic(CICON[x.c])} ${CATS[x.c]}${x.a?" · تقريبي":""}</span></div></li>`).join("");
+
+/* ---------- tip of the day ---------- */
+const WHO="https://www.who.int/europe/news-room/fact-sheets/item/physical-activity", BH="https://who.int/initiatives/behealthy/physical-activity", CDC="https://www.cdc.gov/physical-activity-education/guidelines/";
+const TIPS=[
+ ["ستون دقيقة يوميًا في المتوسط تكفي لتصنعي الفرق، ويمكن تقسيمها على اليوم كله.","منظمة الصحة العالمية",WHO],
+ ["القليل من الحركة أفضل من لا شيء. ابدئي بعشر دقائق وزيديها تدريجيًا.","منظمة الصحة العالمية",BH],
+ ["قوّي عضلاتك وعظامك ثلاث مرات أسبوعيًا على الأقل: قفز، حبل، وتمارين وزن الجسم.","منظمة الصحة العالمية",BH],
+ ["أدخلي نشاطًا قويًا يرفع نبضك ثلاثة أيام في الأسبوع، مثل الجري أو كرة السلة.","CDC",CDC],
+ ["كل ساعة جلوس أمام الشاشة؟ قومي خمس دقائق: تمددي، امشي، اصعدي الدرج.","فريق الأكاديمية",null],
+ ["اشربي الماء قبل التمرين وخلاله وبعده، وخذي قارورتك معك لكل حصة.","فريق الأكاديمية",null],
+ ["الإحماء خمس دقائق قبل أي نشاط يحمي عضلاتك ويجهز جسمك.","فريق الأكاديمية",null],
+ ["النوم الكافي جزء من التمرين؛ جسمك يبني قوته وأنتِ نائمة.","فريق الأكاديمية",null],
+ ["الحركة مع صديقة أمتع وأسهل للاستمرار. ادعي زميلتك لبرنامج هذا الفصل.","فريق الأكاديمية",null],
+ ["المشي إلى البقالة أو حول البيت بعد العشاء يُحسب من دقائقك اليومية.","فريق الأكاديمية",null],
+ ["قارني نفسك بنفسك فقط: سجّلي دقائقك هذا الأسبوع وحاولي زيادة خمس دقائق الأسبوع القادم.","فريق الأكاديمية",null],
+ ["النشاط البدني يدعم تركيزك وتحصيلك الدراسي، وليس لياقتك فقط.","منظمة الصحة العالمية",WHO]
+];
+let ti=Math.floor(Math.random()*TIPS.length);
+const last=store.get("yathrib-tip-last");if(TIPS.length>1&&ti===last)ti=(ti+1)%TIPS.length;
+function showTip(){
+  const [t,s,u]=TIPS[ti];store.set("yathrib-tip-last",ti);
+  document.getElementById("tipno").textContent=ar(ti+1);
+  document.getElementById("tiptext").textContent=t;
+  document.getElementById("tipsrc").innerHTML=u?`المصدر: <a href="${u}">${s}</a>`:s;
+}
+document.getElementById("tipnext").onclick=()=>{ti=(ti+1)%TIPS.length;showTip();const t=document.getElementById("tiptext");t.animate&&t.animate([{opacity:0,transform:RM.matches?"none":"translateY(6px)"},{opacity:1,transform:"none"}],{duration:320,easing:"cubic-bezier(.22,1,.36,1)"})};
+showTip();
+
+/* ---------- weekly challenge ---------- */
+const names=["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
+let wk=store.get("yathrib-week-v1");
+if(!wk||!Array.isArray(wk.mins)||wk.mins.length!==7)wk={mins:[60,45,75,30,60,90,15],demo:true};
+const host=document.getElementById("days");
+names.forEach((n,i)=>{
+  const row=document.createElement("div");row.className="day";
+  row.innerHTML=`<span class="l" id="d${i}-l">${n}</span><div class="meter" role="meter" aria-labelledby="d${i}-l" aria-valuemin="0" aria-valuemax="120" id="d${i}-m"><i id="d${i}-bar"></i></div><div class="stepper"><button type="button" id="d${i}-minus" aria-label="إنقاص ١٥ دقيقة يوم ${n}">−</button><output id="d${i}-out"></output><button type="button" id="d${i}-plus" aria-label="إضافة ١٥ دقيقة يوم ${n}">+</button></div>`;
+  host.appendChild(row);
+  row.querySelector(`#d${i}-minus`).onclick=()=>step(i,-15);
+  row.querySelector(`#d${i}-plus`).onclick=()=>step(i,15);
+});
+function step(i,d){wk.mins[i]=Math.max(0,Math.min(180,wk.mins[i]+d));wk.demo=false;store.set("yathrib-week-v1",wk);drawWk()}
+document.getElementById("reset").onclick=()=>{wk={mins:[0,0,0,0,0,0,0],demo:false};store.set("yathrib-week-v1",wk);drawWk()};
+function drawWk(){
+  wk.mins.forEach((m,i)=>{document.getElementById(`d${i}-bar`).style.width=Math.min(100,m/120*100)+"%";document.getElementById(`d${i}-out`).textContent=ar(m)+" د";document.getElementById(`d${i}-m`).setAttribute("aria-valuenow",m)});
+  const total=wk.mins.reduce((a,b)=>a+b,0),avg=Math.round(total/7);
+  document.getElementById("avg").textContent=ar(avg);
+  document.getElementById("total").textContent=`المجموع ${ar(total)} دقيقة من هدف ${ar(420)} دقيقة أسبوعيًا.`;
+  const st=document.getElementById("status");
+  if(avg>=60){st.className="status ok";st.textContent="على المسار، أحسنتِ"}else{st.className="status go";st.textContent=`باقٍ ${ar(60-avg)} دقيقة يوميًا للهدف`}
+  document.getElementById("mode").style.display=wk.demo?"":"none";
+}
+drawWk();
+
+/* ---------- registration (device only) ---------- */
+const f=document.getElementById("regForm"),err=document.getElementById("r-err");
+f.addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=document.getElementById("r-name").value.trim(),cls=document.getElementById("r-class").value.trim();
+  const prog=(f.querySelector('input[name="prog"]:checked')||{}).value,note=document.getElementById("r-note").value.trim();
+  if(!name||!cls||!prog){err.textContent="أكملي الاسم والصف واختاري برنامجًا.";return}
+  err.textContent="";
+  const txt=`طلب تسجيل — أكاديمية يثرب الرياضية\nالطالبة: ${name}\nالصف: ${cls}\nالبرنامج: ${prog}`+(note?`\nملاحظة: ${note}`:"");
+  document.getElementById("r-text").textContent=txt;
+  document.getElementById("receipt").hidden=false;
+  store.set("yathrib-reg-v1",{name,cls,prog,note});
+  document.getElementById("r-copy").onclick=async()=>{const c=document.getElementById("r-copied");try{await navigator.clipboard.writeText(txt);c.textContent="تم النسخ."}catch(e){c.textContent="تعذّر النسخ، حدّدي النص وانسخيه يدويًا."}};
+});
+const r=store.get("yathrib-reg-v1");
+if(r){document.getElementById("r-name").value=r.name||"";document.getElementById("r-class").value=r.cls||"";const p=[...f.querySelectorAll('input[name="prog"]')].find(x=>x.value===r.prog);if(p)p.checked=true;document.getElementById("r-note").value=r.note||""}
+})();
+</script>
+</body>
+</html>
