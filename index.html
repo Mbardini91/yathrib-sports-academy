@@ -1187,7 +1187,7 @@ check();
 </script>
 <script>
 (function(){const b=document.getElementById("themebtn"),r=document.documentElement,m=document.querySelector('meta[name="theme-color"]');
-function set(t){r.dataset.theme=t;b.setAttribute("aria-pressed",t==="dark");b.title=t==="dark"?"الوضع الفاتح":"الوضع الداكن";if(m)m.content=t==="dark"?"#1a1823":"#baaed0"}
+function set(t){r.dataset.theme=t;b.setAttribute("aria-pressed",t==="dark");b.title=t==="dark"?"الوضع الفاتح":"الوضع الداكن";if(m)m.content=t==="dark"?"#0D1324":"#EEF1F5"}
 set(r.dataset.theme||"light");
 b.addEventListener("click",()=>{const t=r.dataset.theme==="dark"?"light":"dark";set(t);try{localStorage.setItem("yathrib-theme",t)}catch(e){}});})();
 </script>
