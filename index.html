@@ -527,16 +527,6 @@ footer a{color:var(--lane)}
 
 <!-- ================= HOME ================= -->
 <main id="v-home" class="view">
-<section class="block" id="login-block"><div class="wrap">
-  <div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></span>تسجيل الدخول</h2><p>سجّلي اسمك وفئتك، ونوديك مباشرة لقسمك. الاسم يُحفظ على جهازك فقط.</p></div>
-  <div class="login">
-    <form id="loginForm" novalidate><b style="font-size:20px">مرحباً بك في أكاديمية يثرب الرياضية</b>
-      <div class="field"><label for="lg-name">الاسم الثلاثي</label><input id="lg-name" placeholder="مثال: فاطمة أحمد محمد" autocomplete="off"></div>
-      <div class="field"><label for="lg-role">التصنيف</label><select id="lg-role"><option value="">اختر التصنيف</option><option value="students">طالبة</option><option value="staff">الهيئة الإدارية</option><option value="parents">ولي أمر</option></select></div>
-      <button class="btn" type="submit">تسجيل الدخول</button><p class="err" id="lg-err" role="alert"></p></form>
-    <div class="side-note"><b style="font-size:22px">مرحباً بك في رحلتك نحو الصحة واللياقة</b><p>نحن سعداء بوجودك معنا! سجل دخولك الآن للوصول إلى برامج التمارين المخصصة، جداول المشي، المكتبة الصحية، والمسابقات اليومية المثيرة.</p>
-      <ul><li><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>برامج متخصصة</li><li><svg class="i" aria-hidden="true"><use href="#i-dumbbell"/></svg>تمارين متنوعة</li><li><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg>مسابقات يومية</li></ul></div>
-  </div></div></section>
 <section class="block">
     <div class="wrap">
       <div class="head"><h2><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-megaphone"/></svg></span>الإعلانات وآخر الأخبار</h2><p><span class="pill">محتوى مقترح مؤقت</span> يُستبدل بأخبار الأكاديمية الفعلية.</p></div>
@@ -1010,13 +1000,13 @@ document.querySelectorAll(".walk tr").forEach(tr=>{if(+tr.dataset.day===wd)tr.cl
 let me=store.get("yathrib-user");
 function drawWho(){const w=document.getElementById("who");if(me&&me.name){w.hidden=false;document.getElementById("who-name").textContent=me.name.split(" ")[0]}else w.hidden=true}
 drawWho();
-document.getElementById("loginForm").addEventListener("submit",e=>{
+const lf=document.getElementById("loginForm");if(lf)lf.addEventListener("submit",e=>{
   e.preventDefault();
   const name=document.getElementById("lg-name").value.trim(),role=document.getElementById("lg-role").value,err=document.getElementById("lg-err");
   if(!name||!role){err.textContent="اكتبي الاسم واختاري التصنيف.";return}
   err.textContent="";me={name,role};store.set("yathrib-user",me);drawWho();location.hash=role;
 });
-document.getElementById("logout").onclick=()=>{me=null;try{localStorage.removeItem("yathrib-user")}catch(e){}drawWho();document.getElementById("lg-name").value="";document.getElementById("lg-role").value=""};
+document.getElementById("logout").onclick=()=>{me=null;try{localStorage.removeItem("yathrib-user")}catch(e){}drawWho();};
 
 // exercise cards: guided timer + done
 const fmt=s=>ar(Math.floor(s/60))+":"+ar(String(s%60).padStart(2,"0"));
