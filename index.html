@@ -445,6 +445,22 @@ input:focus,textarea:focus{outline:none;border-color:var(--lane)}
 .duo .tip .lbl b{font-size:36px}
 .duo .tip p#tiptext{font-size:22px;line-height:1.6}
 .duo .tip .btn{align-self:flex-start;margin-top:auto}
+
+/* ---- registration success ---- */
+.sent{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:20px 22px;border-radius:18px;background:color-mix(in srgb,var(--lane) 14%,transparent);color:var(--ink)}
+.sent b{font-size:20px;color:var(--lane)}
+.sent p{color:var(--muted)}
+.sent-ico svg{width:56px;height:56px;display:block}
+.sent-ico .c{fill:var(--lane);transform-origin:center;transform-box:fill-box}
+.sent-ico .k{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:0}
+.sent-emoji{font-size:44px;line-height:1}
+.sent.play .c{animation:pop .5s cubic-bezier(.22,1.4,.36,1) both}
+.sent.play .k{animation:tick .45s .25s ease-out both}
+.sent.play .sent-emoji{animation:medal .9s .3s cubic-bezier(.22,1.4,.36,1) both}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes tick{from{stroke-dashoffset:40}to{stroke-dashoffset:0}}
+@keyframes medal{0%{transform:translateY(-20px) rotate(-30deg) scale(.4);opacity:0}60%{transform:translateY(0) rotate(12deg) scale(1.15);opacity:1}100%{transform:rotate(0) scale(1)}}
+@media (prefers-reduced-motion:reduce){.sent.play .c,.sent.play .k,.sent.play .sent-emoji{animation:none}}
 /* ---- swipeable calendar ---- */
 .gridclip{overflow:hidden;margin-inline:-4px;padding-inline:4px}
 #grid{touch-action:pan-y;will-change:transform;user-select:none;-webkit-user-select:none}
@@ -674,14 +690,16 @@ footer a{color:var(--lane)}
   
   <section class="block">
     <div class="wrap">
-      <div class="head"><h2><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-pen"/></svg></span>التسجيل في البرامج</h2><p>اختاري برنامجك، ثم انسخي الطلب وسلّميه لمعلمة التربية الرياضية. لا يُرسل أي شيء من هذه الصفحة.</p></div>
+      <div class="head"><h2><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-pen"/></svg></span>التسجيل في البرامج</h2><p>اختاري لعبتك واضغطي «سجّلي الآن»، ويوصل طلبك مباشرة لمعلمة التربية الرياضية.</p></div>
       <form class="reg" id="regForm" novalidate>
         <div class="field"><label for="r-name">اسم الطالبة</label><input id="r-name" required autocomplete="off"></div>
         <div class="field"><label for="r-class">الصف والشعبة</label><input id="r-class" placeholder="مثال: ٢/٣" required autocomplete="off"></div>
         <fieldset class="field full"><legend>البرنامج</legend><div class="chips"><label><input type="radio" name="prog" id="p1" value="تنس الطاولة"><span>تنس الطاولة</span></label><label><input type="radio" name="prog" id="p2" value="كرة الطائرة"><span>كرة الطائرة</span></label><label><input type="radio" name="prog" id="p3" value="كرة القدم"><span>كرة القدم</span></label><label><input type="radio" name="prog" id="p4" value="كرة اليد"><span>كرة اليد</span></label><label><input type="radio" name="prog" id="p5" value="كرة السلة"><span>كرة السلة</span></label><label><input type="radio" name="prog" id="p6" value="الريشة الطائرة"><span>الريشة الطائرة</span></label><label><input type="radio" name="prog" id="p7" value="نط الحبل"><span>نط الحبل</span></label><label><input type="radio" name="prog" id="p8" value="اللياقة البدنية التنافسية"><span>اللياقة البدنية التنافسية</span></label><label><input type="radio" name="prog" id="p9" value="ألعاب القوى"><span>ألعاب القوى</span></label><label><input type="radio" name="prog" id="p10" value="الشطرنج"><span>الشطرنج</span></label><label><input type="radio" name="prog" id="p11" value="الألعاب الإلكترونية"><span>الألعاب الإلكترونية</span></label></div></fieldset>
         <div class="field full"><label for="r-note">ملاحظة لولي الأمر أو المعلمة (اختياري)</label><textarea id="r-note" rows="2"></textarea></div>
-        <div class="full actions"><button class="btn" type="submit" id="r-submit">جهّزي طلب التسجيل</button><p class="err" id="r-err" role="alert"></p></div>
-        <div class="full receipt" id="receipt" hidden><p id="r-text"></p><button class="btn ghost" type="button" id="r-copy">انسخي الطلب</button><span class="src" id="r-copied"></span></div>
+        <div class="full actions"><button class="btn" type="submit" id="r-submit">سجّلي الآن</button><p class="err" id="r-err" role="alert"></p></div>
+        <div class="full sent" id="r-sent" hidden role="status"><span class="sent-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="c" cx="32" cy="32" r="28"/><path class="k" d="M20 33 l8 8 l16 -18"/></svg></span><div><b>تم إرسال طلبك بنجاح!</b><p>وصل طلب التسجيل لمعلمة التربية الرياضية، وبتتواصل معك قريبًا.</p></div><span class="sent-emoji" aria-hidden="true">🏅</span></div>
+        <div class="full receipt" id="receipt" hidden><p id="r-fail-msg"></p><p id="r-text"></p><button class="btn ghost" type="button" id="r-copy">انسخي الطلب</button><span class="src" id="r-copied"></span></div>
+        <p class="full src">يُرسل الطلب إلى بريد معلمة التربية الرياضية عبر خدمة FormSubmit.</p>
       </form>
     </div>
   </section>
@@ -1068,19 +1086,31 @@ document.getElementById("tipnext").onclick=()=>{ti=(ti+1)%TIPS.length;showTip();
 showTip();
 
 /* weekly challenge removed */
-/* ---------- registration (device only) ---------- */
-const f=document.getElementById("regForm"),err=document.getElementById("r-err");
-f.addEventListener("submit",e=>{
+/* ---------- registration: sent by email via FormSubmit ---------- */
+const f=document.getElementById("regForm"),err=document.getElementById("r-err"),sb=document.getElementById("r-submit");
+const REG_TO="Dania.a.masalha@moe.bh";
+f.addEventListener("submit",async e=>{
   e.preventDefault();
   const name=document.getElementById("r-name").value.trim(),cls=document.getElementById("r-class").value.trim();
   const prog=(f.querySelector('input[name="prog"]:checked')||{}).value,note=document.getElementById("r-note").value.trim();
-  if(!name||!cls||!prog){err.textContent="أكملي الاسم والصف واختاري برنامجًا.";return}
-  err.textContent="";
-  const txt=`طلب تسجيل — أكاديمية يثرب الرياضية\nالطالبة: ${name}\nالصف: ${cls}\nالبرنامج: ${prog}`+(note?`\nملاحظة: ${note}`:"");
-  document.getElementById("r-text").textContent=txt;
-  document.getElementById("receipt").hidden=false;
+  if(!name||!cls||!prog){err.textContent="أكملي الاسم والصف واختاري لعبة.";return}
+  err.textContent="";document.getElementById("receipt").hidden=true;document.getElementById("r-sent").hidden=true;
   store.set("yathrib-reg-v1",{name,cls,prog,note});
-  document.getElementById("r-copy").onclick=async()=>{const c=document.getElementById("r-copied");try{await navigator.clipboard.writeText(txt);c.textContent="تم النسخ."}catch(e){c.textContent="تعذّر النسخ، حدّدي النص وانسخيه يدويًا."}};
+  sb.disabled=true;sb.textContent="جارٍ الإرسال…";
+  try{
+    const res=await fetch("https://formsubmit.co/ajax/"+REG_TO,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
+      body:JSON.stringify({"اسم الطالبة":name,"الصف والشعبة":cls,"اللعبة":prog,"ملاحظة":note||"—",_subject:"طلب تسجيل جديد — أكاديمية يثرب الرياضية",_template:"table",_captcha:"false"})});
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok||String(data.success)!=="true")throw new Error(data.message||res.status);
+    const ok=document.getElementById("r-sent");ok.hidden=false;ok.classList.remove("play");void ok.offsetWidth;ok.classList.add("play");
+    f.reset();sb.textContent="تم الإرسال ✓";setTimeout(()=>{sb.disabled=false;sb.textContent="سجّلي الآن"},2500);
+  }catch(x){
+    sb.disabled=false;sb.textContent="سجّلي الآن";
+    const txt=`طلب تسجيل — أكاديمية يثرب الرياضية\nالطالبة: ${name}\nالصف: ${cls}\nاللعبة: ${prog}`+(note?`\nملاحظة: ${note}`:"");
+    document.getElementById("r-fail-msg").textContent="تعذّر الإرسال الآن. انسخي الطلب وأرسليه إلى "+REG_TO;
+    document.getElementById("r-text").textContent=txt;document.getElementById("receipt").hidden=false;
+    document.getElementById("r-copy").onclick=async()=>{const c=document.getElementById("r-copied");try{await navigator.clipboard.writeText(txt);c.textContent="تم النسخ."}catch(e){c.textContent="تعذّر النسخ، حدّدي النص وانسخيه يدويًا."}};
+  }
 });
 const r=store.get("yathrib-reg-v1");
 if(r){document.getElementById("r-name").value=r.name||"";document.getElementById("r-class").value=r.cls||"";const p=[...f.querySelectorAll('input[name="prog"]')].find(x=>x.value===r.prog);if(p)p.checked=true;document.getElementById("r-note").value=r.note||""}
