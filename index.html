@@ -435,6 +435,16 @@ input:focus,textarea:focus{outline:none;border-color:var(--lane)}
 .prog:active{transform:translateY(-2px) scale(.985)}
 @keyframes drift{from{transform:scale(1.1) translate(0,0)}to{transform:scale(1.14) translate(-2%,-2%)}}
 @media (prefers-reduced-motion:reduce){.prog,.prog .art img{transition:none}.prog:hover,.prog:focus-visible,.prog.on{transform:none}.prog .art img{transform:none!important;animation:none!important}}
+
+/* ---- home: daily quiz beside tip of the day ---- */
+.duo{display:grid;grid-template-columns:1.35fr 1fr;gap:20px;align-items:stretch}
+@media (max-width:900px){.duo{grid-template-columns:1fr}}
+.quizcol{display:grid;gap:16px;align-content:start}
+.duo .tip{display:flex;flex-direction:column;align-items:stretch;gap:16px;padding:30px}
+.duo .tip .lbl{flex-direction:row;align-items:center;gap:10px;justify-content:flex-start}
+.duo .tip .lbl b{font-size:36px}
+.duo .tip p#tiptext{font-size:22px;line-height:1.6}
+.duo .tip .btn{align-self:flex-start;margin-top:auto}
 /* ---- swipeable calendar ---- */
 .gridclip{overflow:hidden;margin-inline:-4px;padding-inline:4px}
 #grid{touch-action:pan-y;will-change:transform;user-select:none;-webkit-user-select:none}
@@ -530,7 +540,7 @@ footer a{color:var(--lane)}
     <a class="brand" href="#home"><span class="mark" aria-hidden="true"></span><span><b>أكاديمية يثرب الرياضية</b><small>مدرسة يثرب الإعدادية للبنات · العام الدراسي ٢٠٢٦–٢٠٢٧</small></span></a>
     <div class="stats" aria-live="polite"><span class="stat"><b id="st-visits">٠</b>زياراتك اليوم</span><span class="stat"><b id="st-done">٠</b>تمارينك اليوم</span><span class="who" id="who" hidden><svg class="i" aria-hidden="true"><use href="#i-user"/></svg><span id="who-name"></span><button type="button" id="logout" aria-label="تسجيل الخروج"><svg class="i" aria-hidden="true"><use href="#i-logout"/></svg></button></span></div>
     <nav class="nav" aria-label="أقسام المنصة">
-      <a href="#home" data-v="home">الرئيسية</a><a href="#about" data-v="about">عن المركز</a><a href="#students" data-v="students">الطالبات</a><a href="#staff" data-v="staff">الهيئة الإدارية</a><a href="#parents" data-v="parents">أولياء الأمور</a><a href="#play" data-v="play">مسابقات وفعاليات</a><a href="#library" data-v="library">المكتبة الصحية</a><a href="#quiz" data-v="quiz">المسابقة اليومية</a><span class="seg" id="seg" aria-hidden="true"></span>
+      <a href="#home" data-v="home">الرئيسية</a><a href="#about" data-v="about">عن المركز</a><a href="#students" data-v="students">الطالبات</a><a href="#staff" data-v="staff">الهيئة الإدارية</a><a href="#parents" data-v="parents">أولياء الأمور</a><a href="#play" data-v="play">مسابقات وفعاليات</a><a href="#library" data-v="library">المكتبة الصحية</a><span class="seg" id="seg" aria-hidden="true"></span>
     </nav>
   </header>
 </div></div>
@@ -602,15 +612,18 @@ footer a{color:var(--lane)}
     </div>
   </section>
 
-  <section class="block">
-    <div class="wrap">
-      <div class="tip" aria-live="polite">
+  <section class="block"><div class="wrap">
+      <div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg></span>المسابقة اليومية ونصيحة اليوم</h2><p>سؤال جديد كل يوم، ونصيحة تتجدد مع كل زيارة.</p></div>
+      <div class="duo"><div class="quizcol"><div class="qcard"><div class="top"><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-question"/></svg></span><div><b>سؤال اليوم</b><p class="src" id="q-date"></p></div></div>
+      <p class="q" id="q-text"></p><div class="qopts" id="q-opts" role="group" aria-label="الخيارات"></div>
+      <button class="btn" type="button" id="q-send" disabled>إرسال الإجابة</button><p class="qfb" id="q-fb" hidden></p></div>
+    <div class="winner"><svg class="i" aria-hidden="true"><use href="#i-crown"/></svg><span>فائزة الأمس</span><b id="q-winner">مريم خالد</b><span>تهانينا للفائزة</span></div>
+  </div><div class="tip" aria-live="polite">
         <div class="lbl"><svg class="i" aria-hidden="true"><use href="#i-bulb"/></svg><b id="tipno">١</b>نصيحة اليوم</div>
         <div><p id="tiptext"></p><p class="src" id="tipsrc"></p></div>
         <button class="btn ghost" type="button" id="tipnext">نصيحة أخرى</button>
-      </div>
-    </div>
-  </section>
+      </div></div>
+    </div></section>
 </main>
 
 <!-- ================= ABOUT ================= -->
@@ -733,15 +746,6 @@ footer a{color:var(--lane)}
   <section class="block"><div class="wrap"><div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-home"/></svg></span>تمارين منزلية لأولياء الأمور</h2><p>اضغط «ابدأ التمرين» ليمشي معك المؤقت خطوة بخطوة، و«أكملت» لما تخلص.</p></div><div class="exs"><article class="ex" id="ex-pr-joints" data-id="pr-joints"><header><h3><svg class="i" aria-hidden="true"><use href="#i-pulse"/></svg>تمارين المفاصل</h3><span class="min">10 دقائق</span></header><p class="goal-l"><b>الهدف:</b> تحسين مرونة المفاصل ومنع التيبس</p><ol><li data-sec="120"><span>دوران الرقبة يميناً ويساراً</span><span class="d">2 دقيقة</span></li><li data-sec="120"><span>دوران الكتفين للخلف والأمام</span><span class="d">2 دقيقة</span></li><li data-sec="180"><span>ثني الركبتين ورفعهما</span><span class="d">3 دقائق</span></li><li data-sec="120"><span>دوران الكاحلين والمعصمين</span><span class="d">2 دقيقة</span></li><li data-sec="60"><span>تمارين الاسترخاء</span><span class="d">1 دقيقة</span></li></ol><p class="note"><b>مهم:</b> تحرك ببطء ولا تجبر المفصل على الحركة</p><div class="ctl"><button class="btn sm" type="button" data-act="start" id="ex-pr-joints-start"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>ابدأ التمرين</button><button class="btn sm ok" type="button" data-act="done" id="ex-pr-joints-done"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>أكملت</button><span class="timer" aria-live="polite"></span></div></article><article class="ex" id="ex-pr-balance" data-id="pr-balance"><header><h3><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>تمارين التوازن</h3><span class="min">8 دقائق</span></header><p class="goal-l"><b>الهدف:</b> تحسين الثبات والتوازن ومنع السقوط</p><ol><li data-sec="120"><span>الوقوف على قدم واحدة</span><span class="d">2 دقيقة</span></li><li data-sec="120"><span>المشي في خط مستقيم</span><span class="d">2 دقيقة</span></li><li data-sec="120"><span>الوقوف على أطراف الأصابع</span><span class="d">2 دقيقة</span></li><li data-sec="120"><span>تمارين التوازن الجانبي</span><span class="d">2 دقيقة</span></li></ol><p class="note"><b>للأمان:</b> تمسك بكرسي أو حائط عند الحاجة</p><div class="ctl"><button class="btn sm" type="button" data-act="start" id="ex-pr-balance-start"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>ابدأ التمرين</button><button class="btn sm ok" type="button" data-act="done" id="ex-pr-balance-done"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>أكملت</button><span class="timer" aria-live="polite"></span></div></article></div></div></section>
   
 </main>
-<main id="v-quiz" class="view">
-  <div class="wrap"><div class="audhead"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg></span><div><h1>المسابقة الرياضية اليومية</h1><p class="lede">سؤال جديد كل يوم. جاوبي واعرفي النتيجة فورًا.</p></div></div></div>
-  <section class="block"><div class="wrap"><div class="quizbox">
-    <div class="qcard"><div class="top"><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-question"/></svg></span><div><b>سؤال اليوم</b><p class="src" id="q-date"></p></div></div>
-      <p class="q" id="q-text"></p><div class="qopts" id="q-opts" role="group" aria-label="الخيارات"></div>
-      <button class="btn" type="button" id="q-send" disabled>إرسال الإجابة</button><p class="qfb" id="q-fb" hidden></p></div>
-    <div class="winner"><svg class="i" aria-hidden="true"><use href="#i-crown"/></svg><span>فائزة الأمس</span><b id="q-winner">مريم خالد</b><span>تهانينا للفائزة</span></div>
-  </div></div></section>
-</main>
 <div class="wrap">
   <footer>
     <span>أكاديمية يثرب الرياضية · مدرسة يثرب الإعدادية للبنات · مملكة البحرين</span>
@@ -776,7 +780,7 @@ document.fonts&&document.fonts.ready.then(moveSeg);
 const chrome=document.getElementById("chrome");
 addEventListener("scroll",()=>chrome.classList.toggle("scrolled",scrollY>4),{passive:true});
 /* ---------- routing ---------- */
-const VIEWS=["home","about","students","staff","parents","play","library","quiz"];
+const VIEWS=["home","about","students","staff","parents","play","library"];
 let lastView=null;
 function route(){
   const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):"home";
