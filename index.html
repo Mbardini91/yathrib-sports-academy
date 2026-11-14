@@ -545,7 +545,17 @@ input:focus,textarea:focus{outline:none;border-color:var(--lane)}
 footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:grid;gap:8px}
 footer a{color:var(--lane)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.themebtn{width:44px;height:44px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer;padding:0;transition:transform var(--press),background-color .2s ease;position:relative;overflow:hidden}
+.themebtn:active{transform:scale(.92)}
+.themebtn svg{grid-area:1/1;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s var(--ease-spring),opacity .3s ease}
+.themebtn .moon{fill:currentColor;stroke:none}
+.themebtn .moon{opacity:0;transform:rotate(-90deg) scale(.5)}
+:root[data-theme="dark"] .themebtn .sun{opacity:0;transform:rotate(90deg) scale(.5)}
+:root[data-theme="dark"] .themebtn .moon{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.themebtn svg{transition:opacity .2s ease}}
 </style>
+<script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -599,7 +609,7 @@ footer a{color:var(--lane)}
 <div class="chrome" id="chrome"><div class="wrap">
   <header class="bar">
     <a class="brand" href="#home"><span class="mark" aria-hidden="true"></span><span><b>أكاديمية يثرب الرياضية</b><small>مدرسة يثرب الإعدادية للبنات · العام الدراسي ٢٠٢٦–٢٠٢٧</small></span></a>
-    <div class="stats" aria-live="polite"><span class="stat"><b id="st-visits">٠</b>زياراتك اليوم</span><span class="stat"><b id="st-done">٠</b>تمارينك اليوم</span><span class="who" id="who" hidden><svg class="i" aria-hidden="true"><use href="#i-user"/></svg><span id="who-name"></span><button type="button" id="logout" aria-label="تسجيل الخروج"><svg class="i" aria-hidden="true"><use href="#i-logout"/></svg></button></span></div>
+    <div class="stats" aria-live="polite"><button type="button" class="themebtn" id="themebtn" aria-label="تبديل الوضع الداكن والفاتح"><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button><span class="stat"><b id="st-visits">٠</b>زياراتك اليوم</span><span class="stat"><b id="st-done">٠</b>تمارينك اليوم</span><span class="who" id="who" hidden><svg class="i" aria-hidden="true"><use href="#i-user"/></svg><span id="who-name"></span><button type="button" id="logout" aria-label="تسجيل الخروج"><svg class="i" aria-hidden="true"><use href="#i-logout"/></svg></button></span></div>
     <nav class="nav" aria-label="أقسام المنصة">
       <a href="#home" data-v="home">الرئيسية</a><a href="#about" data-v="about">عن المركز</a><a href="#students" data-v="students">الطالبات</a><a href="#staff" data-v="staff">الهيئة الإدارية</a><a href="#parents" data-v="parents">أولياء الأمور</a><a href="#play" data-v="play">مسابقات وفعاليات</a><a href="#library" data-v="library">المكتبة الصحية</a><span class="seg" id="seg" aria-hidden="true"></span>
     </nav>
@@ -1174,6 +1184,12 @@ const r=store.get("yathrib-reg-v1");
 if(r){document.getElementById("r-name").value=r.name||"";document.getElementById("r-class").value=r.cls||"";const p=[...f.querySelectorAll('input[name="prog"]')].find(x=>x.value===r.prog);if(p)p.checked=true;document.getElementById("r-note").value=r.note||""}
 check();
 })();
+</script>
+<script>
+(function(){const b=document.getElementById("themebtn"),r=document.documentElement,m=document.querySelector('meta[name="theme-color"]');
+function set(t){r.dataset.theme=t;b.setAttribute("aria-pressed",t==="dark");b.title=t==="dark"?"الوضع الفاتح":"الوضع الداكن";if(m)m.content=t==="dark"?"#1a1823":"#baaed0"}
+set(r.dataset.theme||"light");
+b.addEventListener("click",()=>{const t=r.dataset.theme==="dark"?"light":"dark";set(t);try{localStorage.setItem("yathrib-theme",t)}catch(e){}});})();
 </script>
 </body>
 </html>
