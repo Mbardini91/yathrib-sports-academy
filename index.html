@@ -379,7 +379,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--lane)}
 .ex .timer{font-weight:700;font-variant-numeric:tabular-nums;font-size:18px;margin-inline-start:auto}
 .btn.sm{padding:8px 16px;font-size:14px;display:inline-flex;align-items:center;gap:6px}
 .btn.ok{background:var(--lane);border-color:var(--lane);color:#fff}
-.calcs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.calcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
 @media (max-width:760px){.calcs{grid-template-columns:1fr}}
 .calc{background:var(--surface);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:10px}
 .calc h3{display:flex;align-items:center;gap:8px;font-size:20px}
@@ -743,9 +743,9 @@ footer a{color:var(--lane)}
       </div>
     </div>
   </section>
-  <section class="block"><div class="wrap"><div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-calc"/></svg></span>حاسبات صحية</h2><p>للبالغين من عمر ١٨ سنة فأكثر.</p></div><div class="calcs">
+  <section class="block"><div class="wrap"><div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-calc"/></svg></span>حاسبات صحية</h2></div><div class="calcs">
 <form class="calc" id="lb-bmi" novalidate><h3><svg class="i" aria-hidden="true"><use href="#i-calc"/></svg>حاسبة كتلة الجسم (BMI)</h3><div class="row"><input id="lb-bmi-w" type="number" inputmode="decimal" placeholder="الوزن (كجم)" aria-label="الوزن بالكيلوغرام"><input id="lb-bmi-h" type="number" inputmode="decimal" placeholder="الطول (سم)" aria-label="الطول بالسنتيمتر"></div><button class="btn sm" type="submit">احسب</button><p class="out" aria-live="polite">أدخل الوزن والطول.</p><p class="src">التصنيف حسب <a href="https://www.who.int/europe/news-room/fact-sheets/item/a-healthy-lifestyle---who-recommendations">منظمة الصحة العالمية</a> للبالغين.</p></form>
-<form class="calc" id="lb-cal" novalidate><h3><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg>حاسبة السعرات اليومية</h3><div class="row"><input id="lb-cal-w" type="number" inputmode="decimal" placeholder="الوزن (كجم)" aria-label="الوزن بالكيلوغرام"><input id="lb-cal-h" type="number" inputmode="decimal" placeholder="الطول (سم)" aria-label="الطول بالسنتيمتر"><input id="lb-cal-a" type="number" inputmode="numeric" placeholder="العمر" aria-label="العمر بالسنوات"><select id="lb-cal-s" aria-label="الجنس"><option value="">الجنس</option><option value="f">أنثى</option><option value="m">ذكر</option></select></div><button class="btn sm" type="submit">احسب</button><p class="out" aria-live="polite">أدخل البيانات الأربعة.</p><p class="src">معادلة Mifflin-St Jeor لمعدل الأيض الأساسي.</p></form>
+<form class="calc" id="lb-cal" novalidate><h3><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg>حاسبة السعرات اليومية</h3><div class="row"><input id="lb-cal-w" type="number" inputmode="decimal" placeholder="الوزن (كجم)" aria-label="الوزن بالكيلوغرام"><input id="lb-cal-h" type="number" inputmode="decimal" placeholder="الطول (سم)" aria-label="الطول بالسنتيمتر"><input id="lb-cal-a" type="number" inputmode="numeric" placeholder="العمر" aria-label="العمر بالسنوات"><select id="lb-cal-s" aria-label="الجنس"><option value="">الجنس</option><option value="f">أنثى</option><option value="m">ذكر</option></select></div><button class="btn sm" type="submit">احسب</button><p class="out" aria-live="polite">أدخل البيانات الأربعة.</p><p class="src">معادلة Mifflin-St Jeor لمعدل الأيض الأساسي.</p></form><form class="calc" id="lb-wat" novalidate><h3><svg class="i" aria-hidden="true"><use href="#i-leaf"/></svg>حاسبة احتياج الجسم للماء</h3><div class="row"><input id="lb-wat-w" type="number" inputmode="decimal" placeholder="الوزن (كجم)" aria-label="الوزن بالكيلوغرام"><input id="lb-wat-m" type="number" inputmode="numeric" placeholder="دقائق الرياضة اليوم" aria-label="دقائق النشاط الرياضي اليوم"><select id="lb-wat-h" aria-label="الجو"><option value="0">داخل مكان مكيّف أغلب اليوم</option><option value="1">في الجو الحار جزء من اليوم</option></select></div><button class="btn sm" type="submit">احسب</button><p class="out" aria-live="polite">أدخل الوزن ودقائق الرياضة.</p><p class="src">تقدير عام: ٣٠–٣٥ مل لكل كجم يوميًا، مع زيادة للرياضة والجو الحار، ويشمل الماء من الأكل.</p></form>
 </div></div></section>
 </main>
 
@@ -1017,6 +1017,12 @@ document.querySelectorAll(".ex").forEach(card=>{
 // calculators (adults)
 const num=id=>parseFloat(document.getElementById(id).value);
 ["lb"].forEach(p=>{
+  const wf=document.getElementById(p+"-wat");if(wf)wf.addEventListener("submit",e=>{e.preventDefault();const w=num(p+"-wat-w"),m=num(p+"-wat-m")||0,hot=document.getElementById(p+"-wat-h").value==="1",o=wf.querySelector(".out");
+    if(!(w>15&&w<250)){o.textContent="أدخل الوزن بالكيلوغرام.";return}
+    if(m<0||m>600){o.textContent="دقائق الرياضة بين ٠ و٦٠٠.";return}
+    const ml=Math.round((w*33+m*12+(hot?500:0))/50)*50, cups=Math.round(ml/250);
+    o.innerHTML=`تقريبًا ${ar((ml/1000).toFixed(1))} لتر يوميًا<small>حوالي ${ar(cups)} أكواب (٢٥٠ مل) موزّعة على اليوم</small>`});
+
   const b=document.getElementById(p+"-bmi"),c=document.getElementById(p+"-cal");
   b.addEventListener("submit",e=>{e.preventDefault();const w=num(p+"-bmi-w"),h=num(p+"-bmi-h")/100,o=b.querySelector(".out");
     if(!(w>20&&w<350&&h>1&&h<2.5)){o.textContent="تأكد من الوزن بالكيلوغرام والطول بالسنتيمتر.";return}
