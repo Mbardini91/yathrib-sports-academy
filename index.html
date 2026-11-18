@@ -884,6 +884,41 @@ p{line-height:1.8}
 .deck-b li{display:grid;grid-template-columns:22px 1fr;gap:6px;font-size:13px;line-height:1.65}
 .deck-b li span{font-size:15px;line-height:1.5}
 @media (prefers-reduced-motion:reduce){.spot.tkd .spot-ico,.deck{animation:none}}
+
+/* org chart — ID badge cards */
+.orgtree{display:flex;flex-direction:column;align-items:center;gap:0;position:relative}
+.tier{list-style:none;margin:0;padding:0;display:flex;justify-content:center;gap:22px;position:relative;width:100%}
+.tier+.tier,.tier-lbl+.tier{margin-top:0}
+.tier.four{display:grid;grid-template-columns:repeat(4,220px);gap:22px;position:relative;padding-top:0;width:fit-content;margin-inline:auto}
+.tier-lbl{display:inline-flex;align-items:center;gap:8px;margin:14px 0 6px;padding:6px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:14px;font-weight:600;color:var(--lane);position:relative;z-index:1}
+.tier-lbl .i{width:16px;height:16px}
+.idb{display:flex;flex-direction:column;align-items:center;transform-origin:50% 0;animation:badgeIn .8s var(--ease-spring) both}
+.tier:nth-of-type(2) .idb{animation-delay:.08s}.tier:nth-of-type(3) .idb{animation-delay:.16s}
+.tier.four .idb:nth-child(1){animation-delay:.24s}.tier.four .idb:nth-child(2){animation-delay:.3s}.tier.four .idb:nth-child(3){animation-delay:.36s}.tier.four .idb:nth-child(4){animation-delay:.42s}
+@keyframes badgeIn{from{opacity:0;transform:translateY(-24px) rotate(-6deg)}60%{transform:rotate(3deg)}}
+.idb-strap{width:14px;height:44px;border-radius:0 0 4px 4px;background:repeating-linear-gradient(45deg,var(--c),var(--c) 6px,color-mix(in srgb,var(--c) 70%,#000) 6px,color-mix(in srgb,var(--c) 70%,#000) 12px)}
+.idb-card{position:relative;width:220px;padding:26px 18px 14px;border-radius:20px;background:var(--surface);text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;
+  box-shadow:0 1px 0 var(--line),0 18px 30px -18px color-mix(in srgb,var(--ink) 50%,transparent);border-top:6px solid var(--c);transition:transform .7s var(--ease-spring),box-shadow .4s ease;transform-origin:50% -44px}
+.idb-clip{position:absolute;top:-14px;left:50%;width:34px;height:16px;margin-left:-17px;border-radius:6px 6px 4px 4px;background:linear-gradient(#e7eaf0,#b9c0cc);box-shadow:inset 0 -2px 0 rgba(0,0,0,.12)}
+.idb-clip::after{content:"";position:absolute;left:50%;top:5px;width:14px;height:4px;margin-left:-7px;border-radius:2px;background:#8a93a3}
+.idb-av{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font:700 32px/1 var(--display);color:#fff;margin-bottom:6px;
+  background:radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--c) 55%,#fff),var(--c) 60%,color-mix(in srgb,var(--c) 70%,#000));box-shadow:0 0 0 4px var(--surface),0 0 0 6px color-mix(in srgb,var(--c) 35%,transparent),0 10px 20px -8px var(--c)}
+.idb b{font-size:16px;line-height:1.5}
+.idb-role{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--c);line-height:1.5}
+.idb-role .i{width:15px;height:15px;flex:none}
+.idb-foot{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);width:100%;font-size:10.5px;color:var(--muted);letter-spacing:0}
+.idb.t1{--c:#C98A12} .idb.t2{--c:var(--violet)} .idb.t3{--c:var(--track)} .idb.t4{--c:var(--lane)}
+.idb.big .idb-card{width:250px;padding-top:30px}
+.idb.big .idb-av{width:86px;height:86px;font-size:38px}
+.idb.big b{font-size:18px}
+@media (hover:hover){.idb:hover .idb-card{transform:rotate(-4deg) translateY(4px);box-shadow:0 1px 0 var(--line),0 28px 40px -20px color-mix(in srgb,var(--ink) 55%,transparent)}
+ .tier.four .idb:nth-child(even):hover .idb-card{transform:rotate(4deg) translateY(4px)}}
+/* connectors */
+.tier:not(:first-child) .idb-strap{height:40px}
+.tier.four::before{content:"";position:absolute;top:0;height:2px;background:var(--line);inset-inline:110px}
+@media (max-width:980px){.tier.four{grid-template-columns:repeat(2,220px)}.tier.four::before{display:none}}
+@media (max-width:520px){.tier.four{grid-template-columns:repeat(2,1fr);gap:12px;width:100%}.tier.four .idb-card{width:100%;padding:22px 10px 12px}.idb-card{width:min(250px,86vw)}.tier.four .idb-av{width:58px;height:58px;font-size:26px}.idb-foot{display:none}}
+@media (prefers-reduced-motion:reduce){.idb{animation:none}.idb-card{transition:none}.idb:hover .idb-card{transform:none}}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t="light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
@@ -1060,6 +1095,18 @@ p{line-height:1.8}
 <div class="facil"><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg><h3>جهاز المشي</h3><p>أجهزة حديثة لتمارين الكارديو</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-bike"/></svg><h3>الدراجة البيضاوية</h3><p>تمارين شاملة للجسم</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-bike"/></svg><h3>الدراجة الثابتة</h3><p>تقوية عضلات الساقين</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg><h3>أدوات رياضية متنوعة</h3><p>كرات، أوزان، وأدوات تمارين</p></div><div class="fac safe"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg><h3>بيئة آمنة</h3><p>مساحة مهيأة لممارسة الرياضة بأمان</p></div></div></div></section>
   
   
+  <section class="block org">
+    <div class="wrap">
+      <div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg></span>الهيكل التنظيمي الإداري والتعليمي</h2><p>الفريق اللي يقود المركز ويدرّب بناتنا كل يوم.</p></div>
+      <div class="orgtree">
+        <ul class="tier"><li class="idb t1 big"><span class="idb-strap" aria-hidden="true"></span><div class="idb-card"><span class="idb-clip" aria-hidden="true"></span><span class="idb-av" aria-hidden="true">ر</span><b>أ. رجاء الدوسري</b><span class="idb-role"><svg class="i" aria-hidden="true"><use href="#i-crown"/></svg>مديرة المدرسة</span><span class="idb-foot" aria-hidden="true">مدرسة يثرب الإعدادية للبنات</span></div></li></ul>
+        <ul class="tier"><li class="idb t2"><span class="idb-strap" aria-hidden="true"></span><div class="idb-card"><span class="idb-clip" aria-hidden="true"></span><span class="idb-av" aria-hidden="true">ر</span><b>أ. رحاب عيسى</b><span class="idb-role"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg>المديرة المساعدة</span><span class="idb-foot" aria-hidden="true">مدرسة يثرب الإعدادية للبنات</span></div></li></ul>
+        <ul class="tier"><li class="idb t3"><span class="idb-strap" aria-hidden="true"></span><div class="idb-card"><span class="idb-clip" aria-hidden="true"></span><span class="idb-av" aria-hidden="true">ل</span><b>أ. لولوه المطاوعه</b><span class="idb-role"><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg>منسقة قسم التربية الرياضية</span><span class="idb-foot" aria-hidden="true">مدرسة يثرب الإعدادية للبنات</span></div></li></ul>
+        <p class="tier-lbl"><svg class="i" aria-hidden="true"><use href="#i-whistle"/></svg>معلمات القسم</p>
+        <ul class="tier four"><li class="idb t4"><span class="idb-strap" aria-hidden="true"></span><div class="idb-card"><span class="idb-clip" aria-hidden="true"></span><span class="idb-av" aria-hidden="true">د</span><b>أ. دانيا أحمد إبراهيم</b><span class="idb-role"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg>معلمة تربية رياضية</span><span class="idb-foot" aria-hidden="true">مدرسة يثرب الإعدادية للبنات</span></div></li><li class="idb t4"><span class="idb-strap" aria-hidden="true"></span><div class="idb-card"><span class="idb-clip" aria-hidden="true"></span><span class="idb-av" aria-hidden="true">ز</span><b>أ. زينب رمزي منديل</b><span class="idb-role"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg>معلمة تربية رياضية</span><span class="idb-foot" aria-hidden="true">مدرسة يثرب الإعدادية للبنات</span></div></li><li class="idb t4"><span class="idb-strap" aria-hidden="true"></span><div class="idb-card"><span class="idb-clip" aria-hidden="true"></span><span class="idb-av" aria-hidden="true">ز</span><b>أ. زينب محمد إبراهيم</b><span class="idb-role"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg>معلمة تربية رياضية</span><span class="idb-foot" aria-hidden="true">مدرسة يثرب الإعدادية للبنات</span></div></li><li class="idb t4"><span class="idb-strap" aria-hidden="true"></span><div class="idb-card"><span class="idb-clip" aria-hidden="true"></span><span class="idb-av" aria-hidden="true">ح</span><b>أ. حوراء علي المدحوب</b><span class="idb-role"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg>معلمة تربية رياضية</span><span class="idb-foot" aria-hidden="true">مدرسة يثرب الإعدادية للبنات</span></div></li></ul>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- ================= PLAY ================= -->
