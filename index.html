@@ -966,6 +966,20 @@ p{line-height:1.8}
 @keyframes nvWave{0%{transform:none}20%{transform:rotate(-15deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(4deg)}100%{transform:translateY(-1px) scale(1.08)}}
 @media (max-width:620px){.nimbus-item{padding:0 14px}.nimbus-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
 @media (prefers-reduced-motion:reduce){.nv-ico svg,.nv-ico::before,.nv-ico::after,.nv-door{animation:none!important;transition:none}}
+
+/* ===== highlight stroke on hover (pointer-following) ===== */
+.hl-ring{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:4;padding:2px;opacity:0;transition:opacity .35s ease;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),#fff 0%,color-mix(in srgb,var(--track) 90%,#fff) 18%,var(--lane) 42%,transparent 72%),
+             linear-gradient(135deg,color-mix(in srgb,var(--track) 60%,transparent),color-mix(in srgb,var(--gold) 45%,transparent) 50%,color-mix(in srgb,var(--lane) 60%,transparent));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.hl-glow{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;opacity:0;transition:opacity .35s ease;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--lane) 10%,transparent),transparent 65%)}
+.hl:hover>.hl-ring,.hl:focus-within>.hl-ring{opacity:1}
+.hl:hover>.hl-glow{opacity:1}
+.hl{transition:box-shadow .35s ease,transform var(--press)}
+.hl:hover{box-shadow:0 0 0 1px transparent,0 18px 40px -22px color-mix(in srgb,var(--lane) 55%,transparent),0 8px 18px -12px color-mix(in srgb,var(--track) 35%,transparent)}
+:root[data-theme="dark"] .hl-ring{background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),#fff 0%,var(--track) 20%,var(--lane) 45%,transparent 72%),linear-gradient(135deg,color-mix(in srgb,var(--track) 30%,transparent),color-mix(in srgb,var(--lane) 30%,transparent))}
+@media (hover:none){.hl-ring,.hl-glow{display:none}}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t="light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
@@ -1950,6 +1964,21 @@ nav.addEventListener("pointerdown",e=>{const p=local(e.clientX,e.clientY);ripple
 new MutationObserver(()=>{nav.dataset.tone=dark()?"dark":"light";loop()}).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
 nav.dataset.tone=dark()?"dark":"light";
 window.nimbusSync=measure;document.fonts&&document.fonts.ready.then(()=>{s.ready=false;measure()});measure();
+})();
+</script>
+<script>
+(function(){
+if(!matchMedia("(hover:hover)").matches)return;
+const SEL=".bcard,.idb-card,.goal,.vm>article,.upcoming,.feature,.steps4 li,.deck,.ach-i,.hon li,.qcard,.tip,.libcards>*,.calc,.fac,.news,.notice,.book .binfo,.pcard,.fp-item,.cal";
+function arm(el){if(el.dataset.hl)return;el.dataset.hl=1;el.classList.add("hl");
+  if(getComputedStyle(el).position==="static")el.style.position="relative";
+  const g=document.createElement("span");g.className="hl-glow";g.setAttribute("aria-hidden","true");
+  const r=document.createElement("span");r.className="hl-ring";r.setAttribute("aria-hidden","true");el.prepend(g);el.append(r)}
+function scan(root){(root.querySelectorAll?root:document).querySelectorAll(SEL).forEach(arm)}
+scan(document);
+new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.matches&&n.matches(SEL))arm(n);scan(n)}}))).observe(document.body,{childList:true,subtree:true});
+document.addEventListener("pointermove",e=>{const el=e.target.closest&&e.target.closest(".hl");if(!el)return;const b=el.getBoundingClientRect();
+  el.style.setProperty("--mx",(e.clientX-b.left)+"px");el.style.setProperty("--my",(e.clientY-b.top)+"px")},{passive:true});
 })();
 </script>
 </body>
