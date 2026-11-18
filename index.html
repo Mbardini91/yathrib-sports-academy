@@ -717,7 +717,7 @@ footer a{color:var(--lane)}
 .bcard{--c:var(--track);position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;border-radius:24px;background:var(--surface);color:var(--ink);text-decoration:none;isolation:isolate;
   box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 4%,transparent),0 2px 4px color-mix(in srgb,var(--ink) 5%,transparent),0 12px 24px color-mix(in srgb,var(--ink) 6%,transparent);transform:translateZ(0)}
 .b-prog,.b-walk{--c:var(--lane)} .b-lib{--c:var(--violet)} .b-play{--c:var(--gold)}
-.bcard .bg{position:absolute;inset:0;z-index:-1}
+.bcard .bg{position:absolute;inset:0;z-index:-1;overflow:hidden}
 .bcard .bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform .7s var(--ease-spring)}
 .bcard .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--surface) 18%,color-mix(in srgb,var(--surface) 70%,transparent) 34%,transparent 55%)}
 .b-about .bg::after,.b-walk .bg::after{background:linear-gradient(to top,var(--surface) 30%,color-mix(in srgb,var(--surface) 70%,transparent) 50%,transparent 72%)}
@@ -733,7 +733,7 @@ footer a{color:var(--lane)}
   .bcard:hover .bbody{transform:translateY(-40px)}
   .bcard:hover .bico{transform:scale(.75)}
   .bcard:hover .bcta{opacity:1;transform:none}
-  .bcard:hover .bg img{transform:scale(1.05)}
+  .bcard:hover .bg img{transform:scale(1.04)}
   .bcard:hover::after{background:color-mix(in srgb,var(--ink) 3%,transparent)}
 }
 @media (hover:none){.bbody{padding-bottom:52px}.bcta{opacity:1;transform:none}}
