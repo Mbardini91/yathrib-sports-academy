@@ -599,6 +599,23 @@ footer a{color:var(--lane)}
 .pcredit{margin-top:18px;font-size:13px;color:var(--muted)}
 .wdet{--c:var(--lane);background:var(--surface);border-radius:24px;padding:24px;display:grid;gap:10px;max-width:760px}
 .wdet>p{font-size:17px}
+
+.bookshelf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,230px));justify-content:start;gap:36px 28px;position:relative}
+@media (max-width:900px){.bookshelf{grid-template-columns:repeat(2,1fr)}}
+.book{display:flex;flex-direction:column;gap:14px}
+.book .cover{position:relative;display:block;aspect-ratio:3/4;border-radius:4px 14px 14px 4px;overflow:hidden;background:var(--surface);box-shadow:0 1px 0 var(--line),0 18px 30px -18px color-mix(in srgb,var(--ink) 55%,transparent);transition:transform .45s var(--ease-spring),box-shadow .45s var(--ease-spring)}
+.book .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(to left,transparent 88%,rgba(0,0,0,.18) 94%,rgba(255,255,255,.25) 97%,transparent);pointer-events:none}
+.book .cover img{width:100%;height:100%;object-fit:cover;display:block}
+.book .cover:hover{transform:translateY(-6px) rotate(-1deg);box-shadow:0 1px 0 var(--line),0 28px 40px -20px color-mix(in srgb,var(--ink) 60%,transparent)}
+.book .cover:active{transform:scale(.97)}
+.book .cover::before{content:"";position:absolute;inset-inline:-12px;bottom:-14px;height:10px;border-radius:6px;background:var(--line);z-index:-1}
+.binfo{display:flex;flex-direction:column;gap:6px}
+.binfo .pill{align-self:start}
+.binfo h3{font-size:18px}
+.binfo p{color:var(--muted);font-size:13px}
+.bact{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.bact .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:14px}
+@media (prefers-reduced-motion:reduce){.book .cover:hover{transform:none}}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
@@ -880,23 +897,21 @@ footer a{color:var(--lane)}
 </div></div></section>
   <section class="block">
     <div class="wrap">
-      <div class="shelves">
-        <div class="shelf"><span class="pill teal" style="align-self:start">إرشادات موثوقة</span><h3><svg class="i" aria-hidden="true"><use href="#i-pulse"/></svg>كم نتحرك؟</h3><ul>
-          <li><a href="https://www.who.int/europe/news-room/fact-sheets/item/physical-activity"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><span>النشاط البدني — صحيفة وقائع<small>منظمة الصحة العالمية</small></span><svg class="i o" aria-hidden="true"><use href="#i-out"/></svg></a></li>
-          <li><a href="https://who.int/initiatives/behealthy/physical-activity"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><span>مستويات النشاط الموصى بها حسب العمر<small>منظمة الصحة العالمية — Be Healthy</small></span><svg class="i o" aria-hidden="true"><use href="#i-out"/></svg></a></li>
-          <li><a href="https://www.cdc.gov/physical-activity-education/guidelines/"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><span>إرشادات النشاط للأطفال في سن المدرسة<small>CDC</small></span><svg class="i o" aria-hidden="true"><use href="#i-out"/></svg></a></li>
-        </ul></div>
-        <div class="shelf"><span class="pill" style="align-self:start">للطالبات</span><h3><svg class="i" aria-hidden="true"><use href="#i-run"/></svg>تمارين وأفكار</h3><ul>
-          <li class="soon"><svg class="i" aria-hidden="true"><use href="#i-video"/></svg>فيديوهات تمارين قصيرة من معلمات الأكاديمية — قريبًا</li>
-          <li class="soon"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>بطاقات «عشر دقائق في البيت» للطباعة — قريبًا</li>
-          <li><a href="https://www.un.org/en/observances/sport-day"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><span>اليوم الدولي للرياضة من أجل التنمية والسلام<small>الأمم المتحدة</small></span><svg class="i o" aria-hidden="true"><use href="#i-out"/></svg></a></li>
-        </ul></div>
-        <div class="shelf"><span class="pill ghost" style="align-self:start">لأولياء الأمور والإدارة</span><h3><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>أدلة ومتابعة</h3><ul>
-          <li class="soon"><svg class="i" aria-hidden="true"><use href="#i-home"/></svg>دليل «البيت ملعب ثانٍ» لأولياء الأمور — قريبًا</li>
-          <li class="soon"><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg>ملخص نتائج دراسة الحالة ٢٠٢٥–٢٠٢٦ — قريبًا</li>
-          <li class="soon"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>نماذج متابعة البرامج للإدارة — قريبًا</li>
-        </ul></div>
-      </div>
+      <div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></span>رف الكتب الإلكترونية</h2><p>كتب عن الرياضة والتغذية والصحة، تنقرينها على الغلاف وتفتح مباشرة.</p></div>
+      <ul class="bookshelf">
+          <li class="book"><a class="cover" href="books/sport-health-fitness.pdf" target="_blank" rel="noopener"><img src="img/book-sport-health-fitness.webp" alt="غلاف كتاب الرياضة: صحة ولياقة بدنية" loading="lazy" width="420" height="594"></a>
+            <div class="binfo"><h3>الرياضة: صحة ولياقة بدنية</h3><p>المكتبة الرياضية · ٣٢٤ صفحة</p>
+            <div class="bact"><a class="btn" href="books/sport-health-fitness.pdf" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>اقرئي</a><a class="btn ghost dl" href="books/sport-health-fitness.pdf" download aria-label="تحميل الرياضة: صحة ولياقة بدنية"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>تحميل</a></div></div></li>
+          <li class="book"><a class="cover" href="books/healthy-eating.pdf" target="_blank" rel="noopener"><img src="img/book-healthy-eating.webp" alt="غلاف كتاب الأكل الصحي" loading="lazy" width="420" height="594"></a>
+            <div class="binfo"><h3>الأكل الصحي</h3><p>سلسلة «أغتني بنفسي» · مكتبة لبنان ناشرون · ٣٤ صفحة</p>
+            <div class="bact"><a class="btn" href="books/healthy-eating.pdf" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>اقرئي</a><a class="btn ghost dl" href="books/healthy-eating.pdf" download aria-label="تحميل الأكل الصحي"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>تحميل</a></div></div></li>
+          <li class="book"><a class="cover" href="books/yoga-philosophy.pdf" target="_blank" rel="noopener"><img src="img/book-yoga-philosophy.webp" alt="غلاف كتاب فلسفة اليوغا" loading="lazy" width="420" height="594"></a>
+            <div class="binfo"><h3>فلسفة اليوغا</h3><p>١٠٠ صفحة</p>
+            <div class="bact"><a class="btn" href="books/yoga-philosophy.pdf" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>اقرئي</a><a class="btn ghost dl" href="books/yoga-philosophy.pdf" download aria-label="تحميل فلسفة اليوغا"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>تحميل</a></div></div></li>
+          <li class="book"><a class="cover" href="books/basketball.pdf" target="_blank" rel="noopener"><img src="img/book-basketball.webp" alt="غلاف كتاب كرة السلة" loading="lazy" width="420" height="594"></a>
+            <div class="binfo"><h3>كرة السلة</h3><p>كتب الفراشة · الرياضة للجميع · ٤٩ صفحة</p>
+            <div class="bact"><a class="btn" href="books/basketball.pdf" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>اقرئي</a><a class="btn ghost dl" href="books/basketball.pdf" download aria-label="تحميل كرة السلة"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>تحميل</a></div></div></li>
+      </ul>
     </div>
   </section>
   <section class="block"><div class="wrap"><div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-calc"/></svg></span>حاسبات صحية</h2></div><div class="calcs">
