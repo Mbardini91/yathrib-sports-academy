@@ -618,7 +618,7 @@ footer a{color:var(--lane)}
 @media (prefers-reduced-motion:reduce){.book .cover:hover{transform:none}}
 
 /* interactive shelf */
-.book .stage{position:relative;perspective:900px;padding-bottom:14px}
+.book .stage{position:relative;perspective:1500px;padding-bottom:14px}
 .book .cover{transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px));transition:transform .5s var(--ease-spring),box-shadow .5s var(--ease-spring);
   box-shadow:-3px 3px 0 -1px var(--surface),-4px 4px 0 -1px var(--line),-6px 6px 0 -2px var(--surface),-7px 7px 0 -2px var(--line),0 22px 30px -18px color-mix(in srgb,var(--ink) 60%,transparent);overflow:visible;border-radius:4px 12px 12px 4px}
 .book .cover img{border-radius:inherit}
@@ -642,6 +642,21 @@ footer a{color:var(--lane)}
 .reader .x{width:38px;height:38px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:22px;line-height:1;cursor:pointer}
 .reader iframe{width:100%;height:100%;border:0;background:var(--bg)}
 @media (prefers-reduced-motion:reduce){.book .cover,.book .cover:hover{transform:none}.reader[open]{animation:none}}
+
+/* open-on-hover book */
+.book .cover::after{display:none}
+.book .cover>img{display:none}
+.inner,.lid,.lid-back{position:absolute;inset:0;border-radius:inherit}
+.inner{overflow:hidden;background:#fbf9f4;box-shadow:inset -14px 0 20px -14px rgba(0,0,0,.35)}
+.inner img{width:100%;height:100%;object-fit:cover;display:block;opacity:.96}
+.lid{transform-origin:right center;transform-style:preserve-3d;transition:transform .8s var(--ease-spring);will-change:transform}
+.lid img{width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.lid::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(to left,transparent 0,rgba(0,0,0,.18) 3%,rgba(255,255,255,.22) 5.5%,transparent 9%);backface-visibility:hidden}
+.lid .glare{backface-visibility:hidden}
+.lid-back{transform:rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;background:linear-gradient(to left,#e9e4d8,#f6f2e8 30%)}
+.book .cover:hover .lid,.book .cover:focus-visible .lid{transform:rotateY(38deg)}
+.book .cover:hover .inner{box-shadow:inset -14px 0 20px -14px rgba(0,0,0,.35),inset 40px 0 40px -30px rgba(0,0,0,.18)}
+@media (prefers-reduced-motion:reduce){.lid{transition:none}.book .cover:hover .lid{transform:none}}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
@@ -925,16 +940,16 @@ footer a{color:var(--lane)}
     <div class="wrap">
       <div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></span>رف الكتب الإلكترونية</h2><p>كتب عن الرياضة والتغذية والصحة، تنقرينها على الغلاف وتفتح مباشرة.</p></div>
       <ul class="bookshelf">
-          <li class="book"><div class="stage"><a class="cover" href="books/sport-health-fitness.pdf" target="_blank" rel="noopener" data-read><img src="img/book-sport-health-fitness.webp" alt="غلاف كتاب الرياضة: صحة ولياقة بدنية" loading="lazy" width="420" height="594"><span class="glare" aria-hidden="true"></span></a><span class="ledge" aria-hidden="true"></span></div>
+          <li class="book"><div class="stage"><a class="cover" href="books/sport-health-fitness.pdf" target="_blank" rel="noopener" data-read><span class="inner"><img src="img/book-sport-health-fitness-p.webp" alt="" loading="lazy" width="420" height="594"></span><span class="lid"><img src="img/book-sport-health-fitness.webp" alt="غلاف كتاب الرياضة: صحة ولياقة بدنية" loading="lazy" width="420" height="594"><span class="glare" aria-hidden="true"></span><span class="lid-back" aria-hidden="true"></span></span></a><span class="ledge" aria-hidden="true"></span></div>
             <div class="binfo"><h3>الرياضة: صحة ولياقة بدنية</h3><p>المكتبة الرياضية · ٣٢٤ صفحة</p>
             <div class="bact"><a class="btn" href="books/sport-health-fitness.pdf" target="_blank" rel="noopener" data-read><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>اقرئي</a><a class="btn ghost dl" href="books/sport-health-fitness.pdf" download aria-label="تحميل الرياضة: صحة ولياقة بدنية"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>تحميل</a></div></div></li>
-          <li class="book"><div class="stage"><a class="cover" href="books/healthy-eating.pdf" target="_blank" rel="noopener" data-read><img src="img/book-healthy-eating.webp" alt="غلاف كتاب الأكل الصحي" loading="lazy" width="420" height="594"><span class="glare" aria-hidden="true"></span></a><span class="ledge" aria-hidden="true"></span></div>
+          <li class="book"><div class="stage"><a class="cover" href="books/healthy-eating.pdf" target="_blank" rel="noopener" data-read><span class="inner"><img src="img/book-healthy-eating-p.webp" alt="" loading="lazy" width="420" height="594"></span><span class="lid"><img src="img/book-healthy-eating.webp" alt="غلاف كتاب الأكل الصحي" loading="lazy" width="420" height="594"><span class="glare" aria-hidden="true"></span><span class="lid-back" aria-hidden="true"></span></span></a><span class="ledge" aria-hidden="true"></span></div>
             <div class="binfo"><h3>الأكل الصحي</h3><p>سلسلة «أغتني بنفسي» · مكتبة لبنان ناشرون · ٣٤ صفحة</p>
             <div class="bact"><a class="btn" href="books/healthy-eating.pdf" target="_blank" rel="noopener" data-read><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>اقرئي</a><a class="btn ghost dl" href="books/healthy-eating.pdf" download aria-label="تحميل الأكل الصحي"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>تحميل</a></div></div></li>
-          <li class="book"><div class="stage"><a class="cover" href="books/yoga-philosophy.pdf" target="_blank" rel="noopener" data-read><img src="img/book-yoga-philosophy.webp" alt="غلاف كتاب فلسفة اليوغا" loading="lazy" width="420" height="594"><span class="glare" aria-hidden="true"></span></a><span class="ledge" aria-hidden="true"></span></div>
+          <li class="book"><div class="stage"><a class="cover" href="books/yoga-philosophy.pdf" target="_blank" rel="noopener" data-read><span class="inner"><img src="img/book-yoga-philosophy-p.webp" alt="" loading="lazy" width="420" height="594"></span><span class="lid"><img src="img/book-yoga-philosophy.webp" alt="غلاف كتاب فلسفة اليوغا" loading="lazy" width="420" height="594"><span class="glare" aria-hidden="true"></span><span class="lid-back" aria-hidden="true"></span></span></a><span class="ledge" aria-hidden="true"></span></div>
             <div class="binfo"><h3>فلسفة اليوغا</h3><p>١٠٠ صفحة</p>
             <div class="bact"><a class="btn" href="books/yoga-philosophy.pdf" target="_blank" rel="noopener" data-read><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>اقرئي</a><a class="btn ghost dl" href="books/yoga-philosophy.pdf" download aria-label="تحميل فلسفة اليوغا"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>تحميل</a></div></div></li>
-          <li class="book"><div class="stage"><a class="cover" href="books/basketball.pdf" target="_blank" rel="noopener" data-read><img src="img/book-basketball.webp" alt="غلاف كتاب كرة السلة" loading="lazy" width="420" height="594"><span class="glare" aria-hidden="true"></span></a><span class="ledge" aria-hidden="true"></span></div>
+          <li class="book"><div class="stage"><a class="cover" href="books/basketball.pdf" target="_blank" rel="noopener" data-read><span class="inner"><img src="img/book-basketball-p.webp" alt="" loading="lazy" width="420" height="594"></span><span class="lid"><img src="img/book-basketball.webp" alt="غلاف كتاب كرة السلة" loading="lazy" width="420" height="594"><span class="glare" aria-hidden="true"></span><span class="lid-back" aria-hidden="true"></span></span></a><span class="ledge" aria-hidden="true"></span></div>
             <div class="binfo"><h3>كرة السلة</h3><p>كتب الفراشة · الرياضة للجميع · ٤٩ صفحة</p>
             <div class="bact"><a class="btn" href="books/basketball.pdf" target="_blank" rel="noopener" data-read><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>اقرئي</a><a class="btn ghost dl" href="books/basketball.pdf" download aria-label="تحميل كرة السلة"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>تحميل</a></div></div></li>
       </ul>
@@ -1384,7 +1399,7 @@ const fine=matchMedia("(hover:hover) and (pointer:fine)").matches,calm=matchMedi
 document.querySelectorAll(".book .cover").forEach(c=>{
   if(!fine||calm)return;
   c.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
-    c.classList.add("live");c.style.setProperty("--ry",((x-.5)*22).toFixed(2)+"deg");c.style.setProperty("--rx",((.5-y)*16).toFixed(2)+"deg");
+    c.classList.add("live");c.style.setProperty("--ry",((x-.5)*10).toFixed(2)+"deg");c.style.setProperty("--rx",((.5-y)*8).toFixed(2)+"deg");
     c.style.setProperty("--gx",(x*100).toFixed(1)+"%");c.style.setProperty("--gy",(y*100).toFixed(1)+"%")});
   c.addEventListener("pointerleave",()=>{c.classList.remove("live");c.style.setProperty("--ry","0deg");c.style.setProperty("--rx","0deg")});
 });
@@ -1394,7 +1409,7 @@ const wide=()=>matchMedia("(min-width:760px)").matches;
 document.querySelectorAll("[data-read]").forEach(a=>a.addEventListener("click",e=>{
   if(!wide())return; e.preventDefault();
   const b=a.closest(".book"),src=a.getAttribute("href");
-  tt.textContent=b.querySelector("h3").textContent;im.src=b.querySelector(".cover img").src;tab.href=src;fr.src=src+"#view=FitH";d.showModal();
+  tt.textContent=b.querySelector("h3").textContent;im.src=b.querySelector(".lid img").src;tab.href=src;fr.src=src+"#view=FitH";d.showModal();
 }));
 document.getElementById("rd-x").onclick=()=>d.close();
 d.addEventListener("click",e=>{if(e.target===d)d.close()});
