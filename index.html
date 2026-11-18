@@ -657,6 +657,36 @@ footer a{color:var(--lane)}
 .book .cover:hover .lid,.book .cover:focus-visible .lid{transform:rotateY(38deg)}
 .book .cover:hover .inner{box-shadow:inset -14px 0 20px -14px rgba(0,0,0,.35),inset 40px 0 40px -30px rgba(0,0,0,.18)}
 @media (prefers-reduced-motion:reduce){.lid{transition:none}.book .cover:hover .lid{transform:none}}
+
+/* flipbook reader */
+.flip{width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#0c0f1a;color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.flip[open]{display:grid;grid-template-rows:auto 1fr auto;animation:flIn .4s var(--ease-spring)}
+@keyframes flIn{from{opacity:0}}
+.flip::backdrop{background:transparent}
+.fl-top{display:flex;align-items:center;gap:12px;padding:14px 20px}
+.fl-top h3{flex:1;font-size:18px;color:#fff}
+.fl-top .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:14px;color:#fff;border-color:rgba(255,255,255,.5);background:transparent}
+.fl-x{width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;font-size:24px;line-height:1;cursor:pointer}
+.fl-stage{position:relative;display:grid;place-items:center;overflow:hidden;padding:8px}
+.fl-book{margin:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
+.pg{background:#fdfcf8;overflow:hidden}
+.pg.blank{background:#f1ede3}
+.pg-in{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(90deg,#f3efe6,#fdfcf8 12%,#fdfcf8 88%,#f3efe6)}
+.pg-in:empty::after{content:"";width:28px;height:28px;border-radius:50%;border:3px solid #d9d3c4;border-top-color:#8a8270;animation:spin 1s linear infinite}
+.pg canvas{width:100%;height:100%;display:block}
+.pg-no{position:absolute;bottom:6px;inset-inline:0;text-align:center;font-size:11px;color:#9a927f;pointer-events:none}
+.fl-load{display:grid;justify-items:center;gap:14px;color:rgba(255,255,255,.8);font-size:15px;text-align:center;max-width:320px}
+.fl-load span{width:36px;height:36px;border-radius:50%;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;animation:spin 1s linear infinite}
+.fl-load[hidden]{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fl-bar{display:flex;align-items:center;justify-content:center;gap:16px;padding:12px 20px 18px}
+.fl-nav{width:48px;height:48px;border-radius:999px;border:0;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;cursor:pointer;transition:transform var(--press),background-color .2s ease}
+.fl-nav:hover{background:rgba(255,255,255,.22)} .fl-nav:active{transform:scale(.92)}
+.fl-nav .i{width:22px;height:22px}
+.fl-pos{display:flex;align-items:center;gap:12px;min-width:min(420px,50vw)}
+.fl-pos input{flex:1;accent-color:#fff;direction:rtl}
+.fl-pos span{font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap;color:rgba(255,255,255,.85)}
+@media (max-width:600px){.fl-top .btn{padding:7px 10px;font-size:13px}.fl-pos{min-width:0;flex:1}}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
@@ -1392,7 +1422,6 @@ function set(t){r.dataset.theme=t;b.setAttribute("aria-pressed",t==="dark");b.ti
 set(r.dataset.theme||"light");
 b.addEventListener("click",()=>{const t=r.dataset.theme==="dark"?"light":"dark";set(t);try{localStorage.setItem("yathrib-theme",t)}catch(e){}});})();
 </script>
-<dialog class="reader" id="reader" aria-labelledby="rd-title"><header><img id="rd-img" alt=""><h3 id="rd-title"></h3><a class="btn ghost" id="rd-tab" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-out"/></svg>صفحة كاملة</a><button class="x" type="button" id="rd-x" aria-label="إغلاق">×</button></header><iframe id="rd-frame" title="قارئ الكتاب"></iframe></dialog>
 <script>
 (function(){
 const fine=matchMedia("(hover:hover) and (pointer:fine)").matches,calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1403,18 +1432,62 @@ document.querySelectorAll(".book .cover").forEach(c=>{
     c.style.setProperty("--gx",(x*100).toFixed(1)+"%");c.style.setProperty("--gy",(y*100).toFixed(1)+"%")});
   c.addEventListener("pointerleave",()=>{c.classList.remove("live");c.style.setProperty("--ry","0deg");c.style.setProperty("--rx","0deg")});
 });
-const d=document.getElementById("reader");if(!d||!d.showModal)return;
-const fr=document.getElementById("rd-frame"),tt=document.getElementById("rd-title"),im=document.getElementById("rd-img"),tab=document.getElementById("rd-tab");
-const wide=()=>matchMedia("(min-width:760px)").matches;
-document.querySelectorAll("[data-read]").forEach(a=>a.addEventListener("click",e=>{
-  if(!wide())return; e.preventDefault();
-  const b=a.closest(".book"),src=a.getAttribute("href");
-  tt.textContent=b.querySelector("h3").textContent;im.src=b.querySelector(".lid img").src;tab.href=src;fr.src=src+"#view=FitH";d.showModal();
-}));
-document.getElementById("rd-x").onclick=()=>d.close();
-d.addEventListener("click",e=>{if(e.target===d)d.close()});
-d.addEventListener("close",()=>{fr.src="about:blank"});
+
 })();
+</script>
+<dialog class="flip" id="flip" aria-labelledby="fl-title">
+  <header class="fl-top"><h3 id="fl-title"></h3><a class="btn ghost" id="fl-dl" download><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>تحميل PDF</a><button class="fl-x" type="button" id="fl-x" aria-label="إغلاق">×</button></header>
+  <div class="fl-stage" id="fl-stage"><div class="fl-load" id="fl-load"><span></span>يجهّز الكتاب…</div></div>
+  <footer class="fl-bar">
+    <button type="button" class="fl-nav" id="fl-prev" aria-label="الصفحة السابقة"><svg class="i" aria-hidden="true"><use href="#i-back"/></svg></button>
+    <div class="fl-pos"><input type="range" id="fl-range" min="1" value="1" aria-label="انتقلي لصفحة"><span id="fl-num">١</span></div>
+    <button type="button" class="fl-nav" id="fl-next" aria-label="الصفحة التالية"><svg class="i" aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-back"/></svg></button>
+  </footer>
+</dialog>
+<script src="vendor/page-flip/page-flip.browser.js" defer></script>
+<script type="module">
+import * as pdfjsLib from "./vendor/pdfjs/pdf.min.mjs";
+pdfjsLib.GlobalWorkerOptions.workerSrc="./vendor/pdfjs/pdf.worker.min.mjs";
+const D=document.getElementById("flip"),stage=document.getElementById("fl-stage"),load=document.getElementById("fl-load"),
+  num=document.getElementById("fl-num"),range=document.getElementById("fl-range"),ttl=document.getElementById("fl-title"),dl=document.getElementById("fl-dl");
+const AR=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+let pf=null,doc=null,map=[],els=[],done=new Set(),pw=0,ph=0,task=null,N=0;
+function close(){if(pf){try{pf.destroy()}catch(e){}pf=null} if(task){task.destroy();task=null} doc=null;done.clear();els=[];stage.querySelectorAll(".fl-book").forEach(x=>x.remove())}
+async function render(i){
+  if(i<0||i>=els.length||done.has(i)||!doc||!map[i])return; done.add(i);
+  const page=await doc.getPage(map[i]); const v0=page.getViewport({scale:1});
+  const dpr=Math.min(window.devicePixelRatio||1,2), sc=(els[i].clientWidth||pw)*dpr/v0.width;
+  const v=page.getViewport({scale:sc}),c=document.createElement("canvas");c.width=v.width;c.height=v.height;
+  await page.render({canvasContext:c.getContext("2d"),viewport:v}).promise; els[i].querySelector(".pg-in").replaceChildren(c);
+}
+function around(i){for(let k=-3;k<=4;k++)render(i+k)}
+function cur(){if(!pf)return;const i=pf.getCurrentPageIndex(),p=map[i]||map[i-1]||N;num.textContent=AR(p)+" / "+AR(N);range.value=p;}
+async function open(src,title){
+  close(); ttl.textContent=title; dl.href=src; dl.setAttribute("download",src.split("/").pop()); load.hidden=false; D.showModal();
+  try{
+    task=pdfjsLib.getDocument(src); doc=await task.promise; N=doc.numPages;
+    const v=(await doc.getPage(1)).getViewport({scale:1}); const ratio=v.height/v.width;
+    // RTL: reverse order so page 1 sits on the right of the first spread
+    map=[]; if(N%2) map.push(0); for(let p=N;p>=1;p--) map.push(p);
+    const box=stage.getBoundingClientRect(), portrait=box.width<760;
+    pw=Math.floor(Math.min(portrait?box.width-16:(box.width-40)/2,(box.height-16)/ratio)); ph=Math.floor(pw*ratio);
+    const book=document.createElement("div");book.className="fl-book";stage.appendChild(book);
+    els=map.map(p=>{const d=document.createElement("div");d.className="pg"+(p?"":" blank");d.innerHTML='<div class="pg-in"></div>';return d});
+    pf=new St.PageFlip(book,{width:pw,height:ph,size:"fixed",showCover:false,usePortrait:portrait,startPage:els.length-1,drawShadow:true,maxShadowOpacity:.45,flippingTime:850,mobileScrollSupport:false,autoSize:false});
+    pf.loadFromHTML(els); range.max=N; load.hidden=true;
+    pf.on("flip",e=>{around(e.data);cur()}); around(els.length-1); cur();
+  }catch(err){load.innerHTML="ما قدرنا نفتح الكتاب هنا. حمّليه من زر «تحميل PDF».";console.error(err)}
+}
+const fwd=()=>pf&&pf.flipPrev("bottom"), back=()=>pf&&pf.flipNext("bottom");
+document.getElementById("fl-next").onclick=fwd; document.getElementById("fl-prev").onclick=back;
+range.oninput=()=>{if(!pf)return;num.textContent=AR(+range.value)+" / "+AR(N);};
+range.onchange=()=>{if(!pf)return;const idx=map.indexOf(+range.value);around(idx);pf.turnToPage(idx);cur()};
+D.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"){e.preventDefault();fwd()} if(e.key==="ArrowRight"){e.preventDefault();back()}});
+document.getElementById("fl-x").onclick=()=>D.close(); D.addEventListener("close",close);
+D.addEventListener("click",e=>{if(e.target===D)D.close()});
+document.querySelectorAll("[data-read]").forEach(a=>a.addEventListener("click",e=>{
+  if(!window.St||!D.showModal)return; e.preventDefault(); const b=a.closest(".book"); open(a.getAttribute("href"),b.querySelector("h3").textContent);
+}));
 </script>
 </body>
 </html>
