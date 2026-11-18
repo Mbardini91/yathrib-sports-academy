@@ -980,6 +980,13 @@ p{line-height:1.8}
 .hl:hover{box-shadow:0 0 0 1px transparent,0 18px 40px -22px color-mix(in srgb,var(--lane) 55%,transparent),0 8px 18px -12px color-mix(in srgb,var(--track) 35%,transparent)}
 :root[data-theme="dark"] .hl-ring{background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),#fff 0%,var(--track) 20%,var(--lane) 45%,transparent 72%),linear-gradient(135deg,color-mix(in srgb,var(--track) 30%,transparent),color-mix(in srgb,var(--lane) 30%,transparent))}
 @media (hover:none){.hl-ring,.hl-glow{display:none}}
+
+/* header: brand · nav · theme in one row */
+.bar{flex-wrap:nowrap;gap:14px}
+.bar .brand{flex:none}
+.bar .nimbus-nav{order:0;margin-inline:auto}
+.bar .themebtn{flex:none;order:1}
+@media (max-width:1100px){.bar{flex-wrap:wrap;row-gap:10px}.bar .brand{flex:1 1 calc(100% - 64px);min-width:0}.bar .themebtn{order:0}.bar .nimbus-nav{order:2;margin-inline:auto}}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t="light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
@@ -1046,12 +1053,13 @@ p{line-height:1.8}
 <div class="chrome" id="chrome"><div class="wrap">
   <header class="bar">
     <a class="brand" href="#home"><span class="mark" aria-hidden="true"></span><span><b>أكاديمية يثرب الرياضية</b><small>مدرسة يثرب الإعدادية للبنات · العام الدراسي ٢٠٢٦–٢٠٢٧</small></span></a>
-    <div class="stats" aria-live="polite"><button type="button" class="themebtn" id="themebtn" aria-label="تبديل الوضع الداكن والفاتح"><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button><span class="stat"><b id="st-visits">٠</b>زياراتك اليوم</span><span class="stat"><b id="st-done">٠</b>تمارينك اليوم</span><span class="who" id="who" hidden><svg class="i" aria-hidden="true"><use href="#i-user"/></svg><span id="who-name"></span><button type="button" id="logout" aria-label="تسجيل الخروج"><svg class="i" aria-hidden="true"><use href="#i-logout"/></svg></button></span></div>
+    
     <nav class="nimbus-nav" data-tone="light" data-gl="on" data-refract="off" aria-label="أقسام المنصة">
       <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="nimbus-refract" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.006 0.02" numOctaves="2" seed="7" result="noise"/><feGaussianBlur in="noise" stdDeviation="2" result="soft"/><feDisplacementMap in="SourceGraphic" in2="soft" scale="60" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
       <span class="nimbus-glass" aria-hidden="true"></span><canvas class="nimbus-water" aria-hidden="true"></canvas><span class="nimbus-drop" aria-hidden="true"></span>
       <a class="nimbus-item" href="#home" data-v="home" data-fx="glow" aria-label="الرئيسية"><span class="nv-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2"/><path d="M6 9.6V20h12V9.6"/><path class="nv-door" d="M10 20v-5h4v5Z"/></svg></span><span class="nimbus-label">الرئيسية</span></a><a class="nimbus-item" href="#about" data-v="about" data-fx="spin" aria-label="عن المركز"><span class="nv-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.2"/><circle cx="12" cy="7.8" r=".9" fill="currentColor"/></svg></span><span class="nimbus-label">عن المركز</span></a><a class="nimbus-item" href="#programs" data-v="programs" data-fx="pop" aria-label="برامج المركز"><span class="nv-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.8"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></svg></span><span class="nimbus-label">برامج المركز</span></a><a class="nimbus-item" href="#play" data-v="play" data-fx="wave" aria-label="مسابقات وفعاليات"><span class="nv-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0V4Z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v3.5M8.5 20h7M10 16.5h4V20h-4z"/></svg></span><span class="nimbus-label">مسابقات وفعاليات</span></a><a class="nimbus-item" href="#library" data-v="library" data-fx="drop" aria-label="المكتبة الصحية"><span class="nv-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15Z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5"/></svg></span><span class="nimbus-label">المكتبة الصحية</span></a>
     </nav>
+    <button type="button" class="themebtn" id="themebtn" aria-label="تبديل الوضع الداكن والفاتح"><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
   </header>
 </div></div>
 
@@ -1568,7 +1576,7 @@ const todayKey=(()=>{const d=new Date();return d.getFullYear()+"-"+(d.getMonth()
 let day=store.get("yathrib-day")||{};
 if(day.k!==todayKey)day={k:todayKey,visits:0,done:[]};
 day.visits++;store.set("yathrib-day",day);
-function drawStats(){document.getElementById("st-visits").textContent=ar(day.visits);document.getElementById("st-done").textContent=ar(day.done.length)}
+function drawStats(){const v=document.getElementById("st-visits"),d=document.getElementById("st-done");if(v)v.textContent=ar(day.visits);if(d)d.textContent=ar(day.done.length)}
 drawStats();
 // highlight today's row in walking tables
 const wd=new Date().getDay();
@@ -1576,7 +1584,7 @@ document.querySelectorAll(".walk tr").forEach(tr=>{if(+tr.dataset.day===wd)tr.cl
 
 // login (device only)
 let me=store.get("yathrib-user");
-function drawWho(){const w=document.getElementById("who");if(me&&me.name){w.hidden=false;document.getElementById("who-name").textContent=me.name.split(" ")[0]}else w.hidden=true}
+function drawWho(){const w=document.getElementById("who");if(!w)return;if(me&&me.name){w.hidden=false;document.getElementById("who-name").textContent=me.name.split(" ")[0]}else w.hidden=true}
 drawWho();
 const lf=document.getElementById("loginForm");if(lf)lf.addEventListener("submit",e=>{
   e.preventDefault();
@@ -1584,7 +1592,7 @@ const lf=document.getElementById("loginForm");if(lf)lf.addEventListener("submit"
   if(!name||!role){err.textContent="اكتبي الاسم واختاري التصنيف.";return}
   err.textContent="";me={name,role};store.set("yathrib-user",me);drawWho();location.hash=role;
 });
-document.getElementById("logout").onclick=()=>{me=null;try{localStorage.removeItem("yathrib-user")}catch(e){}drawWho();};
+{const lo=document.getElementById("logout");if(lo)lo.onclick=()=>{me=null;try{localStorage.removeItem("yathrib-user")}catch(e){}drawWho();};}
 
 // exercise cards: guided timer + done
 const fmt=s=>ar(Math.floor(s/60))+":"+ar(String(s%60).padStart(2,"0"));
