@@ -856,6 +856,34 @@ p{line-height:1.8}
 .medal.hon-m{width:30px;height:40px;animation:sway 4s ease-in-out infinite}
 @media (max-width:560px){.hon ul{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.hon::after{display:none}.hon-steps,.medal.hon-m,.hon li{animation:none}}
+
+/* academy: workshop + decks */
+.spot.tkd{background:radial-gradient(120% 140% at 100% 0%,#4FB3C6 0%,transparent 45%),linear-gradient(135deg,#1F7A8C,#12475a 55%,#121B33)}
+.spot.tkd .spot-ico{font-size:28px;animation:tkdKick 2.4s ease-in-out infinite}
+@keyframes tkdKick{0%,70%,100%{transform:rotate(0)}78%{transform:rotate(-14deg) scale(1.08)}86%{transform:rotate(8deg)}}
+.tkd-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tkd-tags span{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25)}
+.decks{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:12px}
+.decks h4{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--c)}
+.deck-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.deck-grid{grid-template-columns:1fr}}
+.deck{border-radius:18px;overflow:hidden;background:var(--bg);border:1px solid var(--line);display:flex;flex-direction:column;animation:achIn .6s var(--ease-spring) both}
+.deck:nth-child(2){animation-delay:.1s}
+.deck-cover{position:relative;display:block;padding:0;border:0;cursor:pointer;aspect-ratio:16/9;overflow:hidden;background:#fff}
+.deck-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease-spring)}
+.deck-cover:hover img{transform:scale(1.05)}
+.deck-n{position:absolute;top:8px;inset-inline-start:8px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.92);color:#121B33}
+.deck-play{position:absolute;inset:auto 0 0 0;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;font:600 13px var(--body);color:#fff;background:linear-gradient(transparent,rgba(18,27,51,.75));opacity:0;transform:translateY(8px);transition:opacity .25s,transform .35s var(--ease-spring)}
+.deck-play .i{width:15px;height:15px}
+.deck-cover:hover .deck-play,.deck-cover:focus-visible .deck-play{opacity:1;transform:none}
+@media (hover:none){.deck-play{opacity:1;transform:none}}
+.deck-b{padding:12px 14px 14px;display:grid;gap:6px}
+.deck-b h5{margin:0;font:700 15px/1.5 var(--display)}
+.deck-b>p{font-size:13px;color:var(--muted);line-height:1.7}
+.deck-b ul{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:6px}
+.deck-b li{display:grid;grid-template-columns:22px 1fr;gap:6px;font-size:13px;line-height:1.65}
+.deck-b li span{font-size:15px;line-height:1.5}
+@media (prefers-reduced-motion:reduce){.spot.tkd .spot-ico,.deck{animation:none}}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t="light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
@@ -1071,7 +1099,7 @@ p{line-height:1.8}
     <div class="wrap">
       <div class="head"><h2><span class="hi v"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></span>البرامج الخاصة بالتثقيف الرياضي والصحي</h2></div>
       <div class="bento pbento pb-ed">
-        <article class="bcard pb pc-ed bt-full" data-id="academy"><div class="bg" aria-hidden="true"><img src="img/gate-library.webp" alt="" width="880" height="660" loading="lazy"></div><div class="bbody"><span class="bico"><svg class="i" aria-hidden="true"><use href="#i-school"/></svg></span><h3>برنامج أكاديمية يثرب الرياضية</h3><p>برنامج تعليمي يهدف إلى دمج الأنشطة الرياضية مع الدروس الأكاديمية لتعزيز تجربة التعليم الشاملة.</p></div><button type="button" class="bcta" data-pd>اعرفي أكثر <svg class="i" aria-hidden="true"><use href="#i-out"/></svg></button><template class="pdet"><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>الطالبات</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>من دقيقة إلى ٥ دقائق في الحصة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>خلال الأسبوع</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تحسين اللياقة البدنية</li><li>تعزيز الصحة النفسية</li><li>تحقيق الاندماج الاجتماعي</li><li>تطوير المهارات الحياتية</li></ol></details></template></article>
+        <article class="bcard pb pc-ed bt-full" data-id="academy"><div class="bg" aria-hidden="true"><img src="img/gate-library.webp" alt="" width="880" height="660" loading="lazy"></div><span class="achip">🥋 ورشة + عرضان</span><div class="bbody"><span class="bico"><svg class="i" aria-hidden="true"><use href="#i-school"/></svg></span><h3>برنامج أكاديمية يثرب الرياضية</h3><p>برنامج تعليمي يهدف إلى دمج الأنشطة الرياضية مع الدروس الأكاديمية لتعزيز تجربة التعليم الشاملة.</p></div><button type="button" class="bcta" data-pd>اعرفي أكثر <svg class="i" aria-hidden="true"><use href="#i-out"/></svg></button><template class="pdet"><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>الطالبات</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>من دقيقة إلى ٥ دقائق في الحصة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>خلال الأسبوع</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تحسين اللياقة البدنية</li><li>تعزيز الصحة النفسية</li><li>تحقيق الاندماج الاجتماعي</li><li>تطوير المهارات الحياتية</li></ol></details><div class="spot tkd"><span class="spot-ico" aria-hidden="true">🥋</span><div><span class="spot-k">ورشة · من تقديم طالبة</span><p>تم تنظيم ورشة <b>«أساسيات التايكوندو»</b> من تقديم الطالبة <b>سحر علي</b> · <bdi>8b</bdi></p></div></div><section class="decks"><h4><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>عروض توعوية من البرنامج</h4><div class="deck-grid"><article class="deck"><button type="button" class="deck-cover" data-slides="move" data-at="0" aria-label="تصفحي عرض الحركة سرّ الصحة والنشاط"><img src="img/move/s1.webp" alt="" loading="lazy" width="1600" height="900"><span class="deck-n">🏃‍♀️ ٥ شرائح</span><span class="deck-play"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>تصفحي العرض</span></button><div class="deck-b"><h5>الحركة سرّ الصحة والنشاط</h5><p>عرض توعوي عن فوائد النشاط البدني وكم نحتاج منه يومياً.</p><ul><li><span>⏱️</span>٦٠ دقيقة نشاط بدني يومياً للفئة ٥–١٧ سنة</li><li><span>💪</span>تقوية العضلات والعظام ٣ أيام أسبوعياً على الأقل</li><li><span>👟</span>تحدي الدقيقة: ابدئي بخطوة صغيرة اليوم</li></ul></div></article><article class="deck"><button type="button" class="deck-cover" data-slides="sit" data-at="0" aria-label="تصفحي عرض هل جلستك صحيحة؟"><img src="img/sit/s1.webp" alt="" loading="lazy" width="1600" height="900"><span class="deck-n">🪑 ٥ شرائح</span><span class="deck-play"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>تصفحي العرض</span></button><div class="deck-b"><h5>هل جلستك صحيحة؟</h5><p>جلوس سليم، تركيز أفضل، وصحة تدوم أثناء الدراسة.</p><ul><li><span>🪑</span>ظهر مستقيم مدعوم بمسند الكرسي، وقدمان على الأرض</li><li><span>🔄</span>غيّري وضعيتك بانتظام وتحركي في الاستراحة</li><li><span>🙆‍♀️</span>دقيقة حركة في الصف: تدوير الكتفين، تمديد الذراعين، تحريك القدمين</li></ul></div></article></div></section></template></article>
       </div>
     </div>
   </section>
@@ -1674,7 +1702,8 @@ document.querySelectorAll("[data-read]").forEach(a=>a.addEventListener("click",e
 </dialog>
 <script>
 (function(){
-const SETS={stars:[4,5,6,7,8,9,10,11].map(n=>"img/stars/p"+n+".webp")};
+const SETS={stars:[4,5,6,7,8,9,10,11].map(n=>"img/stars/p"+n+".webp"),move:[1,2,3,4,5].map(n=>"img/move/s"+n+".webp"),sit:[1,2,3,4,5].map(n=>"img/sit/s"+n+".webp")};
+const TITLES={stars:"نادي نجمات يثرب · التمارين الأسبوعية",move:"الحركة سرّ الصحة والنشاط",sit:"هل جلستك صحيحة؟"};
 const D=document.getElementById("slides");if(!D||!D.showModal)return;
 const tr=document.getElementById("sl-track"),dots=document.getElementById("sl-dots"),n=document.getElementById("sl-n");
 const AR=x=>String(x).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);let list=[],i=0;
@@ -1682,7 +1711,7 @@ function show(k,dir){i=Math.max(0,Math.min(list.length-1,k));const im=tr.querySe
   im.animate([{opacity:0,transform:"translateX("+(dir||0)*40+"px)"},{opacity:1,transform:"none"}],{duration:380,easing:"cubic-bezier(.22,1,.36,1)"});
   n.textContent=AR(i+1)+" / "+AR(list.length);[...dots.children].forEach((d,k)=>d.setAttribute("aria-current",k===i));
   [list[i+1],list[i-1]].forEach(u=>{if(u){const p=new Image();p.src=u}});}
-function open(set,at){list=SETS[set];tr.innerHTML='<img alt="صفحة من برنامج نادي نجمات يثرب">';
+function open(set,at){list=SETS[set];document.getElementById("sl-title").textContent=TITLES[set]||"";tr.innerHTML='<img alt="صفحة من برنامج نادي نجمات يثرب">';
   dots.innerHTML=list.map((_,k)=>'<button type="button" aria-label="صفحة '+AR(k+1)+'"></button>').join("");
   [...dots.children].forEach((d,k)=>d.onclick=()=>show(k,k>i?-1:1));D.showModal();show(at,0)}
 const nx=()=>show(i+1,-1),pv=()=>show(i-1,1);
