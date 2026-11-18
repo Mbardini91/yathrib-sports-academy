@@ -12,7 +12,7 @@
 :root{
   --bg:#EEF1F5; --surface:#FFFFFF; --ink:#121B33; --muted:#5A647D;
   --track:#D9482B; --lane:#1F7A8C; --line:#D5DAE4; --track-soft:#F7DDD6;
-  --gold:#B7861C; --violet:#6A4FB3;
+  --gold:#B7861C; --violet:#6A4FB3; --walk:#2E9B5F;
   --display:"IBM Plex Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif;
   --body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif;
   color-scheme:light;
@@ -21,13 +21,13 @@
   :root:not([data-theme="light"]){
     --bg:#0D1324; --surface:#151D33; --ink:#EEF1F7; --muted:#9AA4BD;
     --track:#F0694C; --lane:#4FB3C6; --line:#26314D; --track-soft:#3A2220;
-    --gold:#E0B04A; --violet:#A38BEB; color-scheme:dark;
+    --gold:#E0B04A; --violet:#A38BEB; --walk:#5CC98A; color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#0D1324; --surface:#151D33; --ink:#EEF1F7; --muted:#9AA4BD;
   --track:#F0694C; --lane:#4FB3C6; --line:#26314D; --track-soft:#3A2220;
-  --gold:#E0B04A; --violet:#A38BEB; color-scheme:dark;
+  --gold:#E0B04A; --violet:#A38BEB; --walk:#5CC98A; color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -117,7 +117,7 @@ button{font-family:inherit}
 .filters button{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer}
 .filters button[aria-pressed="false"]{opacity:.45}
 .dot{width:10px;height:10px;border-radius:50%;flex:none;display:inline-block}
-.c-off{background:var(--track)} .c-sc{background:var(--ink)} .c-bh{background:var(--lane)} .c-ar{background:var(--gold)} .c-gl{background:var(--violet)}
+.c-off{background:var(--track)} .c-sc{background:var(--ink)} .c-bh{background:var(--lane)} .c-ar{background:var(--gold)} .c-gl{background:var(--violet)} .c-wk{background:var(--walk)}
 .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .dow{font-size:12px;font-weight:600;color:var(--muted);text-align:center;padding-bottom:4px}
 .cell{min-height:64px;border-radius:10px;background:var(--bg);padding:6px;display:flex;flex-direction:column;gap:4px;border:1.5px solid transparent;cursor:pointer;text-align:start;color:var(--ink);font:inherit}
@@ -857,8 +857,8 @@ function route(){
 window.addEventListener("hashchange",route);route();
 
 /* ---------- calendar ---------- */
-const CATS={off:"إجازة رسمية",sc:"المدرسة",bh:"رياضة بحرينية",ar:"عربية وخليجية",gl:"عالمية"};
-const CICON={off:"sun",sc:"school",bh:"flag",ar:"trophy",gl:"globe"};
+const CATS={off:"إجازة رسمية",sc:"المدرسة",bh:"رياضة بحرينية",ar:"عربية وخليجية",gl:"عالمية",wk:"فعاليات المشي"};
+const CICON={off:"sun",sc:"school",bh:"flag",ar:"trophy",gl:"globe",wk:"walk"};
 const ic=n=>`<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const EV=[
  {s:"2026-09-03",t:"بداية العام الدراسي للطالبات",c:"sc"},
@@ -883,7 +883,37 @@ const EV=[
  {s:"2027-05-16",e:"2027-05-19",t:"يوم عرفة وعيد الأضحى",c:"off",a:1},
  {s:"2027-06-06",t:"رأس السنة الهجرية",c:"off",a:1},
  {s:"2027-06-15",e:"2027-06-16",t:"عاشوراء",c:"off",a:1},
- {s:"2027-06-30",t:"نهاية العام الدراسي",c:"sc"}
+ {s:"2027-06-30",t:"نهاية العام الدراسي",c:"sc"},
+ {s:"2026-09-10",t:"فعاليات المشي — اليوم العالمي لمحو الأمية",c:"wk"},
+ {s:"2026-09-17",t:"فعاليات المشي — اليوم الدولي للسلام",c:"wk"},
+ {s:"2026-09-24",t:"فعاليات المشي — اليوم الوطني السعودي",c:"wk"},
+ {s:"2026-10-01",t:"فعاليات المشي — اليوم العالمي للمسنين",c:"wk"},
+ {s:"2026-10-08",t:"فعاليات المشي — اليوم العالمي للبريد",c:"wk"},
+ {s:"2026-10-15",t:"فعاليات المشي — يوم الغذاء العالمي",c:"wk"},
+ {s:"2026-10-22",t:"فعاليات المشي — التوعية بسرطان الثدي",c:"wk"},
+ {s:"2026-10-29",t:"فعاليات المشي — يوم المرشدة العربية",c:"wk"},
+ {s:"2026-11-05",t:"فعاليات المشي — يوم الطبيب البحريني",c:"wk"},
+ {s:"2026-11-12",t:"فعاليات المشي — يوم السكر العالمي",c:"wk"},
+ {s:"2026-11-19",t:"فعاليات المشي — اليوم العالمي للطفولة",c:"wk"},
+ {s:"2026-11-26",t:"فعاليات المشي — يوم المرأة البحرينية",c:"wk"},
+ {s:"2026-12-03",t:"فعاليات المشي — اليوم العالمي للمتطوعين",c:"wk"},
+ {s:"2026-12-10",t:"فعاليات المشي — يوم حقوق الإنسان",c:"wk"},
+ {s:"2026-12-17",t:"فعاليات المشي — العيد الوطني المجيد",c:"wk"},
+ {s:"2026-12-24",t:"فعاليات المشي — يوم الشهيد البحريني",c:"wk"},
+ {s:"2027-02-04",t:"فعاليات المشي — اليوم الأخضر",c:"wk"},
+ {s:"2027-02-11",t:"فعاليات المشي — ذكرى الميثاق الوطني",c:"wk"},
+ {s:"2027-02-18",t:"فعاليات المشي — اليوم البحريني الرياضي",c:"wk"},
+ {s:"2027-02-25",t:"فعاليات المشي — أهلاً رمضان",c:"wk"},
+ {s:"2027-03-04",t:"فعاليات المشي — اليوم الأحمر",c:"wk"},
+ {s:"2027-03-11",t:"فعاليات المشي — يوم المرأة العالمي",c:"wk"},
+ {s:"2027-03-18",t:"فعاليات المشي — اليوم الدولي للتعلم الرقمي",c:"wk"},
+ {s:"2027-03-25",t:"فعاليات المشي — يوم الأسرة",c:"wk"},
+ {s:"2027-04-01",t:"فعاليات المشي — اليوم العالمي للتوحد",c:"wk"},
+ {s:"2027-04-08",t:"فعاليات المشي — يوم الصحة العالمي",c:"wk"},
+ {s:"2027-04-15",t:"فعاليات المشي — اليوم الأبيض",c:"wk"},
+ {s:"2027-04-22",t:"فعاليات المشي — اليوم الأخضر",c:"wk"},
+ {s:"2027-04-29",t:"فعاليات المشي — اليوم البنفسجي",c:"wk"},
+ {s:"2027-05-06",t:"فعاليات المشي — اليوم الأصفر",c:"wk"}
 ];
 const D=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
 EV.forEach(x=>{if(x.s){x.S=D(x.s);x.E=x.e?D(x.e):x.S}});
@@ -891,7 +921,7 @@ const START=new Date(2026,8,1), END=new Date(2027,5,1);
 const today=new Date();today.setHours(0,0,0,0);
 let cur=new Date(today.getFullYear(),today.getMonth(),1);
 if(cur<START||cur>END)cur=new Date(START);
-let on=Object.assign({off:1,sc:1,bh:1,ar:1,gl:1},store.get("yathrib-cal-filter")||{});
+let on=Object.assign({off:1,sc:1,bh:1,ar:1,gl:1,wk:1},store.get("yathrib-cal-filter")||{});
 let sel=null;
 
 const fbox=document.getElementById("filters");
