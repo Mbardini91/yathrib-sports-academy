@@ -31,10 +31,10 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:var(--display);line-height:1.25;margin:0;text-wrap:balance;font-weight:600}
-h1{font-weight:700;line-height:1.12}
-h2{line-height:1.18}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.8;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.5;margin:0;text-wrap:balance;font-weight:600}
+h1{font-weight:700;line-height:1.4}
+h2{line-height:1.45}
 p{margin:0}
 a{color:inherit}
 button{font-family:inherit}
@@ -779,6 +779,28 @@ footer a{color:var(--lane)}
 .pb.bt-wide .bbody,.pb.bt-wide2 .bbody,.pb.bt-full .bbody{max-width:58%}
 .pb.bt-wide .bcta,.pb.bt-wide2 .bcta,.pb.bt-full .bcta{inset-inline-end:auto}
 @media (max-width:900px){.pb.bt-wide .bg,.pb.bt-wide2 .bg,.pb.bt-full .bg{inset-inline-start:0}.pb.bt-wide .bg::after,.pb.bt-wide2 .bg::after,.pb.bt-full .bg::after{background:linear-gradient(to top,var(--surface) 30%,color-mix(in srgb,var(--surface) 70%,transparent) 50%,transparent 72%)}.pb.bt-wide .bbody,.pb.bt-wide2 .bbody,.pb.bt-full .bbody{max-width:none}}
+
+/* ===== typographic rhythm (Arabic-safe) ===== */
+p{line-height:1.8}
+.lede{line-height:1.85}
+.head{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:12px;margin-bottom:32px}
+.head h2{line-height:1.45}
+.head p{max-width:42em;line-height:1.8}
+.pagehead h1{margin:8px 0 16px;line-height:1.35}
+.audhead h1{line-height:1.35;margin-bottom:10px}
+.audhead .lede{margin-top:0}
+:is(h1,h2,h3)+:is(p,.lede){margin-top:.5em}
+.bbody,.binfo,.pcard{gap:8px}
+.bbody h3,.pcard h3,.binfo h3{line-height:1.5}
+.bbody p,.pcard p,.binfo p{line-height:1.75}
+.bcard h3{font-size:21px}
+.goal p{line-height:1.75}
+.vm p{line-height:1.6}
+.qcard .q,.duo .tip p#tiptext{line-height:1.7}
+.pd-head h3{line-height:1.45}
+.pd-body>p{line-height:1.8}
+.pmeta dd,.pmeta dt{line-height:1.6}
+.pgoals ol{gap:8px;line-height:1.7}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t="light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
