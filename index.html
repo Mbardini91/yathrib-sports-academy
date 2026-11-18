@@ -687,6 +687,25 @@ footer a{color:var(--lane)}
 .fl-pos input{flex:1;accent-color:#fff;direction:rtl}
 .fl-pos span{font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap;color:rgba(255,255,255,.85)}
 @media (max-width:600px){.fl-top .btn{padding:7px 10px;font-size:13px}.fl-pos{min-width:0;flex:1}}
+
+.patt{border-top:1px solid var(--line);padding-top:12px;display:grid;gap:10px}
+.patt h4{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--c)}
+.patt ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.patt button{width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:500 14px var(--body);text-align:start;cursor:pointer;transition:transform var(--press),border-color .2s ease}
+.patt button .i{color:var(--c);width:18px;height:18px}
+.patt button:hover{border-color:var(--c)} .patt button:active{transform:scale(.98)}
+.patt button::after{content:"";margin-inline-start:auto;width:7px;height:7px;border-top:2px solid var(--muted);border-left:2px solid var(--muted);transform:rotate(-45deg)}
+.slides{width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#0c0f1a;color:#fff}
+.slides[open]{display:grid;grid-template-rows:auto 1fr auto;animation:flIn .4s var(--ease-spring)}
+.slides::backdrop{background:transparent}
+.sl-n{font-size:14px;color:rgba(255,255,255,.75);font-variant-numeric:tabular-nums}
+.sl-stage{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:8px 16px;min-height:0}
+.sl-track{display:grid;place-items:center;min-height:0;height:100%;touch-action:pan-y}
+.sl-track img{max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);background:#fff;user-select:none;-webkit-user-drag:none}
+.sl-dots{display:flex;justify-content:center;gap:8px;padding:12px 0 20px}
+.sl-dots button{width:8px;height:8px;border-radius:999px;border:0;padding:0;background:rgba(255,255,255,.3);cursor:pointer;transition:width .35s var(--ease-spring),background-color .2s}
+.sl-dots button[aria-current="true"]{width:24px;background:#fff}
+@media (max-width:700px){.sl-stage{grid-template-columns:1fr;padding:8px}.sl-stage .fl-nav{display:none}}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
@@ -863,7 +882,7 @@ footer a{color:var(--lane)}
     <div class="wrap">
       <div class="head"><h2><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></span>البرامج الخاصة بمكافحة السمنة والدراسات العلمية</h2></div>
       <div class="pgrid">
-        <article class="pcard pc-ob" data-id="yathrib-stars"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg></span><h3>برنامج نجمات يثرب</h3><p>برنامج يهدف لتقليل نسبة السمنة بين الطالبات ذوات الوزن الزائد من خلال تعزيز النشاط البدني، لتوفير حياة صحية للطالبات.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>طالبات ذوات الوزن الزائد والسمنة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٤٥ دقيقة في اليوم</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>ثلاثة أيام أسبوعياً · فترتين</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تقليل معدلات السمنة والأمراض المتعلقة بقلة النشاط البدني</li><li>تعزيز نمط حياة صحي ومتوازن</li><li>رفع مستوى اللياقة البدنية والصحة العامة للطالبات</li><li>زيادة الوعي بأهمية ممارسة الرياضة والنمط الحياتي الصحي</li></ol></details></article>
+        <article class="pcard pc-ob" data-id="yathrib-stars"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg></span><h3>برنامج نجمات يثرب</h3><p>برنامج يهدف لتقليل نسبة السمنة بين الطالبات ذوات الوزن الزائد من خلال تعزيز النشاط البدني، لتوفير حياة صحية للطالبات.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>طالبات ذوات الوزن الزائد والسمنة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٤٥ دقيقة في اليوم</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>ثلاثة أيام أسبوعياً · فترتين</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تقليل معدلات السمنة والأمراض المتعلقة بقلة النشاط البدني</li><li>تعزيز نمط حياة صحي ومتوازن</li><li>رفع مستوى اللياقة البدنية والصحة العامة للطالبات</li><li>زيادة الوعي بأهمية ممارسة الرياضة والنمط الحياتي الصحي</li></ol></details><div class="patt"><h4><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>مرفقات للاطلاع · التمارين الأسبوعية</h4><ul><li><button type="button" data-slides="stars" data-at="0"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span>الهيكل الأسبوعي</span></button></li><li><button type="button" data-slides="stars" data-at="1"><svg class="i" aria-hidden="true"><use href="#i-wind"/></svg><span>الإحماء والتهدئة</span></button></li><li><button type="button" data-slides="stars" data-at="2"><svg class="i" aria-hidden="true"><use href="#i-dumbbell"/></svg><span>الأحد · تدريب القوة بالأدوات</span></button></li><li><button type="button" data-slides="stars" data-at="4"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg><span>الخميس · ألعاب حركية</span></button></li><li><button type="button" data-slides="stars" data-at="5"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg><span>الثلاثاء · تدريب دائري بالأدوات</span></button></li></ul></div></article>
         <article class="pcard pc-ob" data-id="challenge"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-target"/></svg></span><h3>برنامج قد التحدي؟!</h3><p>برنامج مُعدّ لتحسين الصحة واللياقة البدنية للمعلمات، يهدف لمساعدتهن على تحسين نمط حياتهن.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>الهيئة الإدارية والتعليمية</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٤٥ دقيقة في اليوم</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>ثلاثة أيام أسبوعياً · فترتين</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تقليل معدلات السمنة والأمراض المتعلقة بقلة النشاط البدني</li><li>تعزيز نمط حياة صحي ومتوازن</li><li>تحسين اللياقة البدنية والصحة العامة للمشاركات</li><li>زيادة الوعي بأهمية ممارسة الرياضة والنمط الحياتي الصحي</li></ol></details></article>
       </div>
     </div>
@@ -1488,6 +1507,32 @@ D.addEventListener("click",e=>{if(e.target===D)D.close()});
 document.querySelectorAll("[data-read]").forEach(a=>a.addEventListener("click",e=>{
   if(!window.St||!D.showModal)return; e.preventDefault(); const b=a.closest(".book"); open(a.getAttribute("href"),b.querySelector("h3").textContent);
 }));
+</script>
+<dialog class="slides" id="slides" aria-label="مرفقات نادي نجمات يثرب">
+  <header class="fl-top"><h3 id="sl-title">نادي نجمات يثرب · التمارين الأسبوعية</h3><span class="sl-n" id="sl-n"></span><button class="fl-x" type="button" id="sl-x" aria-label="إغلاق">×</button></header>
+  <div class="sl-stage"><button type="button" class="fl-nav sl-prev" id="sl-prev" aria-label="السابقة"><svg class="i" aria-hidden="true"><use href="#i-back"/></svg></button><div class="sl-track" id="sl-track"></div><button type="button" class="fl-nav sl-next" id="sl-next" aria-label="التالية"><svg class="i" aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-back"/></svg></button></div>
+  <div class="sl-dots" id="sl-dots"></div>
+</dialog>
+<script>
+(function(){
+const SETS={stars:[4,5,6,7,8,9,10,11].map(n=>"img/stars/p"+n+".webp")};
+const D=document.getElementById("slides");if(!D||!D.showModal)return;
+const tr=document.getElementById("sl-track"),dots=document.getElementById("sl-dots"),n=document.getElementById("sl-n");
+const AR=x=>String(x).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);let list=[],i=0;
+function show(k,dir){i=Math.max(0,Math.min(list.length-1,k));const im=tr.querySelector("img");im.src=list[i];
+  im.animate([{opacity:0,transform:"translateX("+(dir||0)*40+"px)"},{opacity:1,transform:"none"}],{duration:380,easing:"cubic-bezier(.22,1,.36,1)"});
+  n.textContent=AR(i+1)+" / "+AR(list.length);[...dots.children].forEach((d,k)=>d.setAttribute("aria-current",k===i));
+  [list[i+1],list[i-1]].forEach(u=>{if(u){const p=new Image();p.src=u}});}
+function open(set,at){list=SETS[set];tr.innerHTML='<img alt="صفحة من برنامج نادي نجمات يثرب">';
+  dots.innerHTML=list.map((_,k)=>'<button type="button" aria-label="صفحة '+AR(k+1)+'"></button>').join("");
+  [...dots.children].forEach((d,k)=>d.onclick=()=>show(k,k>i?-1:1));D.showModal();show(at,0)}
+const nx=()=>show(i+1,-1),pv=()=>show(i-1,1);
+document.getElementById("sl-next").onclick=nx;document.getElementById("sl-prev").onclick=pv;
+document.getElementById("sl-x").onclick=()=>D.close();D.addEventListener("click",e=>{if(e.target===D)D.close()});
+D.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")nx();if(e.key==="ArrowRight")pv()});
+let sx=null;tr.addEventListener("pointerdown",e=>sx=e.clientX);tr.addEventListener("pointerup",e=>{if(sx===null)return;const dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40)(dx>0?nx:pv)()});
+document.querySelectorAll("[data-slides]").forEach(b=>b.onclick=()=>open(b.dataset.slides,+b.dataset.at));
+})();
 </script>
 </body>
 </html>
