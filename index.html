@@ -989,10 +989,17 @@ p{line-height:1.8}
 .bar .themebtn{flex:none;order:1}
 @media (max-width:1100px){.bar{flex-wrap:wrap;row-gap:10px}.bar .brand{flex:1 1 calc(100% - 64px);min-width:0}.bar .themebtn{order:0}.bar .nimbus-nav{order:2;margin-inline:auto}}
 .board.solo{grid-template-columns:1fr!important}
+
+/* gradient wave background */
+#gwave{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;display:block;opacity:0;transition:opacity 1.2s ease}
+html.has-gwave #gwave{opacity:1}
+html{background:var(--bg)}
+html.has-gwave body{background:transparent}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t="light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
 <body>
+<canvas id="gwave" aria-hidden="true"></canvas>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <linearGradient id="mg-rib-a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4572E"/><stop offset="1" stop-color="#A83218"/></linearGradient>
 <linearGradient id="mg-rib-b" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A8FA3"/><stop offset="1" stop-color="#155866"/></linearGradient>
@@ -1979,6 +1986,92 @@ scan(document);
 new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.matches&&n.matches(SEL))arm(n);scan(n)}}))).observe(document.body,{childList:true,subtree:true});
 document.addEventListener("pointermove",e=>{const el=e.target.closest&&e.target.closest(".hl");if(!el)return;const b=el.getBoundingClientRect();
   el.style.setProperty("--mx",(e.clientX-b.left)+"px");el.style.setProperty("--my",(e.clientY-b.top)+"px")},{passive:true});
+})();
+</script>
+<script>
+/* Gradient Wave background — vanilla port of gradient-wave.tsx (MiniGl mesh gradient) */
+(function(){
+const cv=document.getElementById("gwave");if(!cv)return;
+const RMQ=matchMedia("(prefers-reduced-motion: reduce)");
+const norm=h=>{const n=parseInt(h.replace("#",""),16);return[(n>>16&255)/255,(n>>8&255)/255,(n&255)/255]};
+function MiniGl(canvas){
+  const gl=canvas.getContext("webgl",{antialias:true});if(!gl)throw new Error("no webgl");
+  const self=this;this.gl=gl;this.meshes=[];
+  class Uniform{constructor(e){this.type="float";Object.assign(this,e);this.typeFn={float:"1f",int:"1i",vec2:"2fv",vec3:"3fv",vec4:"4fv",mat4:"Matrix4fv"}[this.type]||"1f"}
+    update(loc){if(this.value===undefined||loc===null)return;const fn="uniform"+this.typeFn;if(this.typeFn.indexOf("Matrix")===0)gl[fn](loc,this.transpose||false,this.value);else gl[fn](loc,this.value)}
+    getDeclaration(name,type,length){if(this.excludeFrom===type)return"";
+      if(this.type==="array")return this.value[0].getDeclaration(name,type,this.value.length)+`\nconst int ${name}_length = ${this.value.length};`;
+      if(this.type==="struct"){let nn=name.replace("u_","");nn=nn.charAt(0).toUpperCase()+nn.slice(1);
+        const f=Object.entries(this.value).map(([n,u])=>u.getDeclaration(n,type).replace(/^uniform/,"")).join("");
+        return `uniform struct ${nn} \n{\n${f}\n} ${name}${length?`[${length}]`:""};`}
+      return `uniform ${this.type} ${name}${length?`[${length}]`:""};`}}
+  class Attribute{constructor(e){this.type=gl.FLOAT;this.normalized=false;this.buffer=gl.createBuffer();Object.assign(this,e)}
+    update(){if(this.values){gl.bindBuffer(this.target,this.buffer);gl.bufferData(this.target,this.values,gl.STATIC_DRAW)}}
+    attach(e,t){const n=gl.getAttribLocation(t,e);if(this.target===gl.ARRAY_BUFFER){gl.bindBuffer(this.target,this.buffer);gl.enableVertexAttribArray(n);gl.vertexAttribPointer(n,this.size,this.type,this.normalized,0,0)}return n}
+    use(e){gl.bindBuffer(this.target,this.buffer);if(this.target===gl.ARRAY_BUFFER){gl.enableVertexAttribArray(e);gl.vertexAttribPointer(e,this.size,this.type,this.normalized,0,0)}}}
+  class Material{constructor(vs,fs,uniforms={}){this.uniforms=uniforms;this.uniformInstances=[];
+    const sh=(t,src)=>{const s=gl.createShader(t);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){console.error(gl.getShaderInfoLog(s));throw new Error("shader")}return s};
+    const decl=(u,t)=>Object.entries(u).map(([n,v])=>v.getDeclaration(n,t)).join("\n");const pre="precision highp float;";
+    const vsrc=`${pre}\nattribute vec4 position;\nattribute vec2 uv;\nattribute vec2 uvNorm;\n${decl(self.commonUniforms,"vertex")}\n${decl(uniforms,"vertex")}\n${vs}`;
+    const fsrc=`${pre}\n${decl(self.commonUniforms,"fragment")}\n${decl(uniforms,"fragment")}\n${fs}`;
+    this.program=gl.createProgram();gl.attachShader(this.program,sh(gl.VERTEX_SHADER,vsrc));gl.attachShader(this.program,sh(gl.FRAGMENT_SHADER,fsrc));gl.linkProgram(this.program);
+    if(!gl.getProgramParameter(this.program,gl.LINK_STATUS))throw new Error("link");gl.useProgram(this.program);this.attach(undefined,self.commonUniforms);this.attach(undefined,this.uniforms)}
+    attach(name,u){if(name===undefined)Object.entries(u).forEach(([n,v])=>this.attach(n,v));else if(u.type==="array")u.value.forEach((v,i)=>this.attach(`${name}[${i}]`,v));
+      else if(u.type==="struct")Object.entries(u.value).forEach(([k,v])=>this.attach(`${name}.${k}`,v));else this.uniformInstances.push({uniform:u,location:gl.getUniformLocation(this.program,name)})}}
+  class PlaneGeometry{constructor(){this.attributes={position:new Attribute({target:gl.ARRAY_BUFFER,size:3}),uv:new Attribute({target:gl.ARRAY_BUFFER,size:2}),uvNorm:new Attribute({target:gl.ARRAY_BUFFER,size:2}),index:new Attribute({target:gl.ELEMENT_ARRAY_BUFFER,size:3,type:gl.UNSIGNED_SHORT})}}
+    setTopology(xs=1,ys=1){this.xs=xs;this.ys=ys;this.vc=(xs+1)*(ys+1);const A=this.attributes;A.uv.values=new Float32Array(2*this.vc);A.uvNorm.values=new Float32Array(2*this.vc);A.index.values=new Uint16Array(6*xs*ys);
+      for(let y=0;y<=ys;y++)for(let x=0;x<=xs;x++){const i=y*(xs+1)+x;A.uv.values[2*i]=x/xs;A.uv.values[2*i+1]=1-y/ys;A.uvNorm.values[2*i]=x/xs*2-1;A.uvNorm.values[2*i+1]=1-y/ys*2;
+        if(x<xs&&y<ys){const s=y*xs+x;A.index.values.set([i,i+1+xs,i+1,i+1,i+1+xs,i+2+xs],6*s)}}
+      A.uv.update();A.uvNorm.update();A.index.update()}
+    setSize(w=1,h=1){const A=this.attributes;A.position.values=new Float32Array(3*this.vc);const ox=w/-2,oy=h/-2,sw=w/this.xs,sh=h/this.ys;
+      for(let y=0;y<=this.ys;y++){const py=oy+y*sh;for(let x=0;x<=this.xs;x++){const i=y*(this.xs+1)+x;A.position.values[3*i]=ox+x*sw;A.position.values[3*i+1]=-py;A.position.values[3*i+2]=0}}A.position.update()}}
+  class Mesh{constructor(g,m){this.geometry=g;this.material=m;this.ai=Object.entries(g.attributes).map(([e,a])=>({attribute:a,location:a.attach(e,m.program)}));self.meshes.push(this)}
+    draw(){gl.useProgram(this.material.program);this.material.uniformInstances.forEach(({uniform,location})=>uniform.update(location));this.ai.forEach(({attribute,location})=>attribute.use(location));
+      gl.drawElements(gl.TRIANGLES,this.geometry.attributes.index.values.length,gl.UNSIGNED_SHORT,0)}}
+  Object.assign(this,{Uniform,Attribute,Material,PlaneGeometry,Mesh});
+  const I=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
+  this.commonUniforms={projectionMatrix:new Uniform({type:"mat4",value:I}),modelViewMatrix:new Uniform({type:"mat4",value:I}),resolution:new Uniform({type:"vec2",value:[1,1]}),aspectRatio:new Uniform({type:"float",value:1})};
+  this.setSize=(w,h)=>{this.width=w;this.height=h;canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);this.commonUniforms.resolution.value=[w,h];this.commonUniforms.aspectRatio.value=w/h};
+  this.setOrthographicCamera=()=>{this.commonUniforms.projectionMatrix.value=[2/this.width,0,0,0,0,2/this.height,0,0,0,0,-.001,0,0,0,0,1]};
+  this.render=()=>{gl.clearColor(0,0,0,0);gl.clearDepth(1);this.meshes.forEach(m=>m.draw())};
+}
+const VS=`vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+float snoise(vec3 v){const vec2 C=vec2(1.0/6.0,1.0/3.0);const vec4 D=vec4(0.0,0.5,1.0,2.0);vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.0-g;vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;i=mod289(i);
+vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));float n_=0.142857142857;vec3 ns=n_*D.wyz-D.xzx;vec4 j=p-49.0*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.0*x_);vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.0-abs(x)-abs(y);
+vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);vec4 s0=floor(b0)*2.0+1.0;vec4 s1=floor(b1)*2.0+1.0;vec4 sh=-step(h,vec4(0.0));vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
+vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);m=m*m;return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));}
+vec3 blendNormal(vec3 base,vec3 blend,float opacity){return(blend*opacity+base*(1.0-opacity));}
+varying vec3 v_color;
+void main(){float time=u_time*u_global.noiseSpeed;vec2 noiseCoord=resolution*uvNorm*u_global.noiseFreq;float tilt=resolution.y/2.0*uvNorm.y;float incline=resolution.x*uvNorm.x/2.0*u_vertDeform.incline;float offset=resolution.x/2.0*u_vertDeform.incline*mix(u_vertDeform.offsetBottom,u_vertDeform.offsetTop,uv.y);
+float noise=snoise(vec3(noiseCoord.x*u_vertDeform.noiseFreq.x+time*u_vertDeform.noiseFlow,noiseCoord.y*u_vertDeform.noiseFreq.y,time*u_vertDeform.noiseSpeed+u_vertDeform.noiseSeed))*u_vertDeform.noiseAmp;noise*=1.0-pow(abs(uvNorm.y),2.0);noise=max(0.0,noise);
+vec3 pos=vec3(position.x,position.y+tilt+incline+noise-offset,position.z);v_color=u_baseColor;
+for(int i=0;i<u_waveLayers_length;i++){if(u_active_colors[i+1]==1.){WaveLayers layer=u_waveLayers[i];float layerNoise=smoothstep(layer.noiseFloor,layer.noiseCeil,snoise(vec3(noiseCoord.x*layer.noiseFreq.x+time*layer.noiseFlow,noiseCoord.y*layer.noiseFreq.y,time*layer.noiseSpeed+layer.noiseSeed))/2.0+0.5);v_color=blendNormal(v_color,layer.color,pow(layerNoise,4.));}}
+gl_Position=projectionMatrix*modelViewMatrix*vec4(pos,1.0);}`;
+const FS=`varying vec3 v_color;void main(){vec3 color=v_color;if(u_darken_top==1.0){vec2 st=gl_FragCoord.xy/resolution.xy;color.g-=pow(st.y+sin(-12.0)*st.x,u_shadow_power)*0.4;}gl_FragColor=vec4(color,1.0);}`;
+const PAL={light:["#EEF1F5","#FCE3D9","#EEF1F5","#D3EDF1","#F6EBCD","#EEF1F5"],dark:["#0D1324","#2B1A1C","#0D1324","#0E2E36","#2A2413","#0D1324"]};
+let mg,mesh,t=0,last=0,raf=0,playing=false,W=0,H=0;
+function build(){const fresh=canvas.cloneNode();canvas.replaceWith(fresh);return fresh}
+function init(canvas,colors){
+  mg=new MiniGl(canvas);const U=mg.Uniform,sc=colors.map(norm);
+  const uniforms={u_time:new U({value:0}),u_shadow_power:new U({value:8}),u_darken_top:new U({value:0}),u_active_colors:new U({value:[1,1,1,1],type:"vec4"}),
+    u_global:new U({value:{noiseFreq:new U({value:[1e-4,9e-4],type:"vec2"}),noiseSpeed:new U({value:1e-5})},type:"struct"}),
+    u_vertDeform:new U({value:{incline:new U({value:.5}),offsetTop:new U({value:-.5}),offsetBottom:new U({value:-.5}),noiseFreq:new U({value:[3,4],type:"vec2"}),noiseAmp:new U({value:250}),noiseSpeed:new U({value:10}),noiseFlow:new U({value:5}),noiseSeed:new U({value:5})},type:"struct",excludeFrom:"fragment"}),
+    u_baseColor:new U({value:sc[0],type:"vec3",excludeFrom:"fragment"}),u_waveLayers:new U({value:[],excludeFrom:"fragment",type:"array"})};
+  for(let i=1;i<sc.length;i++)uniforms.u_waveLayers.value.push(new U({value:{color:new U({value:sc[i],type:"vec3"}),noiseFreq:new U({value:[2+i/sc.length,3+i/sc.length],type:"vec2"}),noiseSpeed:new U({value:11+.3*i}),noiseFlow:new U({value:6.5+.3*i}),noiseSeed:new U({value:5+10*i}),noiseFloor:new U({value:.1}),noiseCeil:new U({value:.63+.07*i})},type:"struct"}));
+  const mat=new mg.Material(VS,FS,uniforms),geo=new mg.PlaneGeometry();mesh=new mg.Mesh(geo,mat);resize(true)}
+function resize(force){const w=innerWidth,h=innerHeight;if(!force&&w===W&&Math.abs(h-H)<120)return;W=w;H=h;
+  mg.setSize(w,h);mg.setOrthographicCamera();mesh.geometry.setTopology(Math.ceil(w*.02),Math.ceil(h*.05));mesh.geometry.setSize(w,h);if(!playing)mg.render()}
+function frame(ts){if(!playing)return;t+=Math.min(ts-last,1000/15);last=ts;mesh.material.uniforms.u_time.value=t;mg.render();raf=requestAnimationFrame(frame)}
+function start(){if(playing||RMQ.matches)return;playing=true;last=performance.now();raf=requestAnimationFrame(frame)}
+function stop(){playing=false;cancelAnimationFrame(raf)}
+let canvas=cv;
+function setup(){const mode=document.documentElement.dataset.theme==="dark"?"dark":"light";
+  try{stop();if(mg){canvas=build();}init(canvas,PAL[mode]);t=12000;mesh.material.uniforms.u_time.value=t;mg.render();document.documentElement.classList.add("has-gwave");start()}
+  catch(e){document.documentElement.classList.remove("has-gwave")}}
+setup();
+addEventListener("resize",()=>mg&&resize(false));
+document.addEventListener("visibilitychange",()=>document.hidden?stop():start());
+new MutationObserver(setup).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
 })();
 </script>
 </body>
