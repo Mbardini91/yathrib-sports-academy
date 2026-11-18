@@ -706,8 +706,45 @@ footer a{color:var(--lane)}
 .sl-dots button{width:8px;height:8px;border-radius:999px;border:0;padding:0;background:rgba(255,255,255,.3);cursor:pointer;transition:width .35s var(--ease-spring),background-color .2s}
 .sl-dots button[aria-current="true"]{width:24px;background:#fff}
 @media (max-width:700px){.sl-stage{grid-template-columns:1fr;padding:8px}.sl-stage .fl-nav{display:none}}
+
+/* bento gates */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:13rem;gap:16px}
+.b-about{grid-column:1;grid-row:1}
+.b-play{grid-column:1;grid-row:2/4}
+.b-prog{grid-column:2;grid-row:1/4}
+.b-lib{grid-column:3;grid-row:1/3}
+.b-walk{grid-column:3;grid-row:3}
+.bcard{--c:var(--track);position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;border-radius:24px;background:var(--surface);color:var(--ink);text-decoration:none;isolation:isolate;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 4%,transparent),0 2px 4px color-mix(in srgb,var(--ink) 5%,transparent),0 12px 24px color-mix(in srgb,var(--ink) 6%,transparent);transform:translateZ(0)}
+.b-prog,.b-walk{--c:var(--lane)} .b-lib{--c:var(--violet)} .b-play{--c:var(--gold)}
+.bcard .bg{position:absolute;inset:0;z-index:-1}
+.bcard .bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform .7s var(--ease-spring)}
+.bcard .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--surface) 30%,color-mix(in srgb,var(--surface) 75%,transparent) 55%,transparent 85%)}
+.b-about .bg::after,.b-walk .bg::after{background:linear-gradient(to top,var(--surface) 42%,color-mix(in srgb,var(--surface) 80%,transparent) 65%,color-mix(in srgb,var(--surface) 10%,transparent))}
+.bbody{display:flex;flex-direction:column;gap:6px;padding:24px;transition:transform .35s var(--ease-spring)}
+.bico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 16%,var(--surface));color:var(--c);transform-origin:right center;transition:transform .35s var(--ease-spring);margin-bottom:4px}
+.bico .i{width:28px;height:28px}
+.bcard h3{font-size:22px;font-weight:700}
+.bcard p{color:var(--muted);font-size:15px;max-width:34ch}
+.bcta{position:absolute;bottom:0;inset-inline:0;padding:16px 24px;display:flex;align-items:center;gap:6px;font-weight:600;color:var(--c);opacity:0;transform:translateY(40px);transition:transform .35s var(--ease-spring),opacity .25s ease}
+.bcta .i{width:16px;height:16px;transform:scaleX(-1)}
+.bcard::after{content:"";position:absolute;inset:0;pointer-events:none;transition:background-color .3s ease}
+@media (hover:hover){
+  .bcard:hover .bbody{transform:translateY(-40px)}
+  .bcard:hover .bico{transform:scale(.75)}
+  .bcard:hover .bcta{opacity:1;transform:none}
+  .bcard:hover .bg img{transform:scale(1.05)}
+  .bcard:hover::after{background:color-mix(in srgb,var(--ink) 3%,transparent)}
+}
+@media (hover:none){.bbody{padding-bottom:52px}.bcta{opacity:1;transform:none}}
+.bcard:focus-visible{outline:3px solid var(--c);outline-offset:3px}
+.bcard:active{transform:scale(.985)}
+@media (max-width:900px){.bento{grid-template-columns:1fr 1fr;grid-auto-rows:15rem}
+  .b-about,.b-play,.b-prog,.b-lib,.b-walk{grid-column:auto;grid-row:auto}.b-prog{grid-column:1/-1;grid-row:span 1}}
+@media (max-width:600px){.bento{grid-template-columns:1fr;grid-auto-rows:16rem}.b-prog{grid-row:span 1}}
+@media (prefers-reduced-motion:reduce){.bbody,.bico,.bcta,.bcard .bg img{transition:none}}
 </style>
-<script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
+<script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t="light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -827,12 +864,13 @@ footer a{color:var(--lane)}
 
   <section class="block">
     <div class="wrap">
-      <div class="gates" id="gates">
-        <a class="gate" href="#about"><div class="art"><img src="img/gate-about.webp" alt="ثلاث طالبات بالزي الرياضي يرحّبن على مضمار الجري" width="880" height="660" loading="lazy"></div><div class="txt"><h3>عن المركز</h3><p>رؤيتنا ورسالتنا وأهدافنا وإمكانات المركز.</p><span class="go">ادخلي ←</span></div></a>
-        <a class="gate g2" href="#play"><div class="art"><img src="img/gate-play.webp" alt="طالبتان تلعبان الكرة الطائرة وتجريان في صالة رياضية" width="880" height="660" loading="lazy"></div><div class="txt"><h3>مسابقات وفعاليات</h3><p>الألعاب والتسجيل في الأنشطة.</p><span class="go">ابدئي اللعب ←</span></div></a>
-        <a class="gate" href="#library"><div class="art"><img src="img/gate-library.webp" alt="طالبة تقرأ كتابًا بجانب رف فيه أدوات رياضية" width="880" height="660" loading="lazy"></div><div class="txt"><h3>المكتبة الصحية</h3><p>نصائح صحية موثوقة، وحاسبات الكتلة والسعرات والماء.</p><span class="go">تصفّحي المكتبة ←</span></div></a>
+      <div class="bento">
+        <a class="bcard b-about" href="#about"><div class="bg" aria-hidden="true"><img src="img/gate-about.webp" alt="" width="880" height="660" loading="lazy"></div><div class="bbody"><span class="bico"><svg class="i" aria-hidden="true"><use href="#i-eye"/></svg></span><h3>عن المركز</h3><p>رؤيتنا ورسالتنا وأهدافنا وإمكانات المركز.</p></div><span class="bcta">اعرفي أكثر <svg class="i" aria-hidden="true"><use href="#i-out"/></svg></span></a>
+        <a class="bcard b-prog" href="#programs"><div class="bg" aria-hidden="true"><img src="img/prog-fitness.webp" alt="" width="880" height="660" loading="lazy"></div><div class="bbody"><span class="bico"><svg class="i" aria-hidden="true"><use href="#i-target"/></svg></span><h3>برامج المركز</h3><p>عشرة برامج في أربعة مسارات: مكافحة السمنة، والمشي، واللياقة للجميع، والتثقيف الرياضي.</p></div><span class="bcta">اعرفي أكثر <svg class="i" aria-hidden="true"><use href="#i-out"/></svg></span></a>
+        <a class="bcard b-lib" href="#library"><div class="bg" aria-hidden="true"><img src="img/gate-library.webp" alt="" width="880" height="660" loading="lazy"></div><div class="bbody"><span class="bico"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></span><h3>المكتبة الصحية</h3><p>رف كتب إلكترونية، ونصائح موثوقة، وحاسبات الكتلة والسعرات والماء.</p></div><span class="bcta">اعرفي أكثر <svg class="i" aria-hidden="true"><use href="#i-out"/></svg></span></a>
+        <a class="bcard b-play" href="#play"><div class="bg" aria-hidden="true"><img src="img/gate-play.webp" alt="" width="880" height="660" loading="lazy"></div><div class="bbody"><span class="bico"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg></span><h3>مسابقات وفعاليات</h3><p>إحدى عشرة لعبة، والتسجيل في الأنشطة.</p></div><span class="bcta">اعرفي أكثر <svg class="i" aria-hidden="true"><use href="#i-out"/></svg></span></a>
+        <a class="bcard b-walk" href="#walk"><div class="bg" aria-hidden="true"><img src="img/ex-st-cardio.webp" alt="" width="880" height="660" loading="lazy"></div><div class="bbody"><span class="bico"><svg class="i" aria-hidden="true"><use href="#i-walk"/></svg></span><h3>برنامج المشي</h3><p>فعالية مشي كل خميس، ومبادرات للطالبات والهيئة وأولياء الأمور.</p></div><span class="bcta">اعرفي أكثر <svg class="i" aria-hidden="true"><use href="#i-out"/></svg></span></a>
       </div>
-      <div class="gatedots" id="gatedots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
     </div>
   </section>
 
