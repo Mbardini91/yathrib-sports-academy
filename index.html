@@ -577,6 +577,28 @@ footer a{color:var(--lane)}
 .back{display:inline-flex;align-items:center;gap:6px;margin-top:24px;font-size:14px;font-weight:600;color:var(--muted);text-decoration:none}
 .back:hover{color:var(--ink)}
 .walkcal{display:inline-flex;align-items:center;gap:8px;margin-top:20px}
+
+.pcard>p{color:var(--muted);font-size:15px}
+.pmeta{display:grid;gap:8px;margin:4px 0 0;padding:14px 0 0;border-top:1px solid var(--line)}
+.pmeta div{display:grid;grid-template-columns:auto 1fr;column-gap:10px;row-gap:1px;font-size:14px}
+.pmeta .i{color:var(--c);width:18px;height:18px;grid-row:span 2;margin-top:2px}
+.pmeta dt{color:var(--muted);font-weight:500;font-size:12px}
+.pmeta dd{margin:0;font-weight:600;grid-column:2}
+.pgoals{border-top:1px solid var(--line);padding-top:10px}
+.pgoals summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:600;color:var(--c);font-size:15px}
+.pgoals summary::-webkit-details-marker{display:none}
+.pgoals summary::after{content:"+";margin-inline-start:auto;font-size:18px;transition:transform .3s var(--ease-spring)}
+.pgoals[open] summary::after{transform:rotate(45deg)}
+.pgoals ol{margin:10px 0 0;padding-inline-start:20px;display:grid;gap:6px;font-size:14px;color:var(--ink)}
+.pgoals ol li::marker{color:var(--c);font-weight:700}
+.pcard .go{text-decoration:none}
+.steps4{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:none}
+.steps4 li{background:var(--surface);border-radius:20px;padding:20px;font-weight:600;display:flex;flex-direction:column;gap:10px}
+.steps4 b{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:var(--track-soft);color:var(--track)}
+@media (max-width:760px){.steps4{grid-template-columns:1fr 1fr}}
+.pcredit{margin-top:18px;font-size:13px;color:var(--muted)}
+.wdet{--c:var(--lane);background:var(--surface);border-radius:24px;padding:24px;display:grid;gap:10px;max-width:760px}
+.wdet>p{font-size:17px}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
@@ -748,13 +770,13 @@ footer a{color:var(--lane)}
 
 <!-- ================= PLAY ================= -->
 <main id="v-programs" class="view">
-  <div class="wrap"><div class="audhead"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-target"/></svg></span><div><h1>برامج المركز</h1><p class="lede">برامج المركز الداخلية في أربعة مسارات: الصحة والوقاية، والمشي، واللياقة للجميع، والتثقيف الرياضي.</p></div></div></div>
+  <div class="wrap"><div class="audhead"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-target"/></svg></span><div><h1>برامج المركز</h1><p class="lede">عشرة برامج داخلية في أربعة مسارات: مكافحة السمنة، والمشي والطابور الصباحي، واللياقة للجميع بما فيهن ذوات القدرات المختلفة، والتثقيف الرياضي والصحي.</p></div></div></div>
   <section class="block pgroup pg-ob">
     <div class="wrap">
       <div class="head"><h2><span class="hi "><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></span>البرامج الخاصة بمكافحة السمنة والدراسات العلمية</h2></div>
       <div class="pgrid">
-        <article class="pcard pc-ob" data-id="yathrib-stars"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg></span><h3>برنامج نجمات يثرب</h3><p class="soon">الشرح قريباً</p></article>
-        <article class="pcard pc-ob" data-id="challenge"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-target"/></svg></span><h3>برنامج قد التحدي؟!</h3><p class="soon">الشرح قريباً</p></article>
+        <article class="pcard pc-ob" data-id="yathrib-stars"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg></span><h3>برنامج نجمات يثرب</h3><p>برنامج يهدف لتقليل نسبة السمنة بين الطالبات ذوات الوزن الزائد من خلال تعزيز النشاط البدني، لتوفير حياة صحية للطالبات.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>طالبات ذوات الوزن الزائد والسمنة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٤٥ دقيقة في اليوم</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>ثلاثة أيام أسبوعياً · فترتين</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تقليل معدلات السمنة والأمراض المتعلقة بقلة النشاط البدني</li><li>تعزيز نمط حياة صحي ومتوازن</li><li>رفع مستوى اللياقة البدنية والصحة العامة للطالبات</li><li>زيادة الوعي بأهمية ممارسة الرياضة والنمط الحياتي الصحي</li></ol></details></article>
+        <article class="pcard pc-ob" data-id="challenge"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-target"/></svg></span><h3>برنامج قد التحدي؟!</h3><p>برنامج مُعدّ لتحسين الصحة واللياقة البدنية للمعلمات، يهدف لمساعدتهن على تحسين نمط حياتهن.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>الهيئة الإدارية والتعليمية</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٤٥ دقيقة في اليوم</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>ثلاثة أيام أسبوعياً · فترتين</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تقليل معدلات السمنة والأمراض المتعلقة بقلة النشاط البدني</li><li>تعزيز نمط حياة صحي ومتوازن</li><li>تحسين اللياقة البدنية والصحة العامة للمشاركات</li><li>زيادة الوعي بأهمية ممارسة الرياضة والنمط الحياتي الصحي</li></ol></details></article>
       </div>
     </div>
   </section>
@@ -762,9 +784,9 @@ footer a{color:var(--lane)}
     <div class="wrap">
       <div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-walk"/></svg></span>البرامج الخاصة بالمشي والطابور الصباحي</h2></div>
       <div class="pgrid">
-        <a class="pcard pc-wk has" href="#walk" data-id="walk"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-walk"/></svg></span><h3>برنامج المشي من أجل صحة أفضل</h3><p>جدول مشي أسبوعي كل خميس، ومبادرات للطالبات والهيئة الإدارية وأولياء الأمور.</p><span class="go">ادخلي <svg class="i" aria-hidden="true"><use href="#i-out"/></svg></span></a>
-        <article class="pcard pc-wk" data-id="gold-step"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-crown"/></svg></span><h3>برنامج خطوة من ذهب</h3><p class="soon">الشرح قريباً</p></article>
-        <article class="pcard pc-wk" data-id="bh-morning"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-sun"/></svg></span><h3>برنامج صباحي بحريني</h3><p class="soon">الشرح قريباً</p></article>
+        <article class="pcard pc-wk has" data-id="walk"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-walk"/></svg></span><h3>برنامج المشي من أجل صحة أفضل</h3><p>برنامج يهدف إلى تشجيع جميع منتسبات المدرسة على ممارسة رياضة المشي بشكل منتظم، لما لها من فوائد صحية عديدة.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>جميع منتسبات المدرسة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٢٥ دقيقة في اليوم</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>الخميس من كل أسبوع · فترة واحدة</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تعزيز الصحة البدنية</li><li>تعزيز الصحة النفسية</li><li>تحقيق الاندماج الاجتماعي</li><li>تعزيز القدرة على التركيز والانتباه خلال الحصص الدراسية</li></ol></details><a class="go" href="#walk">المبادرات وجدول المشي <svg class="i" aria-hidden="true"><use href="#i-out"/></svg></a></article>
+        <article class="pcard pc-wk" data-id="gold-step"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-crown"/></svg></span><h3>برنامج خطوة من ذهب</h3><p>برنامج يستهدف منتسبات المدرسة، يتم من خلاله حساب عدد خطوات المشي خلال اليوم.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>الهيئة الإدارية والتعليمية</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٣٠ دقيقة في اليوم</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>ثلاثة أيام أسبوعياً · فترة واحدة</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تحسين اللياقة البدنية</li><li>تعزيز الصحة النفسية</li><li>تحقيق الاندماج الاجتماعي</li><li>تطوير المهارات الحياتية</li></ol></details></article>
+        <article class="pcard pc-wk" data-id="bh-morning"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-sun"/></svg></span><h3>برنامج صباحي بحريني</h3><p>برنامج تُنظَّم فيه أنشطة رياضية صباحية في الطابور، تهدف إلى تنشيط الطالبات وإعدادهن ليوم دراسي مليء بالحيوية والنشاط.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>طالبات المدرسة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٥ دقائق في اليوم</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>ثلاثة أيام أسبوعياً · فترة واحدة</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تعزيز اللياقة البدنية للطالبات من خلال ممارسة التمارين الرياضية اليومية</li><li>تحسين مستوى النشاط البدني العام للطالبات قبل بدء يومهن الدراسي</li><li>تعزيز الروح الرياضية والتعاون بين الطالبات</li><li>تقوية الروابط الاجتماعية وتعزيز الصداقات من خلال الأنشطة الجماعية</li></ol></details></article>
       </div>
     </div>
   </section>
@@ -772,10 +794,10 @@ footer a{color:var(--lane)}
     <div class="wrap">
       <div class="head"><h2><span class="hi g"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg></span>برامج محو الأمية البدنية واللياقة البدنية — وتشمل ذوي القدرات المختلفة</h2></div>
       <div class="pgrid">
-        <article class="pcard pc-pl" data-id="fun-hour"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg></span><h3>برنامج ساعة مرح</h3><p class="soon">الشرح قريباً</p></article>
-        <article class="pcard pc-pl" data-id="talent"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-stairs"/></svg></span><h3>برنامج بموهبتي أرتقي</h3><p class="soon">الشرح قريباً</p></article>
-        <article class="pcard pc-pl" data-id="free"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg></span><h3>برنامج أتحرر من قيودي وأنطلق</h3><p class="soon">الشرح قريباً</p></article>
-        <article class="pcard pc-pl" data-id="timeout"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-pause"/></svg></span><h3>برنامج TIME OUT</h3><p class="soon">الشرح قريباً</p></article>
+        <article class="pcard pc-pl" data-id="fun-hour"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg></span><h3>برنامج ساعة مرح</h3><p>برنامج ترفيهي يستهدف الهيئة الإدارية والتعليمية لإضفاء المرح والسرور، والتخلص من ضغوطات العمل.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>الهيئة الإدارية والتعليمية</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٤٥ دقيقة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>خلال الفصل الدراسي</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تعزيز اللياقة البدنية للمعلمات من خلال ممارسة التمارين الرياضية اليومية</li><li>تعزيز الصحة النفسية</li><li>تعزيز الروح الرياضية والتعاون بين المعلمات</li><li>تقوية الروابط الاجتماعية وتعزيز الصداقات من خلال الأنشطة الجماعية</li></ol></details></article>
+        <article class="pcard pc-pl" data-id="talent"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-stairs"/></svg></span><h3>برنامج بموهبتي أرتقي</h3><p>برنامج يهدف لاكتشاف وتنمية المواهب الرياضية لدى الطالبات، من خلال تقديم التدريب والدعم اللازمين لهن لتحسين مهاراتهن الرياضية والوصول إلى مستويات عالية من الأداء.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>الطالبات</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٤٥ دقيقة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>ثلاثة أيام أسبوعياً · فترتين</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>اكتشاف المواهب الرياضية</li><li>تنمية المهارات الرياضية</li><li>تحقيق التفوق الرياضي</li></ol></details></article>
+        <article class="pcard pc-pl" data-id="free"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg></span><h3>برنامج أتحرر من قيودي وأنطلق</h3><p>برنامج يهدف إلى تمكين «دانات يثرب» من ممارسة الأنشطة الرياضية، مما يعزز صحتهن البدنية والنفسية والاجتماعية. يعتمد على تمارين مناسبة لاحتياجاتهن الفردية ومساعدتهن على تحقيق إمكانياتهن الكاملة.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>دانات يثرب</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٤٥ دقيقة في اليوم</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>الثلاثاء والخميس · فترة واحدة</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تحسين اللياقة البدنية</li><li>تعزيز الصحة النفسية</li><li>تحقيق الاندماج الاجتماعي</li><li>تطوير المهارات الحياتية</li></ol></details></article>
+        <article class="pcard pc-pl" data-id="timeout"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-pause"/></svg></span><h3>برنامج TIME OUT</h3><p>برنامج يهدف إلى تشجيع الطالبات والهيئة الإدارية والتعليمية على ممارسة النشاط البدني، والتثقيف الصحي بأهمية ممارسة الرياضة قبل الطابور وأثناء الدوام المدرسي.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>جميع منتسبات المدرسة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٤٥ دقيقة في اليوم</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>ثلاثة أيام أسبوعياً · فترتين</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تحسين اللياقة البدنية</li><li>تعزيز الصحة النفسية</li><li>تعزيز القدرة على التركيز والانتباه خلال الحصص الدراسية</li><li>التشجيع على التعاون والعمل الجماعي</li></ol></details></article>
       </div>
     </div>
   </section>
@@ -783,14 +805,26 @@ footer a{color:var(--lane)}
     <div class="wrap">
       <div class="head"><h2><span class="hi v"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></span>البرامج الخاصة بالتثقيف الرياضي والصحي</h2></div>
       <div class="pgrid">
-        <article class="pcard pc-ed" data-id="academy"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-school"/></svg></span><h3>برنامج أكاديمية يثرب الرياضية</h3><p class="soon">الشرح قريباً</p></article>
+        <article class="pcard pc-ed" data-id="academy"><span class="pico"><svg class="i" aria-hidden="true"><use href="#i-school"/></svg></span><h3>برنامج أكاديمية يثرب الرياضية</h3><p>برنامج تعليمي يهدف إلى دمج الأنشطة الرياضية مع الدروس الأكاديمية لتعزيز تجربة التعليم الشاملة.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>الطالبات</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>من دقيقة إلى ٥ دقائق في الحصة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>خلال الأسبوع</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تحسين اللياقة البدنية</li><li>تعزيز الصحة النفسية</li><li>تحقيق الاندماج الاجتماعي</li><li>تطوير المهارات الحياتية</li></ol></details></article>
       </div>
+    </div>
+  </section>
+  <section class="block">
+    <div class="wrap">
+      <div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span>منهجية تنفيذ البرامج</h2><p>كل برامج المركز تمشي على نفس الخطوات الأربع.</p></div>
+      <ol class="steps4"><li><b>١</b>التخطيط والتنظيم</li><li><b>٢</b>تحديد الأنشطة الرياضية</li><li><b>٣</b>توفير البيئة والأدوات اللازمة</li><li><b>٤</b>المتابعة والتقييم</li></ol>
+      <p class="pcredit">مركز اللياقة البدنية · المديرة المساعدة: أ. رحاب عيسى · مديرة المدرسة: أ. رجاء الدوسري · مدة جميع البرامج: العام الدراسي ٢٠٢٦–٢٠٢٧</p>
     </div>
   </section>
 </main>
 
 <main id="v-walk" class="view">
   <div class="wrap"><a class="back" href="#programs"><svg class="i" aria-hidden="true"><use href="#i-back"/></svg>برامج المركز</a><div class="audhead t"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-walk"/></svg></span><div><h1>برنامج المشي من أجل صحة أفضل</h1><p class="lede">فعالية مشي كل خميس مرتبطة بمناسبة الأسبوع، طوال الفصلين الدراسيين.</p></div></div></div>
+  <section class="block">
+    <div class="wrap">
+      <div class="wdet"><p>برنامج يهدف إلى تشجيع جميع منتسبات المدرسة على ممارسة رياضة المشي بشكل منتظم، لما لها من فوائد صحية عديدة.</p><dl class="pmeta"><div><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><dt>الفئة المستهدفة</dt><dd>جميع منتسبات المدرسة</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><dt>المدة</dt><dd>٢٥ دقيقة في اليوم</dd></div><div><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><dt>الأيام والفترات</dt><dd>الخميس من كل أسبوع · فترة واحدة</dd></div></dl><details class="pgoals"><summary><svg class="i" aria-hidden="true"><use href="#i-target"/></svg>الأهداف</summary><ol><li>تعزيز الصحة البدنية</li><li>تعزيز الصحة النفسية</li><li>تحقيق الاندماج الاجتماعي</li><li>تعزيز القدرة على التركيز والانتباه خلال الحصص الدراسية</li></ol></details></div>
+    </div>
+  </section>
   <section class="block">
     <div class="wrap">
       <div class="head"><h2><span class="hi"><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg></span>مبادرات</h2><p>اختاري فئتك: جدول مشي، ونصائح، وتمارين مصوّرة.</p></div>
