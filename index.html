@@ -1009,6 +1009,49 @@ html.has-gwave body{background:transparent}
 @media (hover:none){.nash-t{opacity:1;transform:none}}
 @media (max-width:480px){.nash-g{grid-template-columns:repeat(3,1fr);gap:6px}.nash-t{display:none}}
 .nash-g li.tall .nash-c{aspect-ratio:1200/1697}
+
+/* student team (member-selector inspired) */
+.team{margin-top:28px;background:var(--surface);border-radius:28px;padding:24px;display:grid;gap:18px;box-shadow:0 1px 0 var(--line),0 24px 40px -30px color-mix(in srgb,var(--ink) 45%,transparent)}
+.team-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.team-id{display:flex;align-items:center;gap:16px}
+.team-k{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--lane);margin-bottom:2px}
+.team-k .i{width:15px;height:15px}
+.team-id h3{font-size:20px;line-height:1.4}
+.team-id p{font-size:13px;color:var(--muted)}
+.tstack{display:flex;flex-direction:row-reverse}
+.ts-a,.ts-more{width:40px;height:40px;border-radius:50%;display:grid;place-items:end center;overflow:hidden;border:3px solid var(--surface);margin-inline-start:-12px;background:radial-gradient(circle at 30% 25%,#fff,color-mix(in srgb,var(--c) 24%,#fff) 70%);color:var(--c);animation:tsIn .6s var(--ease-spring) both}
+.ts-a:nth-child(2){animation-delay:.05s}.ts-a:nth-child(3){animation-delay:.1s}.ts-a:nth-child(4){animation-delay:.15s}.ts-a:nth-child(5){animation-delay:.2s}.ts-a:nth-child(6){animation-delay:.25s}
+@keyframes tsIn{from{opacity:0;transform:translateX(10px) scale(.6)}}
+.ts-a svg{width:100%;height:100%;margin-bottom:-10%}
+.ts-more{place-items:center;font-size:12px;font-weight:700;background:var(--ink);color:var(--surface)}
+.tsearch{position:relative;display:flex;align-items:center;min-width:min(280px,100%);flex:0 1 300px}
+.tsearch .i{position:absolute;inset-inline-start:12px;width:16px;height:16px;color:var(--muted);pointer-events:none}
+.tsearch input{width:100%;padding:10px 38px 10px 14px;border-radius:12px;border:1px solid transparent;background:color-mix(in srgb,var(--muted) 10%,transparent);color:var(--ink);font:500 14px var(--body);outline:none;transition:border-color .2s,background-color .2s}
+.tsearch input:focus{border-color:color-mix(in srgb,var(--lane) 55%,transparent);background:var(--surface)}
+.tchips{display:flex;gap:8px;flex-wrap:wrap}
+.tch{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);font:600 13px var(--body);cursor:pointer;transition:all .25s var(--ease-spring)}
+.tch i{font-style:normal;font-size:11px;padding:1px 7px;border-radius:999px;background:color-mix(in srgb,var(--muted) 14%,transparent)}
+.tch:hover{color:var(--ink);border-color:color-mix(in srgb,var(--ink) 30%,var(--line))}
+.tch.on{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.tch.on i{background:color-mix(in srgb,var(--surface) 22%,transparent)}
+.tch:active{transform:scale(.95)}
+.tgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:14px}
+.tm{--c:var(--track);display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:16px 8px 14px;border-radius:20px;border:1px solid transparent;cursor:default;
+  transition:transform .35s var(--ease-spring),border-color .25s,background-color .25s;animation:tmIn .55s var(--ease-spring) both;animation-delay:calc(var(--i) * 18ms)}
+@keyframes tmIn{from{opacity:0;transform:translateY(12px) scale(.94)}}
+.tm.g2,.ts-a.g2{--c:var(--lane)} .tm.g3,.ts-a.g3{--c:var(--violet)} .ts-a.g1{--c:var(--track)}
+.tm:hover{transform:translateY(-4px);background:color-mix(in srgb,var(--c) 7%,var(--surface));border-color:color-mix(in srgb,var(--c) 30%,var(--line))}
+.tm-av{position:relative;width:60px;height:60px;border-radius:50%;display:grid;place-items:end center;overflow:hidden;color:var(--c);
+  background:radial-gradient(circle at 30% 25%,#fff,color-mix(in srgb,var(--c) 22%,#fff) 70%);box-shadow:0 0 0 3px var(--surface),0 0 0 5px color-mix(in srgb,var(--c) 40%,transparent);transition:transform .4s var(--ease-spring)}
+.tm-av svg{width:100%;height:100%;margin-bottom:-10%}
+.tm:hover .tm-av{transform:scale(1.08)}
+.tm-n{font-size:13.5px;line-height:1.5;font-weight:700;margin-top:4px}
+.tm-c{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;color:var(--c);padding:2px 10px;border-radius:999px;background:color-mix(in srgb,var(--c) 11%,transparent)}
+.tm[hidden]{display:none}
+.tempty{text-align:center;color:var(--muted);padding:24px 0}
+.tempty[hidden]{display:none}
+@media (max-width:520px){.team{padding:16px}.tgrid{grid-template-columns:repeat(2,1fr);gap:8px}.tm{padding:12px 6px 10px}.tm-av{width:48px;height:48px}.tstack{display:none}}
+@media (prefers-reduced-motion:reduce){.tm,.ts-a{animation:none}.tm,.tm-av{transition:none}}
 </style>
 <script>try{var t=localStorage.getItem("yathrib-theme");if(!t)t="light";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
 </head>
@@ -1043,6 +1086,7 @@ html.has-gwave body{background:transparent}
 <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
 <symbol id="i-dumbbell" viewBox="0 0 24 24"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/></symbol>
 <symbol id="i-hijabi" viewBox="0 0 64 64"><path d="M32 8c-11 0-18 8.5-18 19.5 0 6 2.2 10.6 5.6 13.8C12.6 44.6 8 50.6 7 58h50c-1-7.4-5.6-13.4-12.6-16.7C47.8 38.1 50 33.5 50 27.5 50 16.5 43 8 32 8z" fill="currentColor" opacity=".95"/><ellipse cx="32" cy="28" rx="10.5" ry="12" fill="#F6D2BC"/><path d="M21.5 25c1.5-7 6-10 10.5-10s9 3 10.5 10c-3-3.2-6.6-4.6-10.5-4.6S24.5 21.8 21.5 25z" fill="currentColor"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16 16 4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
 <symbol id="i-back" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
 <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
 <symbol id="i-video" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></symbol>
@@ -1177,7 +1221,18 @@ html.has-gwave body{background:transparent}
     </div>
   </section>
   <section class="block"><div class="wrap"><div class="head"><h2><span class="hi t"><svg class="i" aria-hidden="true"><use href="#i-dumbbell"/></svg></span>إمكانات المركز</h2><p>تجهيزات مركز اللياقة البدنية في المدرسة.</p></div>
-<div class="facil"><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg><h3>جهاز المشي</h3><p>أجهزة حديثة لتمارين الكارديو</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-bike"/></svg><h3>الدراجة البيضاوية</h3><p>تمارين شاملة للجسم</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-bike"/></svg><h3>الدراجة الثابتة</h3><p>تقوية عضلات الساقين</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg><h3>أدوات رياضية متنوعة</h3><p>كرات، أوزان، وأدوات تمارين</p></div><div class="fac safe"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg><h3>بيئة آمنة</h3><p>مساحة مهيأة لممارسة الرياضة بأمان</p></div></div></div></section>
+<div class="facil"><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-run"/></svg><h3>جهاز المشي</h3><p>أجهزة حديثة لتمارين الكارديو</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-bike"/></svg><h3>الدراجة البيضاوية</h3><p>تمارين شاملة للجسم</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-bike"/></svg><h3>الدراجة الثابتة</h3><p>تقوية عضلات الساقين</p></div><div class="fac"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg><h3>أدوات رياضية متنوعة</h3><p>كرات، أوزان، وأدوات تمارين</p></div><div class="fac safe"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg><h3>بيئة آمنة</h3><p>مساحة مهيأة لممارسة الرياضة بأمان</p></div></div>
+      <div class="team" id="team">
+        <div class="team-top">
+          <div class="team-id"><div class="tstack" aria-hidden="true"><span class="ts-a g1"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><span class="ts-a g1"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><span class="ts-a g1"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><span class="ts-a g1"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><span class="ts-a g1"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><span class="ts-a g1"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><span class="ts-more">+١٩</span></div>
+            <div><span class="team-k"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg>الفريق الطلابي لنادي يثرب الرياضي</span><h3>بنات يثرب في الملعب</h3><p>٢٥ طالبة · العام الدراسي ٢٠٢٦–٢٠٢٧</p></div></div>
+          <label class="tsearch"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg><input type="search" id="tq" placeholder="ابحثي عن اسم طالبة…" autocomplete="off"></label>
+        </div>
+        <div class="tchips" role="group" aria-label="تصفية حسب الصف"><button type="button" class="tch on" data-f="all">الكل <i>٢٥</i></button><button type="button" class="tch" data-f="1">الصف الأول <i>١٨</i></button><button type="button" class="tch" data-f="2">الصف الثاني <i>٥</i></button><button type="button" class="tch" data-f="3">الصف الثالث <i>٢</i></button></div>
+        <ul class="tgrid" id="tgrid"><li class="tm g1" data-g="1" data-n="فاطمة بنت يحيى بن علي" style="--i:0"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">فاطمة بنت يحيى بن علي</b><span class="tm-c">الصف <bdi dir="ltr">1-9</bdi></span></li><li class="tm g1" data-g="1" data-n="روز ميرزا قاسم الخطيب" style="--i:1"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">روز ميرزا قاسم الخطيب</b><span class="tm-c">الصف <bdi dir="ltr">1-9</bdi></span></li><li class="tm g1" data-g="1" data-n="مريم حسام محمد مرهش" style="--i:2"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">مريم حسام محمد مرهش</b><span class="tm-c">الصف <bdi dir="ltr">1-9</bdi></span></li><li class="tm g1" data-g="1" data-n="جلاء وسيم علي تركي" style="--i:3"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">جلاء وسيم علي تركي</b><span class="tm-c">الصف <bdi dir="ltr">1-9</bdi></span></li><li class="tm g1" data-g="1" data-n="مريم حسن عباس" style="--i:4"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">مريم حسن عباس</b><span class="tm-c">الصف <bdi dir="ltr">1-9</bdi></span></li><li class="tm g1" data-g="1" data-n="مريم سعد عناد" style="--i:5"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">مريم سعد عناد</b><span class="tm-c">الصف <bdi dir="ltr">1-9</bdi></span></li><li class="tm g1" data-g="1" data-n="روان ثامر جاسم" style="--i:6"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">روان ثامر جاسم</b><span class="tm-c">الصف <bdi dir="ltr">1-12</bdi></span></li><li class="tm g1" data-g="1" data-n="فاطمة حسين علي مطر" style="--i:7"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">فاطمة حسين علي مطر</b><span class="tm-c">الصف <bdi dir="ltr">1-12</bdi></span></li><li class="tm g1" data-g="1" data-n="ريحان محمد الظاهر" style="--i:8"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">ريحان محمد الظاهر</b><span class="tm-c">الصف <bdi dir="ltr">1-12</bdi></span></li><li class="tm g1" data-g="1" data-n="المها عبدالرحمن" style="--i:9"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">المها عبدالرحمن</b><span class="tm-c">الصف <bdi dir="ltr">1-10</bdi></span></li><li class="tm g1" data-g="1" data-n="ريماس ذياب نايف" style="--i:10"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">ريماس ذياب نايف</b><span class="tm-c">الصف <bdi dir="ltr">1-11</bdi></span></li><li class="tm g1" data-g="1" data-n="زينة عادل المطاوعة" style="--i:11"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">زينة عادل المطاوعة</b><span class="tm-c">الصف <bdi dir="ltr">1-11</bdi></span></li><li class="tm g1" data-g="1" data-n="نور الهدى حسين" style="--i:12"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">نور الهدى حسين</b><span class="tm-c">الصف <bdi dir="ltr">1-11</bdi></span></li><li class="tm g1" data-g="1" data-n="رقية عباس جعفر" style="--i:13"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">رقية عباس جعفر</b><span class="tm-c">الصف <bdi dir="ltr">1-11</bdi></span></li><li class="tm g1" data-g="1" data-n="مها عبدالله حمود" style="--i:14"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">مها عبدالله حمود</b><span class="tm-c">الصف <bdi dir="ltr">1-10</bdi></span></li><li class="tm g2" data-g="2" data-n="وئام خليل عبدالله" style="--i:15"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">وئام خليل عبدالله</b><span class="tm-c">الصف <bdi dir="ltr">2-7</bdi></span></li><li class="tm g2" data-g="2" data-n="حور أحمد علي" style="--i:16"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">حور أحمد علي</b><span class="tm-c">الصف <bdi dir="ltr">2-10</bdi></span></li><li class="tm g2" data-g="2" data-n="جوري محمد حسن" style="--i:17"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">جوري محمد حسن</b><span class="tm-c">الصف <bdi dir="ltr">2-3</bdi></span></li><li class="tm g3" data-g="3" data-n="نبأ علي عبدالرسول" style="--i:18"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">نبأ علي عبدالرسول</b><span class="tm-c">الصف <bdi dir="ltr">3-7</bdi></span></li><li class="tm g3" data-g="3" data-n="أبرار حسن حسين" style="--i:19"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">أبرار حسن حسين</b><span class="tm-c">الصف <bdi dir="ltr">3-3</bdi></span></li><li class="tm g1" data-g="1" data-n="أبرار محمد سلامة" style="--i:20"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">أبرار محمد سلامة</b><span class="tm-c">الصف <bdi dir="ltr">1-9</bdi></span></li><li class="tm g1" data-g="1" data-n="ريم مشعل سمير العون" style="--i:21"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">ريم مشعل سمير العون</b><span class="tm-c">الصف <bdi dir="ltr">1-9</bdi></span></li><li class="tm g2" data-g="2" data-n="بنين يوسف" style="--i:22"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">بنين يوسف</b><span class="tm-c">الصف <bdi dir="ltr">2-10</bdi></span></li><li class="tm g2" data-g="2" data-n="حوراء طالب" style="--i:23"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">حوراء طالب</b><span class="tm-c">الصف <bdi dir="ltr">2-10</bdi></span></li><li class="tm g1" data-g="1" data-n="الشيماء عيد إبراهيم" style="--i:24"><span class="tm-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#i-hijabi"/></svg></span><b class="tm-n">الشيماء عيد إبراهيم</b><span class="tm-c">الصف <bdi dir="ltr">1-10</bdi></span></li></ul>
+        <p class="tempty" id="tempty" hidden>ما في طالبة بهالاسم</p>
+      </div>
+</div></section>
   
   
   <section class="block org">
@@ -1990,7 +2045,7 @@ window.nimbusSync=measure;document.fonts&&document.fonts.ready.then(()=>{s.ready
 <script>
 (function(){
 if(!matchMedia("(hover:hover)").matches)return;
-const SEL=".bcard,.idb-card,.goal,.vm>article,.upcoming,.feature,.steps4 li,.deck,.ach-i,.hon li,.qcard,.tip,.libcards>*,.calc,.fac,.news,.notice,.bact .btn,.pcard,.fp-item,.cal";
+const SEL=".tm,.bcard,.idb-card,.goal,.vm>article,.upcoming,.feature,.steps4 li,.deck,.ach-i,.hon li,.qcard,.tip,.libcards>*,.calc,.fac,.news,.notice,.bact .btn,.pcard,.fp-item,.cal";
 function arm(el){if(el.dataset.hl)return;el.dataset.hl=1;el.classList.add("hl");
   if(getComputedStyle(el).position==="static")el.style.position="relative";
   const g=document.createElement("span");g.className="hl-glow";g.setAttribute("aria-hidden","true");
@@ -2086,6 +2141,21 @@ setup();
 addEventListener("resize",()=>mg&&resize(false));
 document.addEventListener("visibilitychange",()=>document.hidden?stop():start());
 new MutationObserver(setup).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+})();
+</script>
+<script>
+(function(){
+const g=document.getElementById("tgrid");if(!g)return;const items=[...g.children],q=document.getElementById("tq"),empty=document.getElementById("tempty"),chips=[...document.querySelectorAll(".tch")];
+let f="all";const norm=t=>t.replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").trim();
+function apply(){const first=new Map(items.map(el=>[el,el.getBoundingClientRect()]));const term=norm(q.value);let n=0;
+  items.forEach(el=>{const ok=(f==="all"||el.dataset.g===f)&&(!term||norm(el.dataset.n).includes(term));el.hidden=!ok;if(ok)n++});
+  empty.hidden=n>0;
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  items.forEach(el=>{if(el.hidden)return;const a=first.get(el),b=el.getBoundingClientRect();
+    if(!a.width){el.animate([{opacity:0,transform:"scale(.9)"},{opacity:1,transform:"none"}],{duration:320,easing:"cubic-bezier(.22,1,.36,1)"});return}
+    const dx=a.left-b.left,dy=a.top-b.top;if(dx||dy)el.animate([{transform:`translate(${dx}px,${dy}px)`},{transform:"none"}],{duration:420,easing:"cubic-bezier(.22,1,.36,1)"})})}
+chips.forEach(c=>c.onclick=()=>{chips.forEach(x=>x.classList.toggle("on",x===c));f=c.dataset.f;apply()});
+q.addEventListener("input",apply);
 })();
 </script>
 </body>
