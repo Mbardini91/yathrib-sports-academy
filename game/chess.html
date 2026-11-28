@@ -162,6 +162,61 @@ button{font-family:inherit;color:inherit;border:0;background:none;cursor:pointer
 .strip span{padding:4px 8px;border-radius:8px}
 .strip span.n{color:var(--muted);padding-right:2px;font-size:12px}
 .strip span.cur{background:rgba(224,176,74,.18);color:#FFE3A6}
+
+/* ---------- guide ---------- */
+#guideOv .sheet{width:min(820px,100%);padding:26px 26px 22px}
+.gtabs{display:flex;gap:6px;padding:5px;border-radius:16px;background:var(--surface2);border:1px solid var(--line);margin:16px 0 18px;overflow-x:auto;scrollbar-width:none}
+.gtabs button{flex:1 0 auto;padding:9px 14px;border-radius:12px;font-weight:600;font-size:14px;color:var(--muted);white-space:nowrap;transition:background .2s,color .2s}
+.gtabs button.on{background:rgba(255,255,255,.1);color:var(--ink)}
+.gpane{display:none}.gpane.on{display:block;animation:paneIn .35s var(--ease)}
+@keyframes paneIn{from{opacity:0;transform:translateY(6px)}}
+.ggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ggrid.two{grid-template-columns:repeat(2,1fr)}
+.gc{background:var(--surface2);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.gc h3{display:flex;align-items:center;gap:8px;font-size:16.5px;font-weight:700}
+.gc h3 img{width:30px;height:30px}
+.gc h3 .val{margin-inline-start:auto;font-size:12px;font-weight:700;color:var(--gold);background:rgba(224,176,74,.12);padding:3px 9px;border-radius:999px}
+.gc p{font-size:13.5px;line-height:1.75;color:var(--muted)}
+.gc p b{color:var(--ink);font-weight:600}
+.mb{display:grid;direction:ltr;border-radius:10px;overflow:hidden;width:100%;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.mb .c{position:relative;aspect-ratio:1;display:grid;place-items:center}
+.mb .c.l{background:var(--sq-light)}.mb .c.d{background:var(--sq-dark)}
+.mb .c img{width:92%;height:92%;position:relative;z-index:2}
+.mb .c.dot::after{content:"";width:30%;height:30%;border-radius:50%;background:rgba(240,105,76,.85);position:absolute}
+.mb .c.ring::after{content:"";position:absolute;inset:6%;border-radius:50%;border:3px solid rgba(240,105,76,.9);z-index:3}
+.mb .c.hot{background-image:repeating-linear-gradient(45deg,rgba(226,70,42,.62) 0 3px,transparent 3px 8px)}
+.mb .c.chk::before{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(255,60,40,.9),rgba(255,60,40,.35) 45%,transparent 72%);z-index:1}
+.mb .c.gold{box-shadow:inset 0 0 0 100px rgba(224,176,74,.42)}
+.mb.sm{max-width:220px;margin-inline:auto}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;background:rgba(240,105,76,.85);margin-inline-end:6px;vertical-align:-1px}
+.legend i.r{background:none;border:2px solid rgba(240,105,76,.9)}
+.legend i.h{border-radius:3px;background:repeating-linear-gradient(45deg,rgba(226,70,42,.9) 0 2px,transparent 2px 4px)}
+.pair{display:grid;grid-template-columns:1fr;gap:6px}.pair>div{display:grid;grid-template-columns:44px 1fr;align-items:center;gap:10px}.pair>div span{order:-1;margin:0;text-align:start}
+.pair span{display:block;text-align:center;font-size:12px;color:var(--muted);font-weight:600;margin-top:5px}
+.prow{display:flex;align-items:center;justify-content:center;gap:6px;direction:ltr;padding:6px 0}
+.prow img{width:40px;height:40px}
+.prow .arr{color:var(--gold);font-weight:700;font-size:20px;margin:0 4px}
+.tips{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tip{display:flex;gap:12px;align-items:flex-start;background:var(--surface2);border:1px solid var(--line);border-radius:16px;padding:13px 14px}
+.tip em{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:13px;background:rgba(79,179,198,.15);color:var(--lane)}
+.tip p{font-size:13.5px;line-height:1.7;color:var(--muted)}
+.tip p b{color:var(--ink);font-weight:600}
+.gsub{font-size:14px;font-weight:700;color:var(--ink);margin:18px 0 10px}
+.gsrc{margin-top:16px;font-size:12.5px;color:var(--muted);line-height:1.7}
+.gsrc a{color:var(--lane)}
+.gfoot{display:flex;justify-content:center;margin-top:14px}
+.gfoot .cta{width:auto;margin-top:0;padding:12px 34px;font-size:16px}
+.helpBtn{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);font-size:12.5px;font-weight:600;color:var(--muted)}
+.helpBtn:hover{color:var(--ink)}
+.helpBtn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.learn{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 0;padding:10px 18px;border-radius:999px;color:var(--lane);font-weight:600;font-size:15px;border:1px solid rgba(79,179,198,.35);background:rgba(79,179,198,.08)}
+.learn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:900px),(max-aspect-ratio:1/1){
+  .ggrid,.ggrid.two,.tips{grid-template-columns:1fr}
+  #guideOv .sheet{padding:22px 16px 18px}
+}
+@media (min-width:520px) and (max-width:900px){.ggrid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -191,7 +246,7 @@ button{font-family:inherit;color:inherit;border:0;background:none;cursor:pointer
       <button class="cbtn" id="flipBtn"><svg viewBox="0 0 24 24"><path d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"/></svg>قلب الرقعة</button>
       <button class="cbtn pri" id="newBtn"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>لعبة جديدة</button>
     </div>
-    <div class="mini"><span id="recordLine"></span><button id="sndBtn"><svg id="sndIco" viewBox="0 0 24 24"></svg><span id="sndTxt">الصوت</span></button></div>
+    <div class="mini"><span id="recordLine"></span><span style="display:flex;gap:6px"><button class="helpBtn" id="helpBtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 114 2c-.9.6-1.5 1.1-1.5 2.2M12 17h.01"/></svg>طريقة اللعب</button><button id="sndBtn"><svg id="sndIco" viewBox="0 0 24 24"></svg><span id="sndTxt">الصوت</span></button></span></div>
   </aside>
 </div>
 
@@ -210,6 +265,7 @@ button{font-family:inherit;color:inherit;border:0;background:none;cursor:pointer
       <button data-c="-1"><img alt="" data-p="5" data-s="-1">أسود</button>
     </div>
     <button class="cta" id="startBtn">ابدئي اللعب</button>
+    <button class="learn" id="learnBtn"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5V5.5M8 7h8"/></svg>لا تعرفين القواعد؟ تعلّمي طريقة اللعب</button>
     <div class="record" id="startRecord"></div>
   </div>
 </div>
@@ -222,6 +278,67 @@ button{font-family:inherit;color:inherit;border:0;background:none;cursor:pointer
     <p class="lede" id="endSub">كش مات</p>
     <button class="cta" id="againBtn">العبي مرة أخرى</button>
     <button class="ghost" id="setupBtn">غيّري المستوى</button>
+  </div>
+</div>
+
+<!-- guide -->
+<div class="ov" id="guideOv">
+  <div class="sheet">
+    <div class="brand"><i></i>شطرنج يثرب · دليل اللعب</div>
+    <h1 style="font-size:clamp(26px,4.4vw,34px)">طريقة <em>اللعب</em></h1>
+    <p class="lede">الشطرنج لعبة بين لاعبَين على رقعة من ٦٤ مربعًا. لكل لاعبة ١٦ قطعة، والقطع البيضاء تبدأ دائمًا. الهدف: محاصرة ملك الخصم (كش مات).</p>
+    <div class="gtabs" id="gtabs">
+      <button data-t="pieces" class="on">حركة القطع</button>
+      <button data-t="special">حركات خاصة</button>
+      <button data-t="end">الفوز والتعادل</button>
+      <button data-t="tips">نصائح وأزرار</button>
+    </div>
+    <div class="gpane on" data-p="pieces">
+      <div class="legend"><span><i></i>مربع تستطيع القطعة الانتقال إليه</span><span><i class="r"></i>قطعة للخصم يمكن أكلها</span></div>
+      <div class="ggrid" id="pieceCards"></div>
+    </div>
+    <div class="gpane" data-p="special">
+      <div class="ggrid">
+        <div class="gc"><h3>التبييت (الرُّوك)</h3><div id="dgCastle"></div><p>نقلة تحمي الملك: يتحرك <b>الملك مربعين</b> باتجاه القلعة، وتقفز القلعة إلى الجهة الأخرى بجانبه. في اللعبة: اسحبي الملك مربعين فقط.</p><p>بشرط: الملك والقلعة لم يتحركا من قبل، لا قطع بينهما، الملك ليس في حالة كش، ولا يمرّ أو يقف على مربع مهدَّد.</p></div>
+        <div class="gc"><h3>ترقية البيدق</h3><div class="prow" id="dgPromo"></div><p>إذا وصل البيدق إلى <b>الصف الأخير</b> يتحوّل إلى وزير أو قلعة أو فيل أو حصان، حسب اختيارك. غالبًا يُختار الوزير لأنه الأقوى. ستظهر لك نافذة لتختاري.</p></div>
+        <div class="gc"><h3>الأخذ بالتجاوز</h3><div id="dgEp"></div><p>إذا تقدّم بيدق الخصم <b>مربعين</b> ووقف بجانب بيدقك، يمكنك أكله كأنه تقدّم مربعًا واحدًا فقط: ينتقل بيدقك قطريًا إلى المربع الذي عبره. مسموح <b>في النقلة التالية مباشرة فقط</b>.</p></div>
+      </div>
+    </div>
+    <div class="gpane" data-p="end">
+      <div class="legend"><span><i class="h"></i>مربع مهدَّد أو طريق الهجوم</span></div>
+      <div class="ggrid">
+        <div class="gc"><h3>كش</h3><div id="dgCheck"></div><p>الملك <b>مهدَّد</b> بالأكل. يجب إنقاذه فورًا بإحدى ثلاث طرق: تحريك الملك، أو وضع قطعة في طريق الهجوم، أو أكل القطعة المهاجِمة.</p></div>
+        <div class="gc"><h3>كش مات (الفوز)</h3><div id="dgMate"></div><p>الملك مهدَّد <b>ولا توجد أي طريقة لإنقاذه</b>. هنا تنتهي المباراة بفوز من حاصرته. في المثال: القلعة تهاجم الملك، والبيادق تسدّ طريق هروبه.</p></div>
+        <div class="gc"><h3>الجمود (تعادل)</h3><div id="dgStale"></div><p>الملك <b>غير مهدَّد</b>، لكن لا توجد للاعبة التي عليها الدور أي نقلة مسموحة. النتيجة تعادل وليست فوزًا، فانتبهي لهذا عندما تكونين متقدمة!</p></div>
+      </div>
+      <div class="gsub">حالات تعادل أخرى</div>
+      <div class="tips">
+        <div class="tip"><em>٣×</em><p><b>تكرار الوضعية:</b> إذا تكرّرت الوضعية نفسها ثلاث مرات.</p></div>
+        <div class="tip"><em>٥٠</em><p><b>قاعدة الخمسين نقلة:</b> ٥٠ نقلة لكل لاعبة دون أكل أي قطعة ودون تحريك أي بيدق.</p></div>
+        <div class="tip"><em>♔</em><p><b>قطع لا تكفي للفوز:</b> مثل ملك ضد ملك، أو ملك وحصان ضد ملك.</p></div>
+        <div class="tip"><em>ⓘ</em><p>في البطولات الرسمية تطلب اللاعبة التعادل في حالتي التكرار والخمسين نقلة. أما في هذه اللعبة فيُعلَن التعادل <b>تلقائيًا</b>.</p></div>
+      </div>
+    </div>
+    <div class="gpane" data-p="tips">
+      <div class="gsub" style="margin-top:0">نصائح للبداية</div>
+      <div class="tips">
+        <div class="tip"><em>١</em><p><b>سيطري على المركز:</b> ابدئي بتحريك بيدق الملك أو الوزير مربعين للأمام.</p></div>
+        <div class="tip"><em>٢</em><p><b>طوّري قطعك مبكرًا:</b> أخرجي الحصانين والفيلين قبل التحرك بالقطع الكبيرة.</p></div>
+        <div class="tip"><em>٣</em><p><b>بيّتي الملك مبكرًا:</b> التبييت يضع الملك في مكان آمن ويُشغّل القلعة.</p></div>
+        <div class="tip"><em>٤</em><p><b>لا تخرجي الوزير مبكرًا:</b> يسهل على الخصم مطاردته وكسب الوقت.</p></div>
+        <div class="tip"><em>٥</em><p><b>قبل كل نقلة اسألي:</b> ماذا يهدّد خصمي؟ وهل قطعي محميّة؟</p></div>
+        <div class="tip"><em>٦</em><p><b>احسبي قيمة القطع</b> قبل التبادل: لا تعطي وزيرًا (٩) مقابل فيل (٣).</p></div>
+      </div>
+      <div class="gsub">أزرار اللعبة</div>
+      <div class="tips">
+        <div class="tip"><em>✋</em><p><b>التحريك:</b> اسحبي القطعة، أو اضغطي عليها ثم على المربع. النقاط تُظهر النقلات المسموحة.</p></div>
+        <div class="tip"><em>💡</em><p><b>تلميح:</b> يظلّل نقلة جيدة مقترحة باللون البنفسجي.</p></div>
+        <div class="tip"><em>↶</em><p><b>تراجع:</b> يلغي نقلتك الأخيرة ونقلة الكمبيوتر لتجرّبي فكرة أخرى.</p></div>
+        <div class="tip"><em>⇅</em><p><b>قلب الرقعة:</b> يعرض الرقعة من جهة الخصم. ومستوى «مبتدئة» هو الأنسب للتعلّم.</p></div>
+      </div>
+    </div>
+    <p class="gsrc">المرجع: <a href="https://handbook.fide.com/chapter/E012023" target="_blank" rel="noopener">قوانين الشطرنج الرسمية للاتحاد الدولي للشطرنج (FIDE)</a> المعمول بها منذ ١ يناير ٢٠٢٣. قيم القطع (١، ٣، ٣، ٥، ٩) تقديرية شائعة لمساعدة المبتدئات وليست جزءًا من القوانين.</p>
+    <div class="gfoot"><button class="cta" id="guideClose">فهمت، لنلعب</button></div>
   </div>
 </div>
 
@@ -907,6 +1024,59 @@ $('flipBtn').onclick = () => { G.flipped = !G.flipped; buildSquares(); for (let 
 $('newBtn').onclick = () => openSetup();
 $('againBtn').onclick = () => { $('endOv').classList.remove('on'); startFromPick(); };
 $('setupBtn').onclick = () => { $('endOv').classList.remove('on'); openSetup(); };
+
+
+/* ---------- guide ---------- */
+function mini(cols, rows, cells, cls = ''){
+  // cells: { 'x,y': { p: signed piece, m: 'dot'|'ring'|'hot'|'chk'|'gold' } }
+  let h = `<div class="mb ${cls}" style="grid-template-columns:repeat(${cols},1fr)">`;
+  for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++){
+    const c = cells[x + ',' + y] || {}, light = (x + y) % 2 === 0;
+    h += `<div class="c ${light ? 'l' : 'd'} ${c.m || ''}">${c.p ? `<img alt="" src="${IMG[c.p]}">` : ''}</div>`;
+  }
+  return h + '</div>';
+}
+function rays(n, cx, cy, dirs, slide){
+  const out = {};
+  for (const [dx, dy] of dirs){ let x = cx + dx, y = cy + dy; while (x >= 0 && y >= 0 && x < n && y < n){ out[x + ',' + y] = { m:'dot' }; if (!slide) break; x += dx; y += dy; } }
+  return out;
+}
+(function buildGuide(){
+  const D8 = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]], RK = D8.slice(0, 4), BS = D8.slice(4), KN = [[1,2],[2,1],[-1,2],[-2,1],[1,-2],[2,-1],[-1,-2],[-2,-1]];
+  const P = [
+    { t:6, n:'الملك', v:'الأهم', d:'يتحرك <b>مربعًا واحدًا</b> في أي اتجاه. لا يجوز أن ينتقل إلى مربع مهدَّد. إذا حوصر بلا مهرب تنتهي المباراة.', c:rays(5, 2, 2, D8, false), n2:5 },
+    { t:5, n:'الوزير', v:'٩ نقاط', d:'<b>أقوى قطعة.</b> يتحرك أي عدد من المربعات أفقيًا أو عموديًا أو قطريًا، ما دام الطريق مفتوحًا.', c:rays(7, 3, 3, D8, true), n2:7 },
+    { t:4, n:'القلعة (الطابية)', v:'٥ نقاط', d:'تتحرك أي عدد من المربعات <b>أفقيًا أو عموديًا</b>، ولا تقفز فوق القطع.', c:rays(7, 3, 3, RK, true), n2:7 },
+    { t:3, n:'الفيل', v:'٣ نقاط', d:'يتحرك أي عدد من المربعات <b>قطريًا</b>، ولذلك يبقى دائمًا على مربعات اللون نفسه.', c:rays(7, 3, 3, BS, true), n2:7 },
+    { t:2, n:'الحصان', v:'٣ نقاط', d:'يتحرك على شكل حرف <b>L</b>: مربعان في اتجاه ثم مربع جانبي. وهو <b>القطعة الوحيدة التي تقفز</b> فوق القطع الأخرى.', c:rays(5, 2, 2, KN, false), n2:5 },
+    { t:1, n:'البيدق (الجندي)', v:'نقطة', d:'يتقدّم <b>للأمام مربعًا واحدًا</b> (أو مربعين في أول نقلة له)، ويأكل <b>قطريًا للأمام</b>. لا يرجع إلى الخلف أبدًا.', pawn:true }
+  ];
+  $('pieceCards').innerHTML = P.map(o => {
+    let board;
+    if (o.pawn) board = mini(5, 5, { '2,4':{ p:1 }, '2,3':{ m:'dot' }, '2,2':{ m:'dot' }, '1,3':{ p:-2, m:'ring' }, '3,3':{ p:-1, m:'ring' } }, 'sm');
+    else { const c = Object.assign({}, o.c); c[((o.n2 - 1) / 2) + ',' + ((o.n2 - 1) / 2)] = { p:o.t }; board = mini(o.n2, o.n2, c, 'sm'); }
+    return `<div class="gc"><h3><img alt="" src="${IMG[o.t]}">${o.n}<span class="val">${o.v}</span></h3>${board}<p>${o.d}</p></div>`;
+  }).join('');
+  $('dgCastle').innerHTML = `<div class="pair"><div>${mini(4, 1, { '0,0':{ p:6 }, '3,0':{ p:4 } })}<span>قبل</span></div><div>${mini(4, 1, { '2,0':{ p:6, m:'gold' }, '1,0':{ p:4, m:'gold' } })}<span>بعد</span></div></div>`;
+  $('dgPromo').innerHTML = `<img alt="" src="${IMG[1]}"><span class="arr">→</span>` + [5, 4, 3, 2].map(t => `<img alt="" src="${IMG[t]}">`).join('');
+  $('dgEp').innerHTML = mini(3, 3, { '0,1':{ p:1 }, '1,1':{ p:-1, m:'ring' }, '1,0':{ m:'dot' } }, 'sm');
+  $('dgCheck').innerHTML = mini(5, 5, { '2,0':{ p:-6, m:'chk' }, '2,4':{ p:4 }, '2,1':{ m:'hot' }, '2,2':{ m:'hot' }, '2,3':{ m:'hot' } }, 'sm');
+  $('dgMate').innerHTML = mini(5, 2, { '2,0':{ p:-6, m:'chk' }, '1,1':{ p:-1 }, '2,1':{ p:-1 }, '3,1':{ p:-1 }, '4,0':{ p:4 }, '3,0':{ m:'hot' }, '1,0':{ m:'hot' }, '0,0':{ m:'hot' } });
+  $('dgStale').innerHTML = mini(3, 3, { '0,0':{ p:-6 }, '1,2':{ p:5 }, '2,2':{ p:6 }, '1,0':{ m:'hot' }, '0,1':{ m:'hot' }, '1,1':{ m:'hot' } }, 'sm');
+  document.querySelectorAll('#gtabs button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#gtabs button').forEach(x => x.classList.toggle('on', x === b));
+    document.querySelectorAll('.gpane').forEach(p => p.classList.toggle('on', p.dataset.p === b.dataset.t));
+    SFX.tap();
+  });
+})();
+let guideFrom = null;
+function openGuide(from){ guideFrom = from; if (from) $(from).classList.remove('on'); $('guideOv').classList.add('on'); $('guideOv').scrollTop = 0; }
+function closeGuide(){ $('guideOv').classList.remove('on'); if (guideFrom) $(guideFrom).classList.add('on'); guideFrom = null; }
+$('learnBtn').onclick = () => { audio(); openGuide('startOv'); };
+$('helpBtn').onclick = () => { audio(); openGuide(null); };
+$('guideClose').onclick = closeGuide;
+$('guideOv').addEventListener('click', e => { if (e.target === $('guideOv')) closeGuide(); });
+addEventListener('keydown', e => { if (e.key === 'Escape' && $('guideOv').classList.contains('on')) closeGuide(); });
 
 /* setup sheet */
 function renderLevels(){
